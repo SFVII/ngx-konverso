@@ -55,8 +55,8 @@ let KonversoService = class KonversoService {
         this._token.subscribe((token) => {
             const bearer = 'Bearer ' + token;
             this.header = new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': window.location.origin,
+                //'Content-Type': 'application/json',
+                // 'Access-Control-Allow-Origin': window.location.origin,
                 'Authorization': bearer
             });
         });

@@ -275,8 +275,8 @@
             this._token.subscribe(function (token) {
                 var bearer = 'Bearer ' + token;
                 _this.header = new http.HttpHeaders({
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': window.location.origin,
+                    //'Content-Type': 'application/json',
+                    // 'Access-Control-Allow-Origin': window.location.origin,
                     'Authorization': bearer
                 });
             });
