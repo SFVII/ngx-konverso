@@ -5,7 +5,7 @@ export declare class FirstVisitComponent implements OnInit {
     assets: DefaultAssets;
     ready: EventEmitter<boolean>;
     position: number;
-    current: any;
+    current: string;
     constructor();
     ngOnInit(): void;
     goTo(pos: number): void;

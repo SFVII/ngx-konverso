@@ -3,6 +3,7 @@ import { KonversoService } from './konverso.service';
 import { ColorSet, DefaultAssets, OpenChatBotResponse, UserInput } from '../interface/KonversoInterface';
 export declare class KonversoComponent implements OnInit {
     private service;
+    _ready: EventEmitter<boolean>;
     ready: EventEmitter<boolean>;
     query: string;
     isMobile: boolean;

@@ -11,13 +11,14 @@ export declare class DesktopFullScreenComponent implements OnInit {
     LastBotAnswer: OpenChatBotResponse;
     PlaceHolder: string[];
     IsMobile: boolean;
-    ready: EventEmitter<boolean>;
+    readySend: EventEmitter<boolean>;
     send: EventEmitter<UserInput>;
     sendBotCommand: EventEmitter<string>;
     userInput: string;
     currentPlaceHolder: string;
     constructor();
     ngOnInit(): void;
+    emit($event: any): void;
     _send(): void;
     scroll(scrollHeight: number): Promise<number>;
     byPassUserInput(botdata: string): void;
