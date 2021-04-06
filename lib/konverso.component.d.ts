@@ -19,7 +19,7 @@ export declare class KonversoComponent implements OnInit {
     Welcome: string;
     constructor(service: KonversoService);
     ngOnInit(): void;
-    send($event: UserInput): Promise<void>;
+    send($event: UserInput): Promise<boolean>;
     sendBotCommand($event: string, push?: boolean): Promise<void>;
     private _isMobile;
 }

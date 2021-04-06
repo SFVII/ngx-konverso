@@ -10,6 +10,7 @@ export declare class DesktopFullScreenComponent implements OnInit {
     LastUserInput: UserInput;
     LastBotAnswer: OpenChatBotResponse;
     PlaceHolder: string[];
+    IsMobile: boolean;
     ready: EventEmitter<boolean>;
     send: EventEmitter<UserInput>;
     sendBotCommand: EventEmitter<string>;
