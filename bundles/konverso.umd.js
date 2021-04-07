@@ -250,7 +250,7 @@
                                     var options = {
                                         headers: _this.header
                                     };
-                                    _this.http.post(_this.endpoint, preparedData, options)
+                                    _this.http.post(_this.endpoint + '?t=' + new Date().getTime(), preparedData, options)
                                         .subscribe(function (data) {
                                         resolve(data);
                                     });

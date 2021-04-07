@@ -32,7 +32,7 @@ let KonversoService = class KonversoService {
                         const options = {
                             headers: this.header
                         };
-                        this.http.post(this.endpoint, preparedData, options)
+                        this.http.post(this.endpoint + '?t=' + new Date().getTime(), preparedData, options)
                             .subscribe((data) => {
                             resolve(data);
                         });
