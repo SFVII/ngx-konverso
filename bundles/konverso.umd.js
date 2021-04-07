@@ -413,32 +413,43 @@
             this.disableUserInput = false;
         }
         KonversoComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.isMobile = this._isMobile();
-            this.assets = this.service.assets;
-            this.firstVisit = this.service.firstVisit;
-            this.firstUsageStory = this.service.firstUsageStory;
-            this.AssistantMode = this.service.AssistantMode;
-            this.PlaceHolder = this.service.PlaceHolder;
-            this.Welcome = this.service.Welcome;
-            this.History = [];
-            if (this.service.ColorSet) {
-                this.colorSet = this.service.ColorSet;
-            }
-            this._ready.subscribe(function (ready) {
-                if (ready) {
-                    _this.firstVisit = false;
-                    _this.service.firstVisit = false;
-                    _this.ready.emit(ready);
-                }
+            return __awaiter(this, void 0, void 0, function () {
+                var customWelcome;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            this.isMobile = this._isMobile();
+                            this.assets = this.service.assets;
+                            this.firstVisit = this.service.firstVisit;
+                            this.firstUsageStory = this.service.firstUsageStory;
+                            this.AssistantMode = this.service.AssistantMode;
+                            this.PlaceHolder = this.service.PlaceHolder;
+                            this.Welcome = this.service.Welcome;
+                            this.History = [];
+                            if (this.service.ColorSet) {
+                                this.colorSet = this.service.ColorSet;
+                            }
+                            this._ready.subscribe(function (ready) {
+                                if (ready) {
+                                    _this.firstVisit = false;
+                                    _this.service.firstVisit = false;
+                                    _this.ready.emit(ready);
+                                }
+                            });
+                            return [4 /*yield*/, this.sendBotCommand('exit', false).catch(function (err) { return console.log('fail reset session'); })];
+                        case 1:
+                            _a.sent();
+                            if (this.Welcome) {
+                                customWelcome = BotMessageSample;
+                                customWelcome.text = this.Welcome;
+                                this.LastBotAnswer = customWelcome;
+                                this.History.push(customWelcome);
+                            }
+                            return [2 /*return*/];
+                    }
+                });
             });
-            if (this.Welcome) {
-                var customWelcome = BotMessageSample;
-                customWelcome.text = this.Welcome;
-                this.LastBotAnswer = customWelcome;
-                this.History.push(customWelcome);
-            }
-            this.sendBotCommand('exit', false).catch(function (err) { return console.log('fail reset session'); });
         };
         KonversoComponent.prototype.send = function ($event) {
             return __awaiter(this, void 0, void 0, function () {
