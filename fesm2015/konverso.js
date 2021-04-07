@@ -261,6 +261,7 @@ let KonversoComponent = class KonversoComponent {
     }
     sendBotCommand($event, push = true) {
         return __awaiter(this, void 0, void 0, function* () {
+            this.LastBotAnswer.text += '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
             const response = yield this.service.send($event).catch((err) => {
                 console.log('We got an error ', err);
             });
@@ -331,6 +332,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         this.readySend = new EventEmitter(false);
         this.send = new EventEmitter(null);
         this.sendBotCommand = new EventEmitter(null);
+        this.currentPlaceHolder = '';
     }
     ngOnInit() {
         if (this.PlaceHolder) {

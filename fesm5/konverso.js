@@ -298,9 +298,11 @@ var KonversoComponent = /** @class */ (function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.service.send($event).catch(function (err) {
-                            console.log('We got an error ', err);
-                        })];
+                    case 0:
+                        this.LastBotAnswer.text += '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
+                        return [4 /*yield*/, this.service.send($event).catch(function (err) {
+                                console.log('We got an error ', err);
+                            })];
                     case 1:
                         response = _a.sent();
                         if (response.response.medias && response.response.medias[0] && response.response.medias[0].required_actions &&
@@ -374,6 +376,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         this.readySend = new EventEmitter(false);
         this.send = new EventEmitter(null);
         this.sendBotCommand = new EventEmitter(null);
+        this.currentPlaceHolder = '';
     }
     DesktopFullScreenComponent.prototype.ngOnInit = function () {
         var _this = this;
