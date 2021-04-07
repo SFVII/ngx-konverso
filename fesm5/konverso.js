@@ -254,7 +254,7 @@ var KonversoComponent = /** @class */ (function () {
                             this.sendBotCommand('exit', false).catch(function (err) { return console.log('fail reset session'); });
                             return [2 /*return*/, false];
                         }
-                        this.LastBotAnswer.text += '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
+                        this.LastBotAnswer.text = '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
                         this.History.push($event);
                         if (this.AssistantMode) {
                             if (this.LastUserInput) {
@@ -299,7 +299,7 @@ var KonversoComponent = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        this.LastBotAnswer.text += '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
+                        this.LastBotAnswer.text = '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
                         if ($event === 'yes_response' || $event === 'no_response') {
                             this.LastUserInput = null;
                         }
