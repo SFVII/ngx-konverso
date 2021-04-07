@@ -192,33 +192,31 @@ let KonversoComponent = class KonversoComponent {
         this.disableUserInput = false;
     }
     ngOnInit() {
-        return __awaiter(this, void 0, void 0, function* () {
-            this.isMobile = this._isMobile();
-            this.assets = this.service.assets;
-            this.firstVisit = this.service.firstVisit;
-            this.firstUsageStory = this.service.firstUsageStory;
-            this.AssistantMode = this.service.AssistantMode;
-            this.PlaceHolder = this.service.PlaceHolder;
-            this.Welcome = this.service.Welcome;
-            this.History = [];
-            if (this.service.ColorSet) {
-                this.colorSet = this.service.ColorSet;
-            }
-            this._ready.subscribe((ready) => {
-                if (ready) {
-                    this.firstVisit = false;
-                    this.service.firstVisit = false;
-                    this.ready.emit(ready);
-                }
-            });
-            yield this.sendBotCommand('exit', false).catch((err) => console.log('fail reset session'));
-            if (this.Welcome) {
-                const customWelcome = BotMessageSample;
-                customWelcome.text = this.Welcome;
-                this.LastBotAnswer = customWelcome;
-                this.History.push(customWelcome);
+        this.isMobile = this._isMobile();
+        this.assets = this.service.assets;
+        this.firstVisit = this.service.firstVisit;
+        this.firstUsageStory = this.service.firstUsageStory;
+        this.AssistantMode = this.service.AssistantMode;
+        this.PlaceHolder = this.service.PlaceHolder;
+        this.Welcome = this.service.Welcome;
+        this.sendBotCommand('exit', false).catch((err) => console.log('fail reset session'));
+        this.History = [];
+        if (this.service.ColorSet) {
+            this.colorSet = this.service.ColorSet;
+        }
+        this._ready.subscribe((ready) => {
+            if (ready) {
+                this.firstVisit = false;
+                this.service.firstVisit = false;
+                this.ready.emit(ready);
             }
         });
+        if (this.Welcome) {
+            const customWelcome = BotMessageSample;
+            customWelcome.text = this.Welcome;
+            this.LastBotAnswer = customWelcome;
+            this.History.push(customWelcome);
+        }
     }
     send($event) {
         return __awaiter(this, void 0, void 0, function* () {
