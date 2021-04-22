@@ -1,45 +1,6 @@
 ::ng-deep {
   ngx-konverso {
-    @keyframes dot-keyframes {
-      0% {
-        opacity: .4;
-        transform: scale(1, 1);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.2, 1.2);
-      }
-
-      100% {
-        opacity: .4;
-        transform: scale(1, 1);
-      }
-    }
-
-    .loading-dots {
-      text-align: center;
-      width: 100%;
-
-      &--dot {
-        animation: dot-keyframes 1.5s infinite ease-in-out;
-       // background-color: #000;
-        border-radius: 10px;
-        display: inline-block;
-        height: 10px;
-        width: 10px;
-
-        &:nth-child(2) {
-          animation-delay: .5s;
-        }
-
-        &:nth-child(3) {
-          animation-delay: 1s;
-        }
-      }
-    }
     overflow: hidden;
-
     bot-full-screen,
     bot-first-visit {
       display: table;
@@ -186,93 +147,6 @@
           }
         }
 
-        .bot-assistant-wrapper {
-          display: table;
-          height: 100%;
-          max-height: 100%;
-          overflow: hidden;
-          width: 100%;
-          position: relative;
-
-          .bot-logo {
-            padding-top: 2.5%;
-            width: 100%;
-            margin: auto;
-            vertical-align: middle;
-
-            img {
-              margin-left: auto;
-              margin-right: auto;
-              display: block;
-              width: 150px;
-            }
-          }
-
-          .bot-answer {
-            width: 600px;
-            text-align: center;
-            margin: 2.5% auto auto;
-            font-size: 25px;
-          }
-
-          .user-input {
-            font-size: 15px;
-            margin: auto;
-            display: block;
-            //transform: rotate(180deg);
-            // direction: ltr;
-
-            .data {
-              padding: 10px 20px;
-              border-radius: 25px 25px 0px 25px;
-              max-width: 550px;
-              width: -webkit-fit-content;
-              width: -moz-fit-content;
-              width: fit-content;
-              position: relative;
-              word-break: break-all;
-              color: #fff;
-              margin: 5% auto auto;
-              background-color: #00a9de;
-            }
-
-            .time {
-              font-weight: 300;
-              position: absolute;
-              width: 200px;
-              display: block;
-              margin-left: 95%;
-              bottom: -1%;
-              color: #000;
-              font-size: 10px;
-            }
-          }
-
-          .bot-input-wrapper {
-            text-align: center;
-            position: absolute;
-            width: 100%;
-            bottom: 2%;
-
-            input {
-              text-align: center;
-              display: block;
-              padding: 10px;
-              border-radius: 25px;
-              color: black;
-              width: 60%;
-              margin: auto;
-              border: 1px solid rgba(0, 0, 0, 0.2)
-            }
-
-            button {
-              display: block;
-              width: calc(36% - 15px);
-              padding: 11px;
-            }
-          }
-        }
-
         .bot-chat-wrapper {
           width: 100%;
           display: table;
@@ -290,24 +164,17 @@
             left: 2%;
           }
 
-
           .bot-discussion-wrapper {
             width: 100%;
-            position: relative;
             max-width: 600px;
             height: calc(85vh - 50px);
             padding: 15px 30px;
             margin: 0 auto;
             overflow-y: scroll;
+            transform: rotate(180deg);
             direction: rtl;
 
-            &::-webkit-scrollbar {
-              width: 0 !important
-            }
-
-
             .bot-chat {
-              position: absolute;
               overflow-x: hidden;
               display: -webkit-box;
               display: -ms-flexbox;
@@ -319,9 +186,7 @@
               -webkit-box-pack: end;
               -ms-flex-pack: end;
               justify-content: flex-end;
-              transform: rotate(180deg);
-              min-height: 100%;
-              width: 94%;
+
 
               .bot-answer {
                 font-size: 15px;
@@ -338,11 +203,6 @@
                 word-break: break-all;
                 transform: rotate(180deg);
                 direction: ltr;
-
-                button {
-                  padding: 10px;
-                  border: 1px solid;
-                }
               }
 
               .user-input {
@@ -383,16 +243,6 @@
             width: 100%;
             margin: auto;
 
-            .bot-input-disable {
-              width: 100%;
-              max-width: 600px;
-              margin: auto auto 10px;
-              min-height: 100px;
-              max-height: 200px;
-              padding: 2.5% 2.5% 0.5% 0.3%;
-              text-align: center;
-            }
-
             .bot-input {
               width: 100%;
               max-width: 600px;
@@ -405,10 +255,10 @@
                 display: inline-block;
                 padding: 10px;
                 border-radius: 25px;
-                color: black;
+                color : black;
                 width: 60%;
                 margin-right: 15px;
-                border: 1px solid rgba(0, 0, 0, 0.2)
+                border : 1px solid rgba(0,0,0,0.2)
               }
 
               button {
@@ -422,63 +272,5 @@
         }
       }
     }
-
-
-    .bot-mobile {
-        font-family: 'nexa', 'Roboto';
-        width: 96vw !important;
-        height: 100vh;
-        display: table;
-        margin: auto;
-        background-size: contain;
-
-        .bot-view {
-          bot-first-visit {
-            position: relative;
-            .bot-logo-init-wrapper {
-              margin-top: 2.5vh;
-              img {
-                margin-left: auto;
-                margin-right: auto;
-                display: block;
-                max-width: 150px;
-              }
-            }
-
-            .bot-init-text {
-              margin-top: 4%;
-              width: 100%;
-            //  max-width: 96% !important;
-              min-height: 150px;
-              font-size: 15px!important;
-              text-align: center;
-            }
-
-            .bot-init-button-wrapper {
-              position: absolute;
-              top: 70vh
-            }
-
-          }
-          .bot-assistant-wrapper {
-            .bot-answer {
-              width: 70vw !important;
-              text-align: center;
-              margin: 15.5% auto auto!important;
-              font-size: 15px!important;
-            }
-
-            .bot-input-wrapper {
-              background: white;
-              bottom: 10vh!important;
-              input {
-                width: 90% !important;
-              }
-            }
-          }
-        }
-    }
   }
 }
-
-

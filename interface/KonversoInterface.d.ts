@@ -55,8 +55,6 @@ export interface KonversoInterface {
     CustomWelcome?: boolean;
     defaultAssets?: DefaultAssets;
     BotInitMessage?: BotInitMessage;
-    AssistantMode?: boolean;
-    InputPlaceHolder: WildCardObjectArray;
 }
 /**
  *  Inteface setting for authentication
@@ -122,21 +120,21 @@ interface WildCardObject {
     [index: string]: string;
 }
 export interface OpenChatBotResponse {
-    query?: string;
-    userId?: string;
-    timestamp?: number;
-    text?: string;
-    infoURL?: string;
-    echo?: {
+    query: string;
+    userId: string;
+    timestamp: number;
+    text: string;
+    infoURL: string;
+    echo: {
         session: string;
     };
-    score?: {
+    score: {
         value: number;
     };
-    channel?: OpenChatBotChannel;
-    medias?: [OpenChatBotMedia];
-    context?: WildCardObject[];
-    suggestions?: OpenChatBotAction[];
+    channel: OpenChatBotChannel;
+    medias: [OpenChatBotMedia];
+    context: WildCardObject[];
+    suggestions: OpenChatBotAction[];
 }
 interface OpenChatBotMeta {
     version: number;

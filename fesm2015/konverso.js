@@ -1,18 +1,16 @@
-import { __awaiter, __decorate, __param } from 'tslib';
-import { EventEmitter, Inject, Injectable, Output, Component, Input, Pipe, Optional, SkipSelf, NgModule } from '@angular/core';
+import { __awaiter } from 'tslib';
+import { EventEmitter, ɵɵinject, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, Inject, ɵɵdirectiveInject, ɵɵdefinePipe, Pipe, ɵɵgetCurrentView, ɵɵelementStart, ɵɵlistener, ɵɵrestoreView, ɵɵnextContext, ɵɵelementEnd, ɵɵstyleMap, ɵɵpureFunction2, ɵɵdefineComponent, ɵɵelementContainerStart, ɵɵelement, ɵɵpipe, ɵɵtemplate, ɵɵtext, ɵɵelementContainerEnd, ɵɵadvance, ɵɵproperty, ɵɵsanitizeUrl, ɵɵpipeBind1, ɵɵsanitizeHtml, Component, Input, Output, ɵɵtextInterpolate1, ɵɵtextInterpolate, ɵɵpureFunction1, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { render } from 'mustache';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { NgForOf, NgIf, CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
+import { DefaultValueAccessor, NgControlStatus, NgModel, FormsModule } from '@angular/forms';
 
-let KonversoService = class KonversoService {
+class KonversoService {
     constructor(config, http) {
         this.http = http;
         this.authentication = new EventEmitter();
         this.firstVisit = false;
-        this.AssistantMode = false;
         this.token = new BehaviorSubject(null);
         // tslint:disable-next-line:variable-name
         this._token = this.token.asObservable();
@@ -32,7 +30,7 @@ let KonversoService = class KonversoService {
                         const options = {
                             headers: this.header
                         };
-                        this.http.post(this.endpoint + '?t=' + new Date().getTime(), preparedData, options)
+                        this.http.post(this.endpoint, preparedData, options)
                             .subscribe((data) => {
                             resolve(data);
                         });
@@ -55,8 +53,8 @@ let KonversoService = class KonversoService {
         this._token.subscribe((token) => {
             const bearer = 'Bearer ' + token;
             this.header = new HttpHeaders({
-                //'Content-Type': 'application/json',
-                // 'Access-Control-Allow-Origin': window.location.origin,
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': window.location.origin,
                 'Authorization': bearer
             });
         });
@@ -69,9 +67,6 @@ let KonversoService = class KonversoService {
     initInstance(config) {
         if (config.endpoint) {
             this.endpoint = config.endpoint;
-            if (config.AssistantMode) {
-                this.AssistantMode = config.AssistantMode;
-            }
             if (config.defaultAssets) {
                 this.assets = config.defaultAssets;
                 if (config.defaultAssets.ColorSet) {
@@ -85,12 +80,6 @@ let KonversoService = class KonversoService {
                         user.lang = config.lang;
                     }
                     this.locale = user.lang;
-                    if (config.InputPlaceHolder && config.InputPlaceHolder[this.locale]) {
-                        this.PlaceHolder = config.InputPlaceHolder[this.locale];
-                    }
-                    if (config.CustomWelcome && config.BotInitMessage.Welcome && config.BotInitMessage.Welcome[this.locale]) {
-                        this.Welcome = render(config.BotInitMessage.Welcome[this.locale], user);
-                    }
                     if (user.token) {
                         this.token.next(user.token);
                     }
@@ -99,10 +88,7 @@ let KonversoService = class KonversoService {
                         delete user.firstVisit;
                         if (((_b = (_a = config) === null || _a === void 0 ? void 0 : _a.BotInitMessage) === null || _b === void 0 ? void 0 : _b.FirstUsage) &&
                             this.locale && ((_d = (_c = config) === null || _c === void 0 ? void 0 : _c.BotInitMessage) === null || _d === void 0 ? void 0 : _d.FirstUsage[this.locale])) {
-                            this.firstUsageStory = [];
-                            for (const history of config.BotInitMessage.FirstUsage[this.locale]) {
-                                this.firstUsageStory.push(render(history, user));
-                            }
+                            this.firstUsageStory = config.BotInitMessage.FirstUsage[this.locale];
                         }
                     }
                     this.user = user;
@@ -110,12 +96,6 @@ let KonversoService = class KonversoService {
             }
             else if (config.lang) {
                 this.locale = config.lang;
-                if (config.InputPlaceHolder && config.InputPlaceHolder[this.locale]) {
-                    this.PlaceHolder = config.InputPlaceHolder[this.locale];
-                }
-                if (config.CustomWelcome && config.BotInitMessage.Welcome && config.BotInitMessage.Welcome[this.locale]) {
-                    this.Welcome = config.BotInitMessage.Welcome[this.locale];
-                }
                 this.user = {
                     userId: this.guid(),
                     lang: config.lang
@@ -150,94 +130,359 @@ let KonversoService = class KonversoService {
         };
         return random() + random() + '-' + random() + '-' + random() + '-' + random() + '-' + random() + random() + random();
     }
-};
-KonversoService.ctorParameters = () => [
-    { type: undefined, decorators: [{ type: Inject, args: ['__NgxKonverso__',] }] },
-    { type: HttpClient }
-];
-KonversoService = __decorate([
-    Injectable(),
-    __param(0, Inject('__NgxKonverso__'))
-], KonversoService);
+}
+KonversoService.ɵfac = function KonversoService_Factory(t) { return new (t || KonversoService)(ɵɵinject('__NgxKonverso__'), ɵɵinject(HttpClient)); };
+KonversoService.ɵprov = ɵɵdefineInjectable({ token: KonversoService, factory: KonversoService.ɵfac });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(KonversoService, [{
+        type: Injectable
+    }], function () { return [{ type: undefined, decorators: [{
+                type: Inject,
+                args: ['__NgxKonverso__']
+            }] }, { type: HttpClient }]; }, null); })();
 
-const BotMessageSample = {
-    query: null,
-    userId: null,
-    timestamp: 1617369777.976196,
-    text: null,
-    infoURL: '',
-    context: [],
-    suggestions: []
-};
+class SafeHtmlPipe {
+    constructor(sanitizer) {
+        this.sanitizer = sanitizer;
+    }
+    transform(value) {
+        return this.sanitizer.bypassSecurityTrustHtml(value);
+    }
+}
+SafeHtmlPipe.ɵfac = function SafeHtmlPipe_Factory(t) { return new (t || SafeHtmlPipe)(ɵɵdirectiveInject(DomSanitizer)); };
+SafeHtmlPipe.ɵpipe = ɵɵdefinePipe({ name: "safeHtml", type: SafeHtmlPipe, pure: true });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(SafeHtmlPipe, [{
+        type: Pipe,
+        args: [{
+                name: 'safeHtml'
+            }]
+    }], function () { return [{ type: DomSanitizer }]; }, null); })();
 
-/***********************************************************
- **  @project ngx-konverso                              **
- **  @file DotLoader                                         **
- **  @author Brice Daupiard <brice.daupiard@smartiiz.com>  **
- **  @Date 07/04/2021                                         **
- ***********************************************************/
-const DotLoaderTemplate = (color) => `<div class="loading-dots">
-<div class="loading-dots--dot" style="background-color: ${color}"></div>
-  <div class="loading-dots--dot" style="background-color: ${color}"></div>
-  <div class="loading-dots--dot" style="background-color: ${color}"></div>
-  </div>`;
+const _c0 = function (a0, a1) { return { backgroundColor: a0, borderColor: a1 }; };
+function FirstVisitComponent_span_6_Template(rf, ctx) { if (rf & 1) {
+    const _r1102 = ɵɵgetCurrentView();
+    ɵɵelementStart(0, "span", 7);
+    ɵɵlistener("click", function FirstVisitComponent_span_6_Template_span_click_0_listener() { ɵɵrestoreView(_r1102); const pos_r1100 = ctx.index; const ctx_r1101 = ɵɵnextContext(); return ctx_r1101.goTo(pos_r1100); });
+    ɵɵelementEnd();
+} if (rf & 2) {
+    const pos_r1100 = ctx.index;
+    const ctx_r1098 = ɵɵnextContext();
+    ɵɵstyleMap(pos_r1100 === ctx_r1098.position ? ɵɵpureFunction2(2, _c0, ctx_r1098.assets == null ? null : ctx_r1098.assets.ColorSet == null ? null : ctx_r1098.assets.ColorSet.Primary, ctx_r1098.assets == null ? null : ctx_r1098.assets.ColorSet == null ? null : ctx_r1098.assets.ColorSet.Primary) : ɵɵpureFunction2(5, _c0, ctx_r1098.assets == null ? null : ctx_r1098.assets.ColorSet == null ? null : ctx_r1098.assets.ColorSet.Secondary, ctx_r1098.assets == null ? null : ctx_r1098.assets.ColorSet == null ? null : ctx_r1098.assets.ColorSet.Primary));
+} }
+const _c1 = function (a0, a1) { return { backgroundColor: a0, color: a1 }; };
+class FirstVisitComponent {
+    constructor() {
+        this.ready = new EventEmitter(false);
+        this.position = 0;
+        this.current = null;
+    }
+    ngOnInit() {
+        this.current = this.firstUsageStory[this.position];
+        const clear = setInterval(() => {
+            if (this.position < (this.firstUsageStory.length - 1)) {
+                this.current = this.firstUsageStory[++this.position];
+            }
+            else {
+                clearInterval(clear);
+            }
+        }, 5000);
+    }
+    goTo(pos) {
+        this.position = pos;
+        this.current = this.firstUsageStory[this.position];
+    }
+    start() {
+        this.ready.emit(true);
+    }
+}
+FirstVisitComponent.ɵfac = function FirstVisitComponent_Factory(t) { return new (t || FirstVisitComponent)(); };
+FirstVisitComponent.ɵcmp = ɵɵdefineComponent({ type: FirstVisitComponent, selectors: [["bot-first-visit"]], inputs: { firstUsageStory: "firstUsageStory", assets: "assets" }, outputs: { ready: "ready" }, decls: 10, vars: 10, consts: [[1, "bot-logo-init-wrapper"], [3, "src"], [1, "bot-init-text", 3, "innerHTML"], [1, "bot-init-bullet-step"], ["class", "bot-init-dot", 3, "style", "click", 4, "ngFor", "ngForOf"], [1, "bot-init-button-wrapper"], ["mat-button", "", 1, "bot-button", "button-lg", 3, "click"], [1, "bot-init-dot", 3, "click"]], template: function FirstVisitComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵɵelementContainerStart(0);
+        ɵɵelementStart(1, "div", 0);
+        ɵɵelement(2, "img", 1);
+        ɵɵelementEnd();
+        ɵɵelement(3, "div", 2);
+        ɵɵpipe(4, "safeHtml");
+        ɵɵelementStart(5, "div", 3);
+        ɵɵtemplate(6, FirstVisitComponent_span_6_Template, 1, 8, "span", 4);
+        ɵɵelementEnd();
+        ɵɵelementStart(7, "div", 5);
+        ɵɵelementStart(8, "button", 6);
+        ɵɵlistener("click", function FirstVisitComponent_Template_button_click_8_listener() { return ctx.start(); });
+        ɵɵtext(9, "C'est parti !");
+        ɵɵelementEnd();
+        ɵɵelementEnd();
+        ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        ɵɵadvance(2);
+        ɵɵproperty("src", ctx.assets.FullSizeLogo, ɵɵsanitizeUrl);
+        ɵɵadvance(1);
+        ɵɵproperty("innerHTML", ɵɵpipeBind1(4, 5, ctx.current), ɵɵsanitizeHtml);
+        ɵɵadvance(3);
+        ɵɵproperty("ngForOf", ctx.firstUsageStory);
+        ɵɵadvance(2);
+        ɵɵstyleMap(ɵɵpureFunction2(7, _c1, ctx.assets == null ? null : ctx.assets.ColorSet == null ? null : ctx.assets.ColorSet.Primary, ctx.assets == null ? null : ctx.assets.ColorSet == null ? null : ctx.assets.ColorSet.Secondary));
+    } }, directives: [NgForOf], pipes: [SafeHtmlPipe], styles: [""] });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(FirstVisitComponent, [{
+        type: Component,
+        args: [{
+                selector: 'bot-first-visit',
+                templateUrl: './first-visit.component.html',
+                styleUrls: ['./first-visit.component.scss']
+            }]
+    }], function () { return []; }, { firstUsageStory: [{
+            type: Input
+        }], assets: [{
+            type: Input
+        }], ready: [{
+            type: Output
+        }] }); })();
 
+function DesktopFullScreenComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
+    const _r1076 = ɵɵgetCurrentView();
+    ɵɵelementContainerStart(0);
+    ɵɵelementStart(1, "bot-first-visit", 3);
+    ɵɵlistener("ready", function DesktopFullScreenComponent_ng_container_2_Template_bot_first_visit_ready_1_listener($event) { ɵɵrestoreView(_r1076); const ctx_r1075 = ɵɵnextContext(); return ctx_r1075.ready.emit($event); });
+    ɵɵelementEnd();
+    ɵɵelementContainerEnd();
+} if (rf & 2) {
+    const ctx_r1073 = ɵɵnextContext();
+    ɵɵadvance(1);
+    ɵɵproperty("firstUsageStory", ctx_r1073.firstUsageStory)("assets", ctx_r1073.assets);
+} }
+const _c0$1 = function (a0, a1) { return { backgroundColor: a0, color: a1 }; };
+function DesktopFullScreenComponent_ng_container_3_ng_container_4_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+    ɵɵelementContainerStart(0);
+    ɵɵelementStart(1, "div", 14);
+    ɵɵelementStart(2, "div", 15);
+    ɵɵtext(3);
+    ɵɵelementEnd();
+    ɵɵelementStart(4, "span", 16);
+    ɵɵtext(5);
+    ɵɵelementEnd();
+    ɵɵelementEnd();
+    ɵɵelementContainerEnd();
+} if (rf & 2) {
+    const entry_r1078 = ɵɵnextContext().$implicit;
+    const ctx_r1079 = ɵɵnextContext(2);
+    ɵɵadvance(2);
+    ɵɵstyleMap(ɵɵpureFunction2(4, _c0$1, ctx_r1079.assets == null ? null : ctx_r1079.assets.ColorSet == null ? null : ctx_r1079.assets.ColorSet.Primary, ctx_r1079.assets == null ? null : ctx_r1079.assets.ColorSet == null ? null : ctx_r1079.assets.ColorSet.Secondary));
+    ɵɵadvance(1);
+    ɵɵtextInterpolate1(" ", entry_r1078.message, " ");
+    ɵɵadvance(2);
+    ɵɵtextInterpolate(entry_r1078.date);
+} }
+function DesktopFullScreenComponent_ng_container_3_ng_container_4_ng_container_2_ng_container_2_Template(rf, ctx) { if (rf & 1) {
+    ɵɵelementContainerStart(0);
+    ɵɵelement(1, "span", 18);
+    ɵɵpipe(2, "safeHtml");
+    ɵɵelement(3, "br");
+    ɵɵelementContainerEnd();
+} if (rf & 2) {
+    const entry_r1078 = ɵɵnextContext(2).$implicit;
+    ɵɵadvance(1);
+    ɵɵproperty("innerHTML", ɵɵpipeBind1(2, 1, entry_r1078.text), ɵɵsanitizeHtml);
+} }
+function DesktopFullScreenComponent_ng_container_3_ng_container_4_ng_container_2_ng_container_3_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+    const _r1090 = ɵɵgetCurrentView();
+    ɵɵelementContainerStart(0);
+    ɵɵelementStart(1, "button", 19);
+    ɵɵlistener("click", function DesktopFullScreenComponent_ng_container_3_ng_container_4_ng_container_2_ng_container_3_ng_container_1_ng_container_1_Template_button_click_1_listener() { ɵɵrestoreView(_r1090); const suggest_r1086 = ɵɵnextContext().$implicit; const ctx_r1088 = ɵɵnextContext(5); return ctx_r1088.byPassUserInput(suggest_r1086 == null ? null : suggest_r1086.value == null ? null : suggest_r1086.value.onClick); });
+    ɵɵelementEnd();
+    ɵɵelementContainerEnd();
+} if (rf & 2) {
+    const suggest_r1086 = ɵɵnextContext().$implicit;
+    ɵɵadvance(1);
+    ɵɵproperty("innerHTML", suggest_r1086.label || (suggest_r1086.value == null ? null : suggest_r1086.value.displayedMessage) || (suggest_r1086.value == null ? null : suggest_r1086.value.title), ɵɵsanitizeHtml);
+} }
+function DesktopFullScreenComponent_ng_container_3_ng_container_4_ng_container_2_ng_container_3_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+    ɵɵelementContainerStart(0);
+    ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_ng_container_4_ng_container_2_ng_container_3_ng_container_1_ng_container_1_Template, 2, 1, "ng-container", 2);
+    ɵɵelementContainerEnd();
+} if (rf & 2) {
+    const suggest_r1086 = ctx.$implicit;
+    ɵɵadvance(1);
+    ɵɵproperty("ngIf", suggest_r1086.format === "button");
+} }
+function DesktopFullScreenComponent_ng_container_3_ng_container_4_ng_container_2_ng_container_3_Template(rf, ctx) { if (rf & 1) {
+    ɵɵelementContainerStart(0);
+    ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_ng_container_4_ng_container_2_ng_container_3_ng_container_1_Template, 2, 1, "ng-container", 7);
+    ɵɵelementContainerEnd();
+} if (rf & 2) {
+    const entry_r1078 = ɵɵnextContext(2).$implicit;
+    ɵɵadvance(1);
+    ɵɵproperty("ngForOf", entry_r1078.medias[0].required_actions);
+} }
+function DesktopFullScreenComponent_ng_container_3_ng_container_4_ng_container_2_Template(rf, ctx) { if (rf & 1) {
+    ɵɵelementContainerStart(0);
+    ɵɵelementStart(1, "div", 17);
+    ɵɵtemplate(2, DesktopFullScreenComponent_ng_container_3_ng_container_4_ng_container_2_ng_container_2_Template, 4, 3, "ng-container", 2);
+    ɵɵtemplate(3, DesktopFullScreenComponent_ng_container_3_ng_container_4_ng_container_2_ng_container_3_Template, 2, 1, "ng-container", 2);
+    ɵɵelementEnd();
+    ɵɵelementContainerEnd();
+} if (rf & 2) {
+    const entry_r1078 = ɵɵnextContext().$implicit;
+    ɵɵadvance(2);
+    ɵɵproperty("ngIf", entry_r1078.text);
+    ɵɵadvance(1);
+    ɵɵproperty("ngIf", entry_r1078.medias && entry_r1078.medias.length && entry_r1078.medias[0].required_actions && entry_r1078.medias[0].required_actions.length);
+} }
+function DesktopFullScreenComponent_ng_container_3_ng_container_4_Template(rf, ctx) { if (rf & 1) {
+    ɵɵelementContainerStart(0);
+    ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_ng_container_4_ng_container_1_Template, 6, 7, "ng-container", 2);
+    ɵɵtemplate(2, DesktopFullScreenComponent_ng_container_3_ng_container_4_ng_container_2_Template, 4, 2, "ng-container", 2);
+    ɵɵelementContainerEnd();
+} if (rf & 2) {
+    const entry_r1078 = ctx.$implicit;
+    ɵɵadvance(1);
+    ɵɵproperty("ngIf", entry_r1078.date);
+    ɵɵadvance(1);
+    ɵɵproperty("ngIf", !entry_r1078.date);
+} }
+function DesktopFullScreenComponent_ng_container_3_Template(rf, ctx) { if (rf & 1) {
+    const _r1095 = ɵɵgetCurrentView();
+    ɵɵelementContainerStart(0);
+    ɵɵelementStart(1, "div", 4);
+    ɵɵelementStart(2, "div", 5);
+    ɵɵelementStart(3, "div", 6);
+    ɵɵtemplate(4, DesktopFullScreenComponent_ng_container_3_ng_container_4_Template, 3, 2, "ng-container", 7);
+    ɵɵelementEnd();
+    ɵɵelementEnd();
+    ɵɵelementStart(5, "div", 8);
+    ɵɵelementStart(6, "div", 9);
+    ɵɵelementStart(7, "input", 10);
+    ɵɵlistener("ngModelChange", function DesktopFullScreenComponent_ng_container_3_Template_input_ngModelChange_7_listener($event) { ɵɵrestoreView(_r1095); const ctx_r1094 = ɵɵnextContext(); return ctx_r1094.userInput = $event; })("keyup.enter", function DesktopFullScreenComponent_ng_container_3_Template_input_keyup_enter_7_listener() { ɵɵrestoreView(_r1095); const ctx_r1096 = ɵɵnextContext(); return ctx_r1096.userInput && ctx_r1096._send(); });
+    ɵɵelementEnd();
+    ɵɵelementStart(8, "button", 11);
+    ɵɵlistener("click", function DesktopFullScreenComponent_ng_container_3_Template_button_click_8_listener() { ɵɵrestoreView(_r1095); const ctx_r1097 = ɵɵnextContext(); return ctx_r1097._send(); });
+    ɵɵtext(9, "Envoyer ");
+    ɵɵelementEnd();
+    ɵɵelementEnd();
+    ɵɵelementEnd();
+    ɵɵelementStart(10, "div", 12);
+    ɵɵelement(11, "img", 13);
+    ɵɵelementEnd();
+    ɵɵelementEnd();
+    ɵɵelementContainerEnd();
+} if (rf & 2) {
+    const ctx_r1074 = ɵɵnextContext();
+    ɵɵadvance(4);
+    ɵɵproperty("ngForOf", ctx_r1074.displayData);
+    ɵɵadvance(3);
+    ɵɵproperty("ngModel", ctx_r1074.userInput);
+    ɵɵadvance(1);
+    ɵɵstyleMap(ɵɵpureFunction2(6, _c0$1, ctx_r1074.assets == null ? null : ctx_r1074.assets.ColorSet == null ? null : ctx_r1074.assets.ColorSet.Primary, ctx_r1074.assets == null ? null : ctx_r1074.assets.ColorSet == null ? null : ctx_r1074.assets.ColorSet.Secondary));
+    ɵɵproperty("disabled", !ctx_r1074.userInput);
+    ɵɵadvance(3);
+    ɵɵproperty("src", ctx_r1074.assets.FullSizeLogo, ɵɵsanitizeUrl);
+} }
+const _c1$1 = function (a0) { return { backgroundImage: a0 }; };
+class DesktopFullScreenComponent {
+    constructor() {
+        this.firstVisit = false;
+        this.ready = new EventEmitter(false);
+        this.send = new EventEmitter(null);
+        this.sendBotCommand = new EventEmitter(null);
+    }
+    ngOnInit() {
+        this.ready.subscribe((ready) => {
+            this.firstVisit = false;
+        });
+    }
+    _send() {
+        const userData = {
+            message: this.userInput,
+            date: new Date().toLocaleTimeString(navigator.language, {
+                hour: '2-digit',
+                minute: '2-digit'
+            })
+        };
+        this.send.emit(userData);
+        this.userInput = null;
+    }
+    byPassUserInput(botdata) {
+        this.sendBotCommand.emit(botdata);
+    }
+}
+DesktopFullScreenComponent.ɵfac = function DesktopFullScreenComponent_Factory(t) { return new (t || DesktopFullScreenComponent)(); };
+DesktopFullScreenComponent.ɵcmp = ɵɵdefineComponent({ type: DesktopFullScreenComponent, selectors: [["bot-full-screen"]], inputs: { assets: "assets", firstVisit: "firstVisit", firstUsageStory: "firstUsageStory", displayData: "displayData" }, outputs: { ready: "ready", send: "send", sendBotCommand: "sendBotCommand" }, decls: 4, vars: 6, consts: [["xmlns", "http://www.w3.org/1999/html", 1, "bot-container"], [1, "bot-view"], [4, "ngIf"], [3, "firstUsageStory", "assets", "ready"], [1, "bot-chat-wrapper"], [1, "bot-discussion-wrapper"], [1, "bot-chat"], [4, "ngFor", "ngForOf"], [1, "bot-input-wrapper"], [1, "bot-input"], ["type", "text", 3, "ngModel", "ngModelChange", "keyup.enter"], [1, "bot-button", 3, "disabled", "click"], [1, "bot-logo"], [3, "src"], [1, "user-input"], [1, "data"], [1, "time"], [1, "bot-answer"], [3, "innerHTML"], [1, "bot-button", 3, "innerHTML", "click"]], template: function DesktopFullScreenComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵɵelementStart(0, "div", 0);
+        ɵɵelementStart(1, "div", 1);
+        ɵɵtemplate(2, DesktopFullScreenComponent_ng_container_2_Template, 2, 2, "ng-container", 2);
+        ɵɵtemplate(3, DesktopFullScreenComponent_ng_container_3_Template, 12, 9, "ng-container", 2);
+        ɵɵelementEnd();
+        ɵɵelementEnd();
+    } if (rf & 2) {
+        ɵɵstyleMap(ɵɵpureFunction1(4, _c1$1, "url(" + ctx.assets.Background + ")"));
+        ɵɵadvance(2);
+        ɵɵproperty("ngIf", ctx.firstVisit && ctx.firstUsageStory);
+        ɵɵadvance(1);
+        ɵɵproperty("ngIf", !ctx.firstVisit);
+    } }, directives: [NgIf, FirstVisitComponent, NgForOf, DefaultValueAccessor, NgControlStatus, NgModel], pipes: [SafeHtmlPipe], styles: [""] });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(DesktopFullScreenComponent, [{
+        type: Component,
+        args: [{
+                selector: 'bot-full-screen',
+                templateUrl: './desktop-full-screen.component.html',
+                styleUrls: ['./desktop-full-screen.component.css']
+            }]
+    }], function () { return []; }, { assets: [{
+            type: Input
+        }], firstVisit: [{
+            type: Input
+        }], firstUsageStory: [{
+            type: Input
+        }], displayData: [{
+            type: Input
+        }], ready: [{
+            type: Output
+        }], send: [{
+            type: Output
+        }], sendBotCommand: [{
+            type: Output
+        }] }); })();
+
+function KonversoComponent_ng_container_0_Template(rf, ctx) { if (rf & 1) {
+    ɵɵelementContainerStart(0);
+    ɵɵtext(1, " Mobile\n");
+    ɵɵelementContainerEnd();
+} }
+function KonversoComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+    const _r1071 = ɵɵgetCurrentView();
+    ɵɵelementContainerStart(0);
+    ɵɵelementStart(1, "bot-full-screen", 1);
+    ɵɵlistener("send", function KonversoComponent_ng_container_1_Template_bot_full_screen_send_1_listener($event) { ɵɵrestoreView(_r1071); const ctx_r1070 = ɵɵnextContext(); return ctx_r1070.send($event); })("sendBotCommand", function KonversoComponent_ng_container_1_Template_bot_full_screen_sendBotCommand_1_listener($event) { ɵɵrestoreView(_r1071); const ctx_r1072 = ɵɵnextContext(); return ctx_r1072.sendBotCommand($event); });
+    ɵɵelementEnd();
+    ɵɵelementContainerEnd();
+} if (rf & 2) {
+    const ctx_r1069 = ɵɵnextContext();
+    ɵɵadvance(1);
+    ɵɵproperty("assets", ctx_r1069.assets)("firstVisit", ctx_r1069.firstVisit)("firstUsageStory", ctx_r1069.firstUsageStory)("displayData", ctx_r1069.History);
+} }
 // @ts-ignore
-let KonversoComponent = class KonversoComponent {
+class KonversoComponent {
     constructor(service) {
         this.service = service;
-        this._ready = new EventEmitter();
         this.ready = new EventEmitter();
-        this.AssistantMode = false;
-        this.disableUserInput = false;
     }
     ngOnInit() {
         this.isMobile = this._isMobile();
         this.assets = this.service.assets;
         this.firstVisit = this.service.firstVisit;
         this.firstUsageStory = this.service.firstUsageStory;
-        this.AssistantMode = this.service.AssistantMode;
-        this.PlaceHolder = this.service.PlaceHolder;
-        this.Welcome = this.service.Welcome;
-        this.sendBotCommand('exit', false).catch((err) => console.log('fail reset session'));
         this.History = [];
         if (this.service.ColorSet) {
             this.colorSet = this.service.ColorSet;
         }
-        this._ready.subscribe((ready) => {
+        this.ready.subscribe((ready) => {
             if (ready) {
                 this.firstVisit = false;
                 this.service.firstVisit = false;
-                this.ready.emit(ready);
             }
         });
-        if (this.Welcome) {
-            const customWelcome = BotMessageSample;
-            customWelcome.text = this.Welcome;
-            this.LastBotAnswer = customWelcome;
-            this.History.push(customWelcome);
-        }
     }
     send($event) {
         return __awaiter(this, void 0, void 0, function* () {
-            if ($event.message === 'exit') {
-                this.sendBotCommand('exit', false).catch((err) => console.log('fail reset session'));
-                return false;
-            }
-            this.LastBotAnswer.text = '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
             this.History.push($event);
-            if (this.AssistantMode) {
-                if (this.LastUserInput) {
-                    this.LastUserInput.message += ' ' + $event.message;
-                    this.LastUserInput.date = $event.date;
-                }
-                else {
-                    this.LastUserInput = $event;
-                }
-            }
-            else {
-                this.LastUserInput = $event;
-            }
             const index = this.History.length - 1;
             const response = yield this.service.send($event.message).catch((err) => {
                 console.log('We got an error ', err);
@@ -245,45 +490,19 @@ let KonversoComponent = class KonversoComponent {
                 this.History[index].error = true;
             });
             if (response && response.response) {
-                if (response.response.medias && response.response.medias[0] && response.response.medias[0].required_actions &&
-                    response.response.medias[0].required_actions.length) {
-                    this.disableUserInput = true;
-                }
-                else {
-                    this.disableUserInput = false;
-                }
-                this.LastBotAnswer = response.response;
+                console.log(response);
                 this.History.push(response.response);
             }
         });
     }
-    sendBotCommand($event, push = true) {
+    sendBotCommand($event) {
         return __awaiter(this, void 0, void 0, function* () {
-            this.LastBotAnswer.text = '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
-            if ($event === 'yes_response' || $event === 'no_response') {
-                this.LastUserInput = null;
-            }
             const response = yield this.service.send($event).catch((err) => {
                 console.log('We got an error ', err);
             });
-            if (response.response.medias && response.response.medias[0] && response.response.medias[0].required_actions &&
-                response.response.medias[0].required_actions.length) {
-                this.disableUserInput = true;
-            }
-            else {
-                this.disableUserInput = false;
-            }
-            if (response && response.response && push) {
-                this.LastBotAnswer = response.response;
+            if (response && response.response) {
+                console.log(response);
                 this.History.push(response.response);
-            }
-            else if (response && response.response && !push) {
-                this.LastUserInput = null;
-                this.LastBotAnswer = response.response;
-                this.History.push(response.response);
-            }
-            else {
-                this.LastUserInput = null;
             }
         });
     }
@@ -310,176 +529,29 @@ let KonversoComponent = class KonversoComponent {
         };
         return isMobile.any();
     }
-};
-KonversoComponent.ctorParameters = () => [
-    { type: KonversoService }
-];
-__decorate([
-    Output()
-], KonversoComponent.prototype, "ready", void 0);
-KonversoComponent = __decorate([
-    Component({
-        selector: 'ngx-konverso',
-        template: "<bot-full-screen [class]=\"isMobile ? 'bot-mobile' : ''\"\n                 [assets]=\"assets\"\n                 [firstVisit]=\"firstVisit\"\n                 [firstUsageStory]=\"firstUsageStory\"\n                 (send)=\"send($event)\"\n                 (sendBotCommand)=\"sendBotCommand($event)\"\n                 [displayData]=\"History\"\n                 [disableUserInput]=\"disableUserInput\"\n                 [LastBotAnswer]=\"LastBotAnswer\"\n                 [LastUserInput]=\"LastUserInput\"\n                 [AssistantMode]=\"AssistantMode\"\n                 [PlaceHolder]=\"PlaceHolder\"\n                 [IsMobile]=\"isMobile\"\n                 (readySend)=\"_ready.emit($event)\"\n></bot-full-screen>\n\n\n",
-        styles: ["::ng-deep ngx-konverso{overflow:hidden;display:block;min-height:100%;height:100%}@-webkit-keyframes dot-keyframes{0%,100%{opacity:.4;transform:scale(1,1)}50%{opacity:1;transform:scale(1.2,1.2)}}@keyframes dot-keyframes{0%,100%{opacity:.4;transform:scale(1,1)}50%{opacity:1;transform:scale(1.2,1.2)}}::ng-deep ngx-konverso .loading-dots{text-align:center;width:100%}::ng-deep ngx-konverso .loading-dots--dot{-webkit-animation:1.5s ease-in-out infinite dot-keyframes;animation:1.5s ease-in-out infinite dot-keyframes;border-radius:10px;display:inline-block;height:10px;width:10px}::ng-deep ngx-konverso .loading-dots--dot:nth-child(2){-webkit-animation-delay:.5s;animation-delay:.5s}::ng-deep ngx-konverso .loading-dots--dot:nth-child(3){-webkit-animation-delay:1s;animation-delay:1s}::ng-deep ngx-konverso bot-first-visit,::ng-deep ngx-konverso bot-full-screen{display:table;min-height:100%;height:100%;width:100%}::ng-deep ngx-konverso bot-full-screen button:focus,::ng-deep ngx-konverso bot-full-screen input:focus{outline:0!important}::ng-deep ngx-konverso bot-full-screen .bot-button>*{position:relative}::ng-deep ngx-konverso bot-full-screen .button-lg{padding:10px!important;font-size:16px!important}::ng-deep ngx-konverso bot-full-screen .bot-button{cursor:pointer;opacity:.9;min-width:150px;border-radius:25px;padding:5px;position:relative;display:block;margin:30px auto;overflow:hidden;border-width:0;outline:0;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:opacity .3s}::ng-deep ngx-konverso bot-full-screen .bot-button span{display:block;padding:12px 24px}::ng-deep ngx-konverso bot-full-screen .bot-button:focus,::ng-deep ngx-konverso bot-full-screen .bot-button:hover{opacity:1}::ng-deep ngx-konverso bot-full-screen .bot-button:before{content:\"\";position:absolute;top:50%;left:50%;display:block;width:0;padding-top:0;border-radius:100%;background-color:rgba(236,240,241,.3);transform:translate(-50%,-50%)}::ng-deep ngx-konverso bot-full-screen .bot-button:active:before{width:120%;padding-top:120%;transition:width .2s ease-out,padding-top .2s ease-out}::ng-deep ngx-konverso bot-full-screen .bot-container{font-family:nexa,Roboto;width:100%;height:100%;display:table;margin:auto;background-size:contain}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view{background-size:contain;width:auto;margin:auto;height:100%;display:table-cell;vertical-align:middle}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view img{margin:auto}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-logo-init-wrapper{padding-top:5%;width:100%;margin:auto;vertical-align:middle}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-logo-init-wrapper img{margin-left:auto;margin-right:auto;display:block}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-text{margin-top:4%;width:100%;min-height:150px;font-size:20px;text-align:center}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-bullet-step{margin-top:5%;text-align:center}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-bullet-step .bot-init-dot{border:1px solid;display:inline-block;width:12px;height:12px;margin-left:2.5px;margin-right:2.5px;border-radius:50%}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-button-wrapper{display:block;width:100%;text-align:center;margin-top:8%;margin-right:auto;margin-left:auto}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper{display:table;height:100%;max-height:100%;overflow:hidden;width:100%;position:relative}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-logo{padding-top:2.5%;width:100%;margin:auto;vertical-align:middle}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-logo img{margin-left:auto;margin-right:auto;display:block;width:150px}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-answer{width:600px;text-align:center;margin:2.5% auto auto;font-size:25px}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .user-input{font-size:15px;margin:auto;display:block}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .user-input .data{padding:10px 20px;border-radius:25px 25px 0;max-width:550px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;position:relative;word-break:break-all;color:#fff;margin:5% auto auto;background-color:#00a9de}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .user-input .time{font-weight:300;position:absolute;width:200px;display:block;margin-left:95%;bottom:-1%;color:#000;font-size:10px}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-input-wrapper{text-align:center;position:absolute;width:100%;bottom:2%}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-input-wrapper input{text-align:center;display:block;padding:10px;border-radius:25px;color:#000;width:60%;margin:auto;border:1px solid rgba(0,0,0,.2)}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-input-wrapper button{display:block;width:calc(36% - 15px);padding:11px}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper{width:100%;display:table;height:100%}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-logo{max-width:100px;position:absolute;top:2%;left:2%}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-logo img{max-width:100px}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper{width:100%;position:relative;max-width:600px;height:calc(85vh - 50px);padding:15px 30px;margin:0 auto;overflow-y:scroll;direction:rtl}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper::-webkit-scrollbar{width:0!important}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat{position:absolute;overflow-x:hidden;display:flex;flex-direction:column-reverse;justify-content:flex-end;transform:rotate(180deg);min-height:100%;width:94%}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .bot-answer{font-size:15px;padding:10px 20px;border-radius:25px;color:#000;background-color:transparent;max-width:550px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;position:relative;margin:15px 0;word-break:break-all;transform:rotate(180deg);direction:ltr}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .bot-answer button{padding:10px;border:1px solid}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .user-input{font-size:15px;transform:rotate(180deg);direction:ltr}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .user-input .data{padding:10px 20px;border-radius:25px 25px 0;max-width:550px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;position:relative;word-break:break-all;color:#fff;margin:15px 0 15px auto;background-color:#00a9de}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .user-input .time{font-weight:300;position:absolute;width:200px;display:block;margin-left:95%;bottom:-1%;color:#000;font-size:10px}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper{display:table;width:100%;margin:auto}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input-disable{width:100%;max-width:600px;margin:auto auto 10px;min-height:100px;max-height:200px;padding:2.5% 2.5% .5% .3%;text-align:center}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input{width:100%;max-width:600px;margin:auto auto 10px;min-height:100px;max-height:200px;padding:2.5% 2.5% .5%}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input input{display:inline-block;padding:10px;border-radius:25px;color:#000;width:60%;margin-right:15px;border:1px solid rgba(0,0,0,.2)}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input button{display:inline-block;width:calc(36% - 15px);padding:11px}::ng-deep ngx-konverso .bot-mobile{font-family:nexa,Roboto;width:96vw!important;height:100vh;display:table;margin:auto;background-size:contain}::ng-deep ngx-konverso .bot-mobile .bot-view bot-first-visit{position:relative}::ng-deep ngx-konverso .bot-mobile .bot-view bot-first-visit .bot-logo-init-wrapper{margin-top:2.5vh}::ng-deep ngx-konverso .bot-mobile .bot-view bot-first-visit .bot-logo-init-wrapper img{margin-left:auto;margin-right:auto;display:block;max-width:150px}::ng-deep ngx-konverso .bot-mobile .bot-view bot-first-visit .bot-init-text{margin-top:4%;width:100%;min-height:150px;font-size:15px!important;text-align:center}::ng-deep ngx-konverso .bot-mobile .bot-view bot-first-visit .bot-init-button-wrapper{position:absolute;top:70vh}::ng-deep ngx-konverso .bot-mobile .bot-view .bot-assistant-wrapper .bot-answer{width:70vw!important;text-align:center;margin:15.5% auto auto!important;font-size:15px!important}::ng-deep ngx-konverso .bot-mobile .bot-view .bot-assistant-wrapper .bot-input-wrapper{background:#fff;bottom:10vh!important}::ng-deep ngx-konverso .bot-mobile .bot-view .bot-assistant-wrapper .bot-input-wrapper input{width:90%!important}"]
-    })
-], KonversoComponent);
+}
+KonversoComponent.ɵfac = function KonversoComponent_Factory(t) { return new (t || KonversoComponent)(ɵɵdirectiveInject(KonversoService)); };
+KonversoComponent.ɵcmp = ɵɵdefineComponent({ type: KonversoComponent, selectors: [["ngx-konverso"]], outputs: { ready: "ready" }, decls: 2, vars: 2, consts: [[4, "ngIf"], [3, "assets", "firstVisit", "firstUsageStory", "displayData", "send", "sendBotCommand"]], template: function KonversoComponent_Template(rf, ctx) { if (rf & 1) {
+        ɵɵtemplate(0, KonversoComponent_ng_container_0_Template, 2, 0, "ng-container", 0);
+        ɵɵtemplate(1, KonversoComponent_ng_container_1_Template, 2, 4, "ng-container", 0);
+    } if (rf & 2) {
+        ɵɵproperty("ngIf", ctx.isMobile);
+        ɵɵadvance(1);
+        ɵɵproperty("ngIf", !ctx.isMobile);
+    } }, directives: [NgIf, DesktopFullScreenComponent], styles: ["ngx-konverso{overflow:hidden;display:block;min-height:100%;height:100%}  ngx-konverso bot-first-visit,   ngx-konverso bot-full-screen{display:table;min-height:100%;height:100%;width:100%}  ngx-konverso bot-full-screen button:focus,   ngx-konverso bot-full-screen input:focus{outline:0!important}  ngx-konverso bot-full-screen .bot-button>*{position:relative}  ngx-konverso bot-full-screen .button-lg{padding:10px!important;font-size:16px!important}  ngx-konverso bot-full-screen .bot-button{cursor:pointer;opacity:.9;min-width:150px;border-radius:25px;padding:5px;position:relative;display:block;margin:30px auto;overflow:hidden;border-width:0;outline:0;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:opacity .3s}  ngx-konverso bot-full-screen .bot-button span{display:block;padding:12px 24px}  ngx-konverso bot-full-screen .bot-button:focus,   ngx-konverso bot-full-screen .bot-button:hover{opacity:1}  ngx-konverso bot-full-screen .bot-button:before{content:\"\";position:absolute;top:50%;left:50%;display:block;width:0;padding-top:0;border-radius:100%;background-color:rgba(236,240,241,.3);transform:translate(-50%,-50%)}  ngx-konverso bot-full-screen .bot-button:active:before{width:120%;padding-top:120%;transition:width .2s ease-out,padding-top .2s ease-out}  ngx-konverso bot-full-screen .bot-container{font-family:nexa,Roboto;width:100%;height:100%;display:table;margin:auto;background-size:contain}  ngx-konverso bot-full-screen .bot-container>.bot-view{background-size:contain;width:auto;margin:auto;height:100%;display:table-cell;vertical-align:middle}  ngx-konverso bot-full-screen .bot-container>.bot-view img{margin:auto}  ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-logo-init-wrapper{padding-top:5%;width:100%;margin:auto;vertical-align:middle}  ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-logo-init-wrapper img{margin-left:auto;margin-right:auto;display:block}  ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-text{margin-top:4%;width:100%;min-height:150px;font-size:20px;text-align:center}  ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-bullet-step{margin-top:5%;text-align:center}  ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-bullet-step .bot-init-dot{border:1px solid;display:inline-block;width:12px;height:12px;margin-left:2.5px;margin-right:2.5px;border-radius:50%}  ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-button-wrapper{display:block;width:100%;text-align:center;margin-top:8%;margin-right:auto;margin-left:auto}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper{width:100%;display:table;height:100%}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-logo{max-width:100px;position:absolute;top:2%;left:2%}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-logo img{max-width:100px}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper{width:100%;max-width:600px;height:calc(85vh - 50px);padding:15px 30px;margin:0 auto;overflow-y:scroll;transform:rotate(180deg);direction:rtl}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat{overflow-x:hidden;display:flex;flex-direction:column-reverse;justify-content:flex-end}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .bot-answer{font-size:15px;padding:10px 20px;border-radius:25px;color:#000;background-color:transparent;max-width:550px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;position:relative;margin:15px 0;word-break:break-all;transform:rotate(180deg);direction:ltr}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .user-input{font-size:15px;transform:rotate(180deg);direction:ltr}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .user-input .data{padding:10px 20px;border-radius:25px 25px 0;max-width:550px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;position:relative;word-break:break-all;color:#fff;margin:15px 0 15px auto;background-color:#00a9de}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .user-input .time{font-weight:300;position:absolute;width:200px;display:block;margin-left:95%;bottom:-1%;color:#000;font-size:10px}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper{display:table;width:100%;margin:auto}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input{width:100%;max-width:600px;margin:auto auto 10px;min-height:100px;max-height:200px;padding:2.5% 2.5% .5%}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input input{display:inline-block;padding:10px;border-radius:25px;color:#000;width:60%;margin-right:15px;border:1px solid rgba(0,0,0,.2)}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input button{display:inline-block;width:calc(36% - 15px);padding:11px}"] });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(KonversoComponent, [{
+        type: Component,
+        args: [{
+                selector: 'ngx-konverso',
+                templateUrl: 'konverso.component.html',
+                styleUrls: ['../../assets/main.scss']
+            }]
+    }], function () { return [{ type: KonversoService }]; }, { ready: [{
+            type: Output
+        }] }); })();
 
-let DesktopFullScreenComponent = class DesktopFullScreenComponent {
-    constructor() {
-        this.AssistantMode = false;
-        this.firstVisit = false;
-        this.IsMobile = false;
-        this.readySend = new EventEmitter(false);
-        this.send = new EventEmitter(null);
-        this.sendBotCommand = new EventEmitter(null);
-        this.currentPlaceHolder = '';
-    }
-    ngOnInit() {
-        if (this.PlaceHolder) {
-            setInterval(() => {
-                this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
-            }, 3000);
-        }
-    }
-    emit($event) {
-        this.firstVisit = false;
-        this.readySend.emit(true);
-    }
-    _send() {
-        const userData = {
-            message: this.userInput,
-            date: new Date().toLocaleTimeString(navigator.language, {
-                hour: '2-digit',
-                minute: '2-digit'
-            })
-        };
-        this.send.emit(userData);
-        this.userInput = null;
-    }
-    scroll(scrollHeight) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve(0);
-                }, 300);
-            });
-        });
-    }
-    byPassUserInput(botdata) {
-        this.sendBotCommand.emit(botdata);
-    }
-};
-__decorate([
-    Input()
-], DesktopFullScreenComponent.prototype, "AssistantMode", void 0);
-__decorate([
-    Input()
-], DesktopFullScreenComponent.prototype, "assets", void 0);
-__decorate([
-    Input()
-], DesktopFullScreenComponent.prototype, "firstVisit", void 0);
-__decorate([
-    Input()
-], DesktopFullScreenComponent.prototype, "firstUsageStory", void 0);
-__decorate([
-    Input()
-], DesktopFullScreenComponent.prototype, "displayData", void 0);
-__decorate([
-    Input()
-], DesktopFullScreenComponent.prototype, "disableUserInput", void 0);
-__decorate([
-    Input()
-], DesktopFullScreenComponent.prototype, "LastUserInput", void 0);
-__decorate([
-    Input()
-], DesktopFullScreenComponent.prototype, "LastBotAnswer", void 0);
-__decorate([
-    Input()
-], DesktopFullScreenComponent.prototype, "PlaceHolder", void 0);
-__decorate([
-    Input()
-], DesktopFullScreenComponent.prototype, "IsMobile", void 0);
-__decorate([
-    Output()
-], DesktopFullScreenComponent.prototype, "readySend", void 0);
-__decorate([
-    Output()
-], DesktopFullScreenComponent.prototype, "send", void 0);
-__decorate([
-    Output()
-], DesktopFullScreenComponent.prototype, "sendBotCommand", void 0);
-DesktopFullScreenComponent = __decorate([
-    Component({
-        selector: 'bot-full-screen',
-        template: "<div class=\"bot-container\"  [class]=\"IsMobile ? 'bot-mobile' : ''\" [style]=\"{backgroundImage : 'url('+assets.Background+')'}\"\n     xmlns=\"http://www.w3.org/1999/html\">\n  <div class=\"bot-view\">\n    <ng-container *ngIf=\"firstVisit && firstUsageStory\">\n      <bot-first-visit [firstUsageStory]=\"firstUsageStory\" [assets]=\"assets\"\n                       (ready)=\"emit($event)\"></bot-first-visit>\n    </ng-container>\n    <ng-container *ngIf=\"!firstVisit\">\n      <div class=\"bot-assistant-wrapper\" *ngIf=\"AssistantMode\">\n        <div class=\"bot-logo\">\n          <img [src]=\"assets.FullSizeLogo\">\n        </div>\n        <div class=\"bot-discussion-wrapper\">\n          <ng-container *ngIf=\"LastUserInput\">\n            <div class=\"user-input\" *ngIf=\"LastUserInput\">\n              <div class=\"data\" [style]=\"{\n                     backgroundColor : assets?.ColorSet?.Primary,\n                     color : assets?.ColorSet?.Secondary\n                    }\">\n                {{LastUserInput.message}}\n              </div>\n              <span class=\"time\">{{LastUserInput.date}}</span>\n            </div>\n          </ng-container>\n          <ng-container *ngIf=\"LastBotAnswer\">\n            <div class=\"bot-answer\">\n              <ng-container>\n\n              </ng-container>\n              <ng-container *ngIf=\"LastBotAnswer.text\">\n                <span [innerHTML]=\"LastBotAnswer.text | safeHtml\"></span><br>\n              </ng-container>\n              <ng-container *ngIf=\"LastBotAnswer.medias && LastBotAnswer.medias.length\n                   && LastBotAnswer.medias[0].required_actions\n                   && LastBotAnswer.medias[0].required_actions.length\">\n                <ng-container *ngFor=\"let suggest of LastBotAnswer.medias[0].required_actions\">\n                  <ng-container *ngIf=\"suggest.format === 'button'\">\n                    <button [style]=\"{\n                     borderColor : assets?.ColorSet?.Primary,\n                     color : assets?.ColorSet?.Primary\n            }\" class=\"bot-button\" (click)=\"byPassUserInput(suggest?.value?.onClick)\"\n                            [innerHTML]=\"suggest.label|| suggest.value?.displayedMessage || suggest.value?.title \"></button>\n                  </ng-container>\n                </ng-container>\n              </ng-container>\n\n            </div>\n          </ng-container>\n          <div class=\"bot-input-wrapper\">\n            <div class=\"bot-input\" *ngIf=\"!disableUserInput\">\n              <input type=\"text\" [(ngModel)]=\"userInput\" (keyup.enter)=\"userInput && _send()\" maxlength=\"200\"\n                     [placeholder]=\"currentPlaceHolder\">\n              <button class=\"bot-button\" [style]=\"{\n                     backgroundColor : assets?.ColorSet?.Primary,\n                     color : assets?.ColorSet?.Secondary\n            }\" (click)=\"_send()\" [disabled]=\"!userInput\">Envoyer\n              </button>\n            </div>\n            <div class=\"bot-input-disable\" *ngIf=\"disableUserInput\">\n              <i>Vous devez s\u00E9lectionner une r\u00E9ponse</i>\n            </div>\n          </div>\n        </div>\n      </div>\n      <div class=\"bot-chat-wrapper\" *ngIf=\"!AssistantMode\">\n        {{AssistantMode}}\n        <div class=\"bot-discussion-wrapper\" #scrollMe [scrollTop]=\"scrollMe.scrollTo(0, 9999999)\">\n          <div class=\"bot-chat\">\n\n            <ng-container *ngFor=\"let entry of displayData\">\n              <ng-container *ngIf=\"entry.date\">\n                <div class=\"user-input\">\n                  <div class=\"data\" [style]=\"{\n                     backgroundColor : assets?.ColorSet?.Primary,\n                     color : assets?.ColorSet?.Secondary\n                    }\">\n                    {{entry.message}}\n                  </div>\n                  <span class=\"time\">{{entry.date}}</span>\n                </div>\n              </ng-container>\n              <ng-container *ngIf=\"!entry.date\">\n                <div class=\"bot-answer\">\n                  <ng-container *ngIf=\"entry.text\">\n                    <span [innerHTML]=\"entry.text | safeHtml\"></span><br>\n                  </ng-container>\n                  <ng-container *ngIf=\"entry.medias && entry.medias.length\n                   && entry.medias[0].required_actions\n                   && entry.medias[0].required_actions.length\">\n                    <ng-container *ngFor=\"let suggest of entry.medias[0].required_actions\">\n                      <ng-container *ngIf=\"suggest.format === 'button'\">\n                        <button [style]=\"{\n                     borderColor : assets?.ColorSet?.Primary,\n                     color : assets?.ColorSet?.Primary\n            }\" class=\"bot-button\" (click)=\"byPassUserInput(suggest?.value?.onClick)\"\n                                [innerHTML]=\"suggest.label|| suggest.value?.displayedMessage || suggest.value?.title \"></button>\n                      </ng-container>\n                    </ng-container>\n                  </ng-container>\n\n                </div>\n              </ng-container>\n            </ng-container>\n          </div>\n        </div>\n        <div class=\"bot-input-wrapper\">\n          <div class=\"bot-input\" *ngIf=\"!disableUserInput\">\n            <input type=\"text\" [(ngModel)]=\"userInput\" (keyup.enter)=\"userInput && _send()\" maxlength=\"200\"\n                   [placeholder]=\"currentPlaceHolder\">\n            <button class=\"bot-button\" [style]=\"{\n                     backgroundColor : assets?.ColorSet?.Primary,\n                     color : assets?.ColorSet?.Secondary\n            }\" (click)=\"_send()\" [disabled]=\"!userInput\">Envoyer\n            </button>\n          </div>\n          <div class=\"bot-input-disable\" *ngIf=\"disableUserInput\">\n            <i>Vous devez s\u00E9lectionner une r\u00E9ponse</i>\n          </div>\n        </div>\n        <div class=\"bot-logo\">\n          <img [src]=\"assets.FullSizeLogo\">\n        </div>\n      </div>\n    </ng-container>\n\n  </div>\n</div>\n",
-        styles: [""]
-    })
-], DesktopFullScreenComponent);
-
-let FirstVisitComponent = class FirstVisitComponent {
-    constructor() {
-        this.ready = new EventEmitter();
-        this.position = 0;
-        this.current = '';
-    }
-    ngOnInit() {
-        this.current = this.firstUsageStory[this.position];
-        const clear = setInterval(() => {
-            if (this.position < (this.firstUsageStory.length - 1)) {
-                this.current = this.firstUsageStory[++this.position];
-            }
-            else {
-                clearInterval(clear);
-            }
-        }, 5000);
-    }
-    goTo(pos) {
-        this.position = pos;
-        this.current = this.firstUsageStory[this.position];
-    }
-    start() {
-        //console.log('OOOKKKK')
-        this.ready.emit(true);
-    }
-};
-__decorate([
-    Input()
-], FirstVisitComponent.prototype, "firstUsageStory", void 0);
-__decorate([
-    Input()
-], FirstVisitComponent.prototype, "assets", void 0);
-__decorate([
-    Output()
-], FirstVisitComponent.prototype, "ready", void 0);
-FirstVisitComponent = __decorate([
-    Component({
-        selector: 'bot-first-visit',
-        template: "<ng-container>\n  <div class=\"bot-logo-init-wrapper\">\n    <img [src]=\"assets.FullSizeLogo\">\n  </div>\n  <div class=\"bot-init-text\" [innerHTML]=\"current | safeHtml\"></div>\n  <div class=\"bot-init-bullet-step\">\n      <span *ngFor=\"let elem of firstUsageStory ; let pos = index\" class=\"bot-init-dot\"\n            [style]=\"pos === position ? {\n              backgroundColor : assets?.ColorSet?.Primary,\n              borderColor :assets?.ColorSet?.Primary\n              }:{\n                backgroundColor :assets?.ColorSet?.Secondary,\n                borderColor :assets?.ColorSet?.Primary\n                }\" (click)=\"goTo(pos)\">\n      </span>\n  </div>\n  <div class=\"bot-init-button-wrapper\">\n    <button mat-button class=\"bot-button button-lg\" [style]=\"{\n      backgroundColor : assets?.ColorSet?.Primary,\n      color : assets?.ColorSet?.Secondary\n    }\" (click)=\"start()\">C'est parti !</button>\n  </div>\n\n</ng-container>\n",
-        styles: [""]
-    })
-], FirstVisitComponent);
-
-let SafeHtmlPipe = class SafeHtmlPipe {
-    constructor(sanitizer) {
-        this.sanitizer = sanitizer;
-    }
-    transform(value) {
-        return this.sanitizer.bypassSecurityTrustHtml(value);
-    }
-};
-SafeHtmlPipe.ctorParameters = () => [
-    { type: DomSanitizer }
-];
-SafeHtmlPipe = __decorate([
-    Pipe({
-        name: 'safeHtml'
-    })
-], SafeHtmlPipe);
-
-var KonversoModule_1;
 // @ts-ignore
-let KonversoModule = KonversoModule_1 = class KonversoModule {
+class KonversoModule {
     constructor(parentModule) {
         if (parentModule) {
             throw new Error('KonversoModule is already loaded. Import it in the AppModule only');
@@ -487,34 +559,44 @@ let KonversoModule = KonversoModule_1 = class KonversoModule {
     }
     static forRoot(config) {
         return {
-            ngModule: KonversoModule_1,
+            ngModule: KonversoModule,
             providers: [
                 { provide: '__NgxKonverso__', useValue: config },
                 KonversoService
             ]
         };
     }
-};
-KonversoModule.ctorParameters = () => [
-    { type: KonversoModule, decorators: [{ type: Optional }, { type: SkipSelf }] }
-];
-KonversoModule = KonversoModule_1 = __decorate([
-    NgModule({
-        declarations: [KonversoComponent, DesktopFullScreenComponent, FirstVisitComponent, SafeHtmlPipe],
-        imports: [
+}
+KonversoModule.ɵmod = ɵɵdefineNgModule({ type: KonversoModule });
+KonversoModule.ɵinj = ɵɵdefineInjector({ factory: function KonversoModule_Factory(t) { return new (t || KonversoModule)(ɵɵinject(KonversoModule, 12)); }, providers: [KonversoService], imports: [[
             FormsModule,
             HttpClientModule,
             CommonModule,
-        ],
-        providers: [KonversoService],
-        exports: [KonversoComponent]
-    }),
-    __param(0, Optional()), __param(0, SkipSelf())
-], KonversoModule);
+        ]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && ɵɵsetNgModuleScope(KonversoModule, { declarations: [KonversoComponent, DesktopFullScreenComponent, FirstVisitComponent, SafeHtmlPipe], imports: [FormsModule,
+        HttpClientModule,
+        CommonModule], exports: [KonversoComponent] }); })();
+/*@__PURE__*/ (function () { ɵsetClassMetadata(KonversoModule, [{
+        type: NgModule,
+        args: [{
+                declarations: [KonversoComponent, DesktopFullScreenComponent, FirstVisitComponent, SafeHtmlPipe],
+                imports: [
+                    FormsModule,
+                    HttpClientModule,
+                    CommonModule,
+                ],
+                providers: [KonversoService],
+                exports: [KonversoComponent]
+            }]
+    }], function () { return [{ type: KonversoModule, decorators: [{
+                type: Optional
+            }, {
+                type: SkipSelf
+            }] }]; }, null); })();
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { KonversoComponent, KonversoModule, KonversoService, DesktopFullScreenComponent as ɵa, FirstVisitComponent as ɵb, SafeHtmlPipe as ɵc };
+export { KonversoComponent, KonversoModule, KonversoService };
 //# sourceMappingURL=konverso.js.map

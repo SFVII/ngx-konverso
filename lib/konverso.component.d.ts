@@ -1,26 +1,22 @@
 import { EventEmitter, OnInit } from '@angular/core';
 import { KonversoService } from './konverso.service';
 import { ColorSet, DefaultAssets, OpenChatBotResponse, UserInput } from '../interface/KonversoInterface';
+import * as i0 from "@angular/core";
 export declare class KonversoComponent implements OnInit {
     private service;
-    _ready: EventEmitter<boolean>;
     ready: EventEmitter<boolean>;
     query: string;
     isMobile: boolean;
     assets: DefaultAssets;
     firstVisit: boolean;
     firstUsageStory: string[];
-    AssistantMode: boolean;
     colorSet: ColorSet;
     History: (UserInput | OpenChatBotResponse)[];
-    disableUserInput: boolean;
-    LastUserInput: UserInput;
-    LastBotAnswer: OpenChatBotResponse;
-    PlaceHolder: string[];
-    Welcome: string;
     constructor(service: KonversoService);
     ngOnInit(): void;
-    send($event: UserInput): Promise<boolean>;
-    sendBotCommand($event: string, push?: boolean): Promise<void>;
+    send($event: UserInput): Promise<void>;
+    sendBotCommand($event: string): Promise<void>;
     private _isMobile;
+    static ɵfac: i0.ɵɵFactoryDef<KonversoComponent>;
+    static ɵcmp: i0.ɵɵComponentDefWithMeta<KonversoComponent, "ngx-konverso", never, {}, { "ready": "ready"; }, never>;
 }
