@@ -70,8 +70,8 @@ export interface KonversoUser {
     userId: string;
     lang: string;
     location?: string;
-    firstVisit?: string;
-    [index: string]: string;
+    firstVisit?: any;
+    [index: string]: any;
 }
 /**
  *  Inteface Query Konverso
