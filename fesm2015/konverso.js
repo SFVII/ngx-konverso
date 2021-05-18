@@ -107,6 +107,7 @@ let KonversoService = class KonversoService {
                         }
                     }
                     this.user = user;
+                    this.readyState = true;
                 });
             }
             else if (config.lang) {
@@ -121,11 +122,11 @@ let KonversoService = class KonversoService {
                     userId: this.guid(),
                     lang: config.lang
                 };
+                this.readyState = true;
             }
             if (config.token) {
                 this.token.next(config.token);
             }
-            this.readyState = true;
         }
         else {
             return new Error('Please provide endpoint');

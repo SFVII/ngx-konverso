@@ -123,6 +123,7 @@ var KonversoService = /** @class */ (function () {
                         }
                     }
                     _this.user = user;
+                    _this.readyState = true;
                 });
             }
             else if (config.lang) {
@@ -137,11 +138,11 @@ var KonversoService = /** @class */ (function () {
                     userId: this.guid(),
                     lang: config.lang
                 };
+                this.readyState = true;
             }
             if (config.token) {
                 this.token.next(config.token);
             }
-            this.readyState = true;
         }
         else {
             return new Error('Please provide endpoint');
