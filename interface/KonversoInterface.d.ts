@@ -5,7 +5,7 @@
  **  @Date 30/03/2021                                         **
  ***********************************************************/
 interface WildCardObjectArray {
-    [index: string]: string[];
+    [index: string]: any[];
 }
 /**
  *  Bot Init message

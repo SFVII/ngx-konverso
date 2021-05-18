@@ -11,6 +11,7 @@ export declare class KonversoService {
     PlaceHolder: string[];
     AssistantMode: boolean;
     Welcome: string;
+    readyState: boolean;
     private locale;
     private token;
     private _token;

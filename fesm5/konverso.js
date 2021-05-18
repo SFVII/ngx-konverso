@@ -13,6 +13,7 @@ var KonversoService = /** @class */ (function () {
         this.authentication = new EventEmitter();
         this.firstVisit = false;
         this.AssistantMode = false;
+        this.readyState = false;
         this.token = new BehaviorSubject(null);
         // tslint:disable-next-line:variable-name
         this._token = this.token.asObservable();
@@ -140,6 +141,7 @@ var KonversoService = /** @class */ (function () {
             if (config.token) {
                 this.token.next(config.token);
             }
+            this.readyState = true;
         }
         else {
             return new Error('Please provide endpoint');
