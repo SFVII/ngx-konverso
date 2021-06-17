@@ -289,6 +289,7 @@
          */
         KonversoService.prototype.initInstance = function (config) {
             var _this = this;
+            this._auth = !!config.auth;
             if (config.endpoint) {
                 this.endpoint = config.endpoint;
                 if (config.AssistantMode) {
@@ -417,11 +418,17 @@
     // @ts-ignore
     var KonversoComponent = /** @class */ (function () {
         function KonversoComponent(service) {
+            var _this = this;
             this.service = service;
             this._ready = new core.EventEmitter();
             this.ready = new core.EventEmitter();
             this.AssistantMode = false;
             this.disableUserInput = false;
+            if (service._auth) {
+                this.service.authentication.subscribe(function () {
+                    _this.ngOnInit();
+                });
+            }
         }
         KonversoComponent.prototype.ngOnInit = function () {
             var _this = this;

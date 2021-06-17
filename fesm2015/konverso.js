@@ -68,6 +68,7 @@ let KonversoService = class KonversoService {
      * Initialize Data for User Instance
      */
     initInstance(config) {
+        this._auth = !!config.auth;
         if (config.endpoint) {
             this.endpoint = config.endpoint;
             if (config.AssistantMode) {
@@ -193,6 +194,11 @@ let KonversoComponent = class KonversoComponent {
         this.ready = new EventEmitter();
         this.AssistantMode = false;
         this.disableUserInput = false;
+        if (service._auth) {
+            this.service.authentication.subscribe(() => {
+                this.ngOnInit();
+            });
+        }
     }
     ngOnInit() {
         console.log('user agent', navigator.userAgent, navigator.userAgent.match(/iPhone|iPad|iPod/i));

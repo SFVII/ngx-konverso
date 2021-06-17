@@ -18,6 +18,7 @@ export declare class KonversoService {
     private user;
     private header;
     private endpoint;
+    _auth: boolean;
     constructor(config: KonversoInterface, http: HttpClient);
     /**
      * Send Query To backend server and get a response
