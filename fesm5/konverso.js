@@ -212,8 +212,32 @@ var KonversoComponent = /** @class */ (function () {
         this.AssistantMode = false;
         this.disableUserInput = false;
         if (service._auth) {
-            this.service.authentication.subscribe(function () {
-                _this.ngOnInit();
+            this.service.lang.subscribe(function () {
+                _this.isMobile = _this._isMobile();
+                _this.assets = _this.service.assets;
+                _this.firstVisit = _this.service.firstVisit;
+                _this.firstUsageStory = _this.service.firstUsageStory;
+                _this.AssistantMode = _this.service.AssistantMode;
+                _this.PlaceHolder = _this.service.PlaceHolder;
+                _this.Welcome = _this.service.Welcome;
+                //this.sendBotCommand('exit', false).catch((err: any) => console.log('fail reset session'));
+                _this.History = [];
+                if (_this.service.ColorSet) {
+                    _this.colorSet = _this.service.ColorSet;
+                }
+                _this._ready.subscribe(function (ready) {
+                    if (ready) {
+                        _this.firstVisit = false;
+                        _this.service.firstVisit = false;
+                        _this.ready.emit(ready);
+                    }
+                });
+                if (_this.Welcome) {
+                    var customWelcome = BotMessageSample;
+                    customWelcome.text = _this.Welcome;
+                    _this.LastBotAnswer = customWelcome;
+                    _this.History.push(customWelcome);
+                }
             });
         }
     }
@@ -227,7 +251,7 @@ var KonversoComponent = /** @class */ (function () {
         this.AssistantMode = this.service.AssistantMode;
         this.PlaceHolder = this.service.PlaceHolder;
         this.Welcome = this.service.Welcome;
-        //this.sendBotCommand('exit', false).catch((err: any) => console.log('fail reset session'));
+        this.sendBotCommand('exit', false).catch(function (err) { return console.log('fail reset session'); });
         this.History = [];
         if (this.service.ColorSet) {
             this.colorSet = this.service.ColorSet;
