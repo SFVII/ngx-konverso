@@ -218,12 +218,10 @@ let KonversoComponent = class KonversoComponent {
                     this.ready.emit(ready);
                 }
             });
-            if (this.Welcome) {
-                const customWelcome = BotMessageSample;
-                customWelcome.text = this.Welcome;
-                this.LastBotAnswer = customWelcome;
-                this.History.push(customWelcome);
-            }
+            const customWelcome = BotMessageSample;
+            customWelcome.text = this.Welcome;
+            this.LastBotAnswer = customWelcome;
+            this.History.push(customWelcome);
         });
     }
     ngOnInit() {

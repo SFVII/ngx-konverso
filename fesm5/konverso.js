@@ -232,12 +232,10 @@ var KonversoComponent = /** @class */ (function () {
                     _this.ready.emit(ready);
                 }
             });
-            if (_this.Welcome) {
-                var customWelcome = BotMessageSample;
-                customWelcome.text = _this.Welcome;
-                _this.LastBotAnswer = customWelcome;
-                _this.History.push(customWelcome);
-            }
+            var customWelcome = BotMessageSample;
+            customWelcome.text = _this.Welcome;
+            _this.LastBotAnswer = customWelcome;
+            _this.History.push(customWelcome);
         });
     }
     KonversoComponent.prototype.ngOnInit = function () {
