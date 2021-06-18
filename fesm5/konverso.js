@@ -17,6 +17,7 @@ var KonversoService = /** @class */ (function () {
         this.token = new BehaviorSubject(null);
         // tslint:disable-next-line:variable-name
         this._token = this.token.asObservable();
+        this.lang = new BehaviorSubject('');
         this.buildHeaders();
         this.initInstance(config);
     }
@@ -93,6 +94,7 @@ var KonversoService = /** @class */ (function () {
                         user.lang = config.lang;
                     }
                     _this.locale = user.lang;
+                    _this.lang.next(_this.locale);
                     if (config.InputPlaceHolder && config.InputPlaceHolder[_this.locale]) {
                         _this.PlaceHolder = config.InputPlaceHolder[_this.locale];
                     }
@@ -129,6 +131,7 @@ var KonversoService = /** @class */ (function () {
             }
             else if (config.lang) {
                 this.locale = config.lang;
+                this.lang.next(this.locale);
                 if (config.InputPlaceHolder && config.InputPlaceHolder[this.locale]) {
                     this.PlaceHolder = config.InputPlaceHolder[this.locale];
                 }
@@ -412,7 +415,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         this.currentPlaceHolder = '';
         this.sendBtn = '';
         this.select = '';
-        service.authentication.subscribe(function (r) {
+        service.lang.subscribe(function (r) {
             if (service.locale) {
                 _this.sendBtn = translate.translate(service.locale, 'SEND');
                 _this.select = translate.translate(service.locale, 'SELECT');
@@ -535,7 +538,7 @@ var FirstVisitComponent = /** @class */ (function () {
         this.position = 0;
         this.current = '';
         this.go = '';
-        service.authentication.subscribe(function (r) {
+        service.lang.subscribe(function (r) {
             if (service.locale) {
                 _this.go = translate.translate(service.locale, 'GO');
             }

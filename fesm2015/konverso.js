@@ -17,6 +17,7 @@ let KonversoService = class KonversoService {
         this.token = new BehaviorSubject(null);
         // tslint:disable-next-line:variable-name
         this._token = this.token.asObservable();
+        this.lang = new BehaviorSubject('');
         this.buildHeaders();
         this.initInstance(config);
     }
@@ -87,6 +88,7 @@ let KonversoService = class KonversoService {
                         user.lang = config.lang;
                     }
                     this.locale = user.lang;
+                    this.lang.next(this.locale);
                     if (config.InputPlaceHolder && config.InputPlaceHolder[this.locale]) {
                         this.PlaceHolder = config.InputPlaceHolder[this.locale];
                     }
@@ -113,6 +115,7 @@ let KonversoService = class KonversoService {
             }
             else if (config.lang) {
                 this.locale = config.lang;
+                this.lang.next(this.locale);
                 if (config.InputPlaceHolder && config.InputPlaceHolder[this.locale]) {
                     this.PlaceHolder = config.InputPlaceHolder[this.locale];
                 }
@@ -374,7 +377,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         this.currentPlaceHolder = '';
         this.sendBtn = '';
         this.select = '';
-        service.authentication.subscribe((r) => {
+        service.lang.subscribe((r) => {
             if (service.locale) {
                 this.sendBtn = translate.translate(service.locale, 'SEND');
                 this.select = translate.translate(service.locale, 'SELECT');
@@ -481,7 +484,7 @@ let FirstVisitComponent = class FirstVisitComponent {
         this.position = 0;
         this.current = '';
         this.go = '';
-        service.authentication.subscribe((r) => {
+        service.lang.subscribe((r) => {
             if (service.locale) {
                 this.go = translate.translate(service.locale, 'GO');
             }

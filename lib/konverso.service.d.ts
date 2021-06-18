@@ -1,6 +1,7 @@
 import { EventEmitter } from '@angular/core';
 import { ColorSet, DefaultAssets, KonversoInterface, KonversoUser } from '../interface/KonversoInterface';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 export declare class KonversoService {
     private http;
     authentication: EventEmitter<KonversoUser>;
@@ -19,6 +20,7 @@ export declare class KonversoService {
     private header;
     private endpoint;
     _auth: boolean;
+    lang: BehaviorSubject<string>;
     constructor(config: KonversoInterface, http: HttpClient);
     /**
      * Send Query To backend server and get a response
