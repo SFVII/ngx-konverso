@@ -427,32 +427,11 @@
             this.ready = new core.EventEmitter();
             this.AssistantMode = false;
             this.disableUserInput = false;
-            this.service.lang.subscribe(function () {
-                console.log(service.locale);
-                _this.isMobile = _this._isMobile();
-                _this.assets = _this.service.assets;
-                _this.firstVisit = _this.service.firstVisit;
-                _this.firstUsageStory = _this.service.firstUsageStory;
-                _this.AssistantMode = _this.service.AssistantMode;
-                _this.PlaceHolder = _this.service.PlaceHolder;
-                _this.Welcome = _this.service.Welcome;
-                //this.sendBotCommand('exit', false).catch((err: any) => console.log('fail reset session'));
-                _this.History = [];
-                if (_this.service.ColorSet) {
-                    _this.colorSet = _this.service.ColorSet;
-                }
-                _this._ready.subscribe(function (ready) {
-                    if (ready) {
-                        _this.firstVisit = false;
-                        _this.service.firstVisit = false;
-                        _this.ready.emit(ready);
-                    }
+            if (service._auth) {
+                this.service.authentication.subscribe(function () {
+                    _this.ngOnInit();
                 });
-                var customWelcome = BotMessageSample;
-                customWelcome.text = _this.Welcome;
-                _this.LastBotAnswer = customWelcome;
-                _this.History.push(customWelcome);
-            });
+            }
         }
         KonversoComponent.prototype.ngOnInit = function () {
             var _this = this;
