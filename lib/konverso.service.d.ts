@@ -12,7 +12,7 @@ export declare class KonversoService {
     AssistantMode: boolean;
     Welcome: string;
     readyState: boolean;
-    private locale;
+    locale: string;
     private token;
     private _token;
     private user;

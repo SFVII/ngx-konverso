@@ -1,7 +1,9 @@
 import { EventEmitter, OnInit } from '@angular/core';
 import { DefaultAssets, OpenChatBotResponse, UserInput } from '../../interface/KonversoInterface';
+import { KonversoService } from '../konverso.service';
 import { TranslateService } from '../translate.service';
 export declare class DesktopFullScreenComponent implements OnInit {
+    private service;
     AssistantMode: boolean;
     assets: DefaultAssets;
     firstVisit: boolean;
@@ -20,7 +22,7 @@ export declare class DesktopFullScreenComponent implements OnInit {
     currentPlaceHolder: string;
     sendBtn: string;
     select: string;
-    constructor(translate: TranslateService);
+    constructor(translate: TranslateService, service: KonversoService);
     ngOnInit(): void;
     emit($event: any): void;
     _send(): void;
