@@ -259,19 +259,24 @@
 
             input {
               text-align: center;
-              display: block;
+              display: inline-block;
               padding: 10px;
               border-radius: 25px;
               color: black;
-              width: 60%;
-              margin: auto;
-              border: 1px solid rgba(0, 0, 0, 0.2)
+              width: 40%;
+              //margin: auto;
+              border: 1px solid rgba(0, 0, 0, 0.2);
+              background: #E5E8EE 0% 0% no-repeat padding-box;
+              border-radius: 25px;
+              margin-right: 10px;
             }
 
             button {
-              display: block;
-              width: calc(36% - 15px);
+              display: inline-block;
+              width: calc(10% - 15px);
               padding: 11px;
+              background: transparent linear-gradient(243deg, #9D107D 0%, #4862AB 100%) 0% 0% no-repeat padding-box;
+              border-radius: 25px;
             }
           }
         }
