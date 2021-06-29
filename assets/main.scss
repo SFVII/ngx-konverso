@@ -87,7 +87,7 @@
         background: #E5E8EE 0% 0% no-repeat padding-box !important;
         border: 2px solid #C2C8D5 !important;
         border-radius: 10px !important;
-        height: 44px !important;
+        min-height: 44px !important;
         color: #77839B !important;
         display: inline-block !important;
         margin-right: 25px !important;
@@ -305,8 +305,8 @@
               display: inline-block;
               width: calc(10% - 15px);
               padding: 11px;
-              background: transparent linear-gradient(243deg, #9D107D 0%, #4862AB 100%) 0% 0% no-repeat padding-box;
-              border-radius: 25px;
+              background: transparent linear-gradient(243deg, #9D107D 0%, #4862AB 100%) 0% 0% no-repeat padding-box !important;
+              border-radius: 25px !important;
             }
           }
         }
