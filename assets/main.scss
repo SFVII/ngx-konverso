@@ -121,6 +121,26 @@
         }
       }
 
+      .bot-button-left {
+        background: transparent linear-gradient(107deg, #4862AB 0%, #9D107D 100%) 0% 0% no-repeat padding-box;
+        border-radius: 22px;
+        color: #FFFFFF !important;
+        font: normal normal normal 12px/19px 'nexa';
+        display: inline-block;
+        letter-spacing: 0px;
+        margin-right: 25px;
+      }
+
+      .bot-button-right {
+        background: #E5E8EE54 0% 0% no-repeat padding-box;
+        border: 2px solid #C2C8D5 !important;
+        color: #404E6B !important;
+        border-radius: 22px;
+        font: normal normal normal 12px/19px 'nexa';
+        letter-spacing: 0px;
+        display: inline-block;
+      }
+
       .bot-container {
         font-family: 'nexa', 'Roboto';
         width: 100%;
