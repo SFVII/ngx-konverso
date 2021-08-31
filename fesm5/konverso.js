@@ -459,7 +459,11 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     DesktopFullScreenComponent.prototype.byPassUserInput = function (botdata, i) {
         var e_1, _a;
         var _this = this;
-        var buttons = document.querySelectorAll('.show-btn');
+        /*const buttons: NodeListOf<HTMLElement> = document.querySelectorAll('.show-btn');
+        for (let btn of Array.from(buttons)) {
+          btn.classList.add('hidden-btn');
+        }*/
+        var buttons = document.querySelectorAll('.bot-answer');
         try {
             for (var _b = __values(Array.from(buttons)), _c = _b.next(); !_c.done; _c = _b.next()) {
                 var btn = _c.value;
@@ -474,7 +478,22 @@ var DesktopFullScreenComponent = /** @class */ (function () {
             finally { if (e_1) throw e_1.error; }
         }
         setTimeout(function () {
+            var e_2, _a;
             _this.sendBotCommand.emit(botdata);
+            var buttons = document.querySelectorAll('.bot-answer');
+            try {
+                for (var _b = __values(Array.from(buttons)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var btn = _c.value;
+                    btn.classList.remove('hidden-btn');
+                }
+            }
+            catch (e_2_1) { e_2 = { error: e_2_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_2) throw e_2.error; }
+            }
         }, 700);
     };
     DesktopFullScreenComponent.ctorParameters = function () { return [

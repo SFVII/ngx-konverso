@@ -416,12 +416,20 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         });
     }
     byPassUserInput(botdata, i) {
-        const buttons = document.querySelectorAll('.show-btn');
+        /*const buttons: NodeListOf<HTMLElement> = document.querySelectorAll('.show-btn');
+        for (let btn of Array.from(buttons)) {
+          btn.classList.add('hidden-btn');
+        }*/
+        const buttons = document.querySelectorAll('.bot-answer');
         for (let btn of Array.from(buttons)) {
             btn.classList.add('hidden-btn');
         }
         setTimeout(() => {
             this.sendBotCommand.emit(botdata);
+            const buttons = document.querySelectorAll('.bot-answer');
+            for (let btn of Array.from(buttons)) {
+                btn.classList.remove('hidden-btn');
+            }
         }, 700);
     }
 };
