@@ -424,13 +424,13 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         for (let btn of Array.from(buttons)) {
             btn.classList.add('hidden-btn');
         }
+        this.sendBotCommand.emit(botdata);
         setTimeout(() => {
-            this.sendBotCommand.emit(botdata);
             const buttons = document.querySelectorAll('.bot-answer');
             for (let btn of Array.from(buttons)) {
                 btn.classList.remove('hidden-btn');
             }
-        }, 700);
+        }, 1000);
     }
 };
 DesktopFullScreenComponent.ctorParameters = () => [

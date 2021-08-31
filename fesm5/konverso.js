@@ -458,7 +458,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     };
     DesktopFullScreenComponent.prototype.byPassUserInput = function (botdata, i) {
         var e_1, _a;
-        var _this = this;
         /*const buttons: NodeListOf<HTMLElement> = document.querySelectorAll('.show-btn');
         for (let btn of Array.from(buttons)) {
           btn.classList.add('hidden-btn');
@@ -477,9 +476,9 @@ var DesktopFullScreenComponent = /** @class */ (function () {
             }
             finally { if (e_1) throw e_1.error; }
         }
+        this.sendBotCommand.emit(botdata);
         setTimeout(function () {
             var e_2, _a;
-            _this.sendBotCommand.emit(botdata);
             var buttons = document.querySelectorAll('.bot-answer');
             try {
                 for (var _b = __values(Array.from(buttons)), _c = _b.next(); !_c.done; _c = _b.next()) {
@@ -494,7 +493,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 }
                 finally { if (e_2) throw e_2.error; }
             }
-        }, 700);
+        }, 1000);
     };
     DesktopFullScreenComponent.ctorParameters = function () { return [
         { type: TranslateService },
