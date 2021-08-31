@@ -416,6 +416,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         });
     }
     byPassUserInput(botdata, i) {
+        console.log('on passe là');
         const buttons = document.querySelectorAll('.show-btn');
         for (let btn of Array.from(buttons)) {
             btn.classList.add('hidden-btn');

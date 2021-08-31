@@ -458,6 +458,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     };
     DesktopFullScreenComponent.prototype.byPassUserInput = function (botdata, i) {
         var e_1, _a;
+        console.log('on passe là');
         var buttons = document.querySelectorAll('.show-btn');
         try {
             for (var _b = __values(Array.from(buttons)), _c = _b.next(); !_c.done; _c = _b.next()) {
