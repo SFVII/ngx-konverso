@@ -2,8 +2,8 @@
   ngx-konverso {
     .hidden-btn {
       //visibility: hidden!important;
-      transform: translateY(-100vh);
-      transition: transform 500ms ease-in-out;
+      transform: translateY(-100vh) !important;
+      transition: transform 500ms ease-in-out !important;
       animation: fadeout 0.5s;
         -moz-animation: fadeout 0.5s; /* Firefox */
         -webkit-animation: fadeout 0.5s; /* Safari and Chrome */
