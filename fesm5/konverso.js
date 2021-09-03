@@ -425,10 +425,10 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     }
     DesktopFullScreenComponent.prototype.ngOnChanges = function () {
         var _this = this;
-        this.changed = true;
+        this.changed = false;
         setTimeout(function () {
-            _this.changed = false;
-        }, 3000);
+            _this.changed = true;
+        }, 100);
     };
     DesktopFullScreenComponent.prototype.ngOnInit = function () {
         var _this = this;

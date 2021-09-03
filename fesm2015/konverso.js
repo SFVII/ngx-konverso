@@ -386,10 +386,10 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         });
     }
     ngOnChanges() {
-        this.changed = true;
+        this.changed = false;
         setTimeout(() => {
-            this.changed = false;
-        }, 3000);
+            this.changed = true;
+        }, 100);
     }
     ngOnInit() {
         if (this.PlaceHolder) {
