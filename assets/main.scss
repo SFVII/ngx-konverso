@@ -390,6 +390,43 @@
             margin: 0 auto;
             overflow-y: scroll;
             direction: rtl;
+            animation: fadeinanswer 1.5s;
+                -moz-animation: fadeinanswer 1.5s; /* Firefox */
+                -webkit-animation: fadeinanswer 1.5s; /* Safari and Chrome */
+                -o-animation: fadeinanswer 1.5s; /* Opera */
+ 
+                @keyframes fadeinanswer {
+                    from {
+                        opacity:0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
+                }
+                @-moz-keyframes fadeinanswer { /* Firefox */
+                    from {
+                        opacity:0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
+                }
+                @-webkit-keyframes fadeinanswer { /* Safari and Chrome */
+                    from {
+                        opacity:0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
+                }
+                @-o-keyframes fadeinanswer { /* Opera */
+                    from {
+                        opacity:0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
+                }
 
             &::-webkit-scrollbar {
               width: 0 !important
@@ -428,43 +465,6 @@
                 word-break: break-all;
                 transform: rotate(180deg);
                 direction: ltr;
-                animation: fadeinanswer 1.5s;
-                -moz-animation: fadeinanswer 1.5s; /* Firefox */
-                -webkit-animation: fadeinanswer 1.5s; /* Safari and Chrome */
-                -o-animation: fadeinanswer 1.5s; /* Opera */
- 
-                @keyframes fadeinanswer {
-                    from {
-                        opacity:0;
-                    }
-                    to {
-                        opacity: 1;
-                    }
-                }
-                @-moz-keyframes fadeinanswer { /* Firefox */
-                    from {
-                        opacity:0;
-                    }
-                    to {
-                        opacity: 1;
-                    }
-                }
-                @-webkit-keyframes fadeinanswer { /* Safari and Chrome */
-                    from {
-                        opacity:0;
-                    }
-                    to {
-                        opacity: 1;
-                    }
-                }
-                @-o-keyframes fadeinanswer { /* Opera */
-                    from {
-                        opacity:0;
-                    }
-                    to {
-                        opacity: 1;
-                    }
-                }
 
                 button {
                   padding: 10px;
