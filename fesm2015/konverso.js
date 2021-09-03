@@ -384,18 +384,15 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
             }
         });
     }
+    ngOnChanges() {
+        console.log('bot modif');
+    }
     ngOnInit() {
         if (this.PlaceHolder) {
             setInterval(() => {
                 this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
             }, 3000);
         }
-        setInterval(() => {
-            const text = document.querySelectorAll('.fade');
-            for (let span of Array.from(text)) {
-                span.classList.remove('fade');
-            }
-        }, 1500);
     }
     emit($event) {
         this.firstVisit = false;

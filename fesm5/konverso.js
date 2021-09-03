@@ -422,6 +422,9 @@ var DesktopFullScreenComponent = /** @class */ (function () {
             }
         });
     }
+    DesktopFullScreenComponent.prototype.ngOnChanges = function () {
+        console.log('bot modif');
+    };
     DesktopFullScreenComponent.prototype.ngOnInit = function () {
         var _this = this;
         if (this.PlaceHolder) {
@@ -429,23 +432,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 _this.currentPlaceHolder = _this.PlaceHolder[Math.floor(Math.random() * _this.PlaceHolder.length)];
             }, 3000);
         }
-        setInterval(function () {
-            var e_1, _a;
-            var text = document.querySelectorAll('.fade');
-            try {
-                for (var _b = __values(Array.from(text)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var span = _c.value;
-                    span.classList.remove('fade');
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-        }, 1500);
     };
     DesktopFullScreenComponent.prototype.emit = function ($event) {
         this.firstVisit = false;
@@ -474,7 +460,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         });
     };
     DesktopFullScreenComponent.prototype.byPassUserInput = function (botdata, i) {
-        var e_2, _a;
+        var e_1, _a;
         /*const buttons: NodeListOf<HTMLElement> = document.querySelectorAll('.show-btn');
         for (let btn of Array.from(buttons)) {
           btn.classList.add('hidden-btn');
@@ -486,16 +472,16 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 btn.classList.add('hidden-btn');
             }
         }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
         finally {
             try {
                 if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
             }
-            finally { if (e_2) throw e_2.error; }
+            finally { if (e_1) throw e_1.error; }
         }
         this.sendBotCommand.emit(botdata);
         setTimeout(function () {
-            var e_3, _a;
+            var e_2, _a;
             var buttons = document.querySelectorAll('.bot-answer');
             try {
                 for (var _b = __values(Array.from(buttons)), _c = _b.next(); !_c.done; _c = _b.next()) {
@@ -503,12 +489,12 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                     btn.classList.remove('hidden-btn');
                 }
             }
-            catch (e_3_1) { e_3 = { error: e_3_1 }; }
+            catch (e_2_1) { e_2 = { error: e_2_1 }; }
             finally {
                 try {
                     if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
                 }
-                finally { if (e_3) throw e_3.error; }
+                finally { if (e_2) throw e_2.error; }
             }
         }, 1000);
     };
