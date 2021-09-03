@@ -294,43 +294,6 @@
             text-align: center;
             margin: 2.5% auto auto;
             font-size: 25px;
-            animation: fadeinanswer 1.5s !important;
-                -moz-animation: fadeinanswer 1.5s !important; /* Firefox */
-                -webkit-animation: fadeinanswer 1.5s !important; /* Safari and Chrome */
-                -o-animation: fadeinanswer 1.5s !important; /* Opera */
- 
-                @keyframes fadeinanswer {
-                    from {
-                        opacity:0;
-                    }
-                    to {
-                        opacity: 1;
-                    }
-                }
-                @-moz-keyframes fadeinanswer { /* Firefox */
-                    from {
-                        opacity:0;
-                    }
-                    to {
-                        opacity: 1;
-                    }
-                }
-                @-webkit-keyframes fadeinanswer { /* Safari and Chrome */
-                    from {
-                        opacity:0;
-                    }
-                    to {
-                        opacity: 1;
-                    }
-                }
-                @-o-keyframes fadeinanswer { /* Opera */
-                    from {
-                        opacity:0;
-                    }
-                    to {
-                        opacity: 1;
-                    }
-                }
 
             /*span {
               color: #FFFFFF !important;
@@ -614,3 +577,42 @@
 }
 
 
+.fade {
+  animation: fadeinanswer 1.5s !important;
+  -moz-animation: fadeinanswer 1.5s !important; /* Firefox */
+  -webkit-animation: fadeinanswer 1.5s !important; /* Safari and Chrome */
+  -o-animation: fadeinanswer 1.5s !important; /* Opera */
+}
+
+@keyframes fadeinanswer {
+  from {
+      opacity:0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+@-moz-keyframes fadeinanswer { /* Firefox */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+@-webkit-keyframes fadeinanswer { /* Safari and Chrome */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+@-o-keyframes fadeinanswer { /* Opera */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity: 1;
+  }
+}
