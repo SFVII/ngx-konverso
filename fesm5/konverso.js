@@ -426,6 +426,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     DesktopFullScreenComponent.prototype.ngOnChanges = function () {
         var _this = this;
         this.changed = false;
+        console.log(this.LastBotAnswer);
         setTimeout(function () {
             _this.changed = true;
         }, 100);

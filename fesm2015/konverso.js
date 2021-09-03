@@ -387,6 +387,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
     }
     ngOnChanges() {
         this.changed = false;
+        console.log(this.LastBotAnswer);
         setTimeout(() => {
             this.changed = true;
         }, 100);
