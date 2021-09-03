@@ -428,49 +428,41 @@
                 word-break: break-all;
                 transform: rotate(180deg);
                 direction: ltr;
-                animation: fadeinanswer 0.7s;
-                -moz-animation: fadeinanswer 0.7s; /* Firefox */
-                -webkit-animation: fadeinanswer 0.7s; /* Safari and Chrome */
-                -o-animation: fadeinanswer 0.7s; /* Opera */
+                animation: fadeinanswer 1.5s;
+                -moz-animation: fadeinanswer 1.5s; /* Firefox */
+                -webkit-animation: fadeinanswer 1.5s; /* Safari and Chrome */
+                -o-animation: fadeinanswer 1.5s; /* Opera */
  
                 @keyframes fadeinanswer {
                     from {
                         opacity:0;
-                        bottom:-20px;
                     }
                     to {
                         opacity: 1;
-                        bottom: 0px;
                     }
                 }
                 @-moz-keyframes fadeinanswer { /* Firefox */
                     from {
                         opacity:0;
-                        bottom:-20px;
                     }
                     to {
                         opacity: 1;
-                        bottom: 0px;
                     }
                 }
                 @-webkit-keyframes fadeinanswer { /* Safari and Chrome */
                     from {
                         opacity:0;
-                        bottom:-20px;
                     }
                     to {
                         opacity: 1;
-                        bottom: 0px;
                     }
                 }
                 @-o-keyframes fadeinanswer { /* Opera */
                     from {
                         opacity:0;
-                        bottom:-20px;
                     }
                     to {
                         opacity: 1;
-                        bottom: 0px;
                     }
                 }
 
