@@ -578,10 +578,10 @@
 
 
 .fade {
-  animation: fadeinanswer 3s !important;
-  -moz-animation: fadeinanswer 3s !important; /* Firefox */
-  -webkit-animation: fadeinanswer 3s !important; /* Safari and Chrome */
-  -o-animation: fadeinanswer 3s !important; /* Opera */
+  animation: fadeinanswer 1.5s !important;
+  -moz-animation: fadeinanswer 1.5s !important; /* Firefox */
+  -webkit-animation: fadeinanswer 1.5s !important; /* Safari and Chrome */
+  -o-animation: fadeinanswer 1.5s !important; /* Opera */
 }
 
 @keyframes fadeinanswer {
