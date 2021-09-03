@@ -644,7 +644,7 @@
             this.changed = true;
             setTimeout(function () {
                 _this.changed = false;
-            }, 1500);
+            }, 3000);
         };
         DesktopFullScreenComponent.prototype.ngOnInit = function () {
             var _this = this;

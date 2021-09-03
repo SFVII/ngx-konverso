@@ -389,7 +389,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         this.changed = true;
         setTimeout(() => {
             this.changed = false;
-        }, 1500);
+        }, 3000);
     }
     ngOnInit() {
         if (this.PlaceHolder) {
