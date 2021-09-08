@@ -643,7 +643,9 @@
             var _this = this;
             var _a;
             this.changed = false;
-            document.getElementById('text').innerHTML = '';
+            if (document.getElementById('text')) {
+                document.getElementById('text').innerHTML = '';
+            }
             console.log(this.LastBotAnswer);
             if (this.LastBotAnswer) {
                 var string = (_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text;
@@ -658,7 +660,9 @@
         DesktopFullScreenComponent.prototype.looper = function (array, timer) {
             var _this = this;
             if (array.length > 0) {
-                document.getElementById('text').innerHTML += array.shift();
+                if (document.getElementById('text')) {
+                    document.getElementById('text').innerHTML += array.shift();
+                }
             }
             else {
                 clearTimeout(timer);
