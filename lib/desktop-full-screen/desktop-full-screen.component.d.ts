@@ -25,7 +25,6 @@ export declare class DesktopFullScreenComponent implements OnChanges, OnInit {
     changed: boolean;
     constructor(translate: TranslateService, service: KonversoService);
     ngOnChanges(): void;
-    looper(array: any, timer: any): void;
     ngOnInit(): void;
     emit($event: any): void;
     _send(): void;
