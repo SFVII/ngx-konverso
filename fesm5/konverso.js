@@ -428,22 +428,24 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         var _a;
         this.changed = false;
         console.log(this.LastBotAnswer);
-        var string = (_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text;
-        var array = string.split("");
-        var timer;
-        function looper() {
-            if (array.length > 0) {
-                document.getElementById('text').innerHTML += array.shift();
-            }
-            else {
-                clearTimeout(timer);
-            }
-            timer = setTimeout('looper()', 30);
+        if (this.LastBotAnswer) {
+            var string = (_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text;
+            var array = string.split("");
+            var timer;
+            this.looper(array, timer);
         }
-        looper();
         setTimeout(function () {
             _this.changed = true;
         }, 100);
+    };
+    DesktopFullScreenComponent.prototype.looper = function (array, timer) {
+        if (array.length > 0) {
+            document.getElementById('text').innerHTML += array.shift();
+        }
+        else {
+            clearTimeout(timer);
+        }
+        timer = setTimeout('looper()', 30);
     };
     DesktopFullScreenComponent.prototype.ngOnInit = function () {
         var _this = this;

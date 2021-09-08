@@ -389,22 +389,24 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         var _a;
         this.changed = false;
         console.log(this.LastBotAnswer);
-        var string = (_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text;
-        var array = string.split("");
-        var timer;
-        function looper() {
-            if (array.length > 0) {
-                document.getElementById('text').innerHTML += array.shift();
-            }
-            else {
-                clearTimeout(timer);
-            }
-            timer = setTimeout('looper()', 30);
+        if (this.LastBotAnswer) {
+            var string = (_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text;
+            var array = string.split("");
+            var timer;
+            this.looper(array, timer);
         }
-        looper();
         setTimeout(() => {
             this.changed = true;
         }, 100);
+    }
+    looper(array, timer) {
+        if (array.length > 0) {
+            document.getElementById('text').innerHTML += array.shift();
+        }
+        else {
+            clearTimeout(timer);
+        }
+        timer = setTimeout('looper()', 30);
     }
     ngOnInit() {
         if (this.PlaceHolder) {
