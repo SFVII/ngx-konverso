@@ -401,12 +401,16 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
     }
     looper(array, timer) {
         if (array.length > 0) {
-            document.getElementById('text').innerHTML += array.shift();
+            if (document.getElementById('text')) {
+                document.getElementById('text').innerHTML += array.shift();
+            }
         }
         else {
             clearTimeout(timer);
         }
-        timer = setTimeout('looper()', 30);
+        timer = setTimeout(() => {
+            this.looper(array, timer);
+        }, 30);
     }
     ngOnInit() {
         if (this.PlaceHolder) {

@@ -439,13 +439,18 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         }, 100);
     };
     DesktopFullScreenComponent.prototype.looper = function (array, timer) {
+        var _this = this;
         if (array.length > 0) {
-            document.getElementById('text').innerHTML += array.shift();
+            if (document.getElementById('text')) {
+                document.getElementById('text').innerHTML += array.shift();
+            }
         }
         else {
             clearTimeout(timer);
         }
-        timer = setTimeout('looper()', 30);
+        timer = setTimeout(function () {
+            _this.looper(array, timer);
+        }, 30);
     };
     DesktopFullScreenComponent.prototype.ngOnInit = function () {
         var _this = this;
