@@ -648,7 +648,6 @@
             this.changed = false;
             if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
                 document.getElementById('text').innerHTML = '';
-                //this.newMessage = true;
             }
             console.log(this.LastBotAnswer);
             if (this.LastBotAnswer && !((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.includes("loading-dots"))) {
@@ -673,7 +672,9 @@
                     clearInterval(timer);
                 }
                 if (_this.newMessage) {
-                    document.getElementById('text').innerHTML = '';
+                    if (document.getElementById('text')) {
+                        document.getElementById('text').innerHTML = '';
+                    }
                     _this.newMessage = false;
                     _this.msgArray = _this.messageCurrent.split("");
                     clearInterval(timer);
