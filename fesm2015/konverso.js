@@ -408,7 +408,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                     clearInterval(timer);
                 }
                 if (this.newMessage) {
-                    clearInterval(timer);
+                    document.getElementById('text').innerHTML = '';
                     this.newMessage = false;
                 }
                 this.looper(array);

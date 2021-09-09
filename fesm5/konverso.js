@@ -447,7 +447,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                     clearInterval(timer);
                 }
                 if (_this.newMessage) {
-                    clearInterval(timer);
+                    document.getElementById('text').innerHTML = '';
                     _this.newMessage = false;
                 }
                 _this.looper(array);
