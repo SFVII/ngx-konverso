@@ -497,7 +497,10 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     };
     DesktopFullScreenComponent.prototype.userWriting = function () {
         this.botListening = true;
-        if (this.botListeningTimer < 5) {
+        if (this.botListeningTimer == 0) {
+            this.botListeningTimer += 2;
+        }
+        else if (this.botListeningTimer < 5) {
             this.botListeningTimer += 1;
         }
     };
@@ -506,6 +509,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         this.readySend.emit(true);
     };
     DesktopFullScreenComponent.prototype._send = function () {
+        this.botListening = false;
         var userData = {
             message: this.userInput,
             date: new Date().toLocaleTimeString(navigator.language, {

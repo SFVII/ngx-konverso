@@ -456,7 +456,10 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
     }
     userWriting() {
         this.botListening = true;
-        if (this.botListeningTimer < 5) {
+        if (this.botListeningTimer == 0) {
+            this.botListeningTimer += 2;
+        }
+        else if (this.botListeningTimer < 5) {
             this.botListeningTimer += 1;
         }
     }
@@ -465,6 +468,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         this.readySend.emit(true);
     }
     _send() {
+        this.botListening = false;
         const userData = {
             message: this.userInput,
             date: new Date().toLocaleTimeString(navigator.language, {
