@@ -455,6 +455,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     DesktopFullScreenComponent.prototype.launchLoop = function () {
         var _this = this;
         var timer = setInterval(function () {
+            console.log(_this.botHidden);
             if (_this.msgArray.length == 0 || _this.botHidden) {
                 clearInterval(timer);
             }

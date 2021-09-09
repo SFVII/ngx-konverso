@@ -415,6 +415,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
     }
     launchLoop() {
         let timer = setInterval(() => {
+            console.log(this.botHidden);
             if (this.msgArray.length == 0 || this.botHidden) {
                 clearInterval(timer);
             }
