@@ -26,11 +26,13 @@ export declare class DesktopFullScreenComponent implements OnChanges, OnInit {
     private newMessage;
     private messageCurrent;
     private msgArray;
+    botListening: boolean;
     constructor(translate: TranslateService, service: KonversoService);
     ngOnChanges(): void;
     launchLoop(): void;
     looper(array: any): void;
     ngOnInit(): void;
+    userWriting(): void;
     emit($event: any): void;
     _send(): void;
     scroll(scrollHeight: number): Promise<number>;
