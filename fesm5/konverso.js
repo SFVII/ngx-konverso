@@ -437,7 +437,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         }
         console.log(this.LastBotAnswer);
         if (this.LastBotAnswer && !((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.includes("loading-dots"))) {
-            var string = (_c = this.LastBotAnswer) === null || _c === void 0 ? void 0 : _c.text.split('<br/>').join("\n        \n").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
+            var string = (_c = this.LastBotAnswer) === null || _c === void 0 ? void 0 : _c.text.split('<br/>').join("\n").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
             if (this.messageCurrent != string) {
                 this.newMessage = true;
                 this.messageCurrent = string;
