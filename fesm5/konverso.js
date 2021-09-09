@@ -416,7 +416,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         this.sendBtn = '';
         this.select = '';
         this.changed = false;
-        this.newMessage = false;
         service.lang.subscribe(function (r) {
             if (service.locale) {
                 _this.sendBtn = translate.translate(service.locale, 'SEND');
@@ -430,7 +429,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         this.changed = false;
         if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
             document.getElementById('text').innerHTML = '';
-            this.newMessage = true;
+            this.looper([], timer);
         }
         console.log(this.LastBotAnswer);
         if (this.LastBotAnswer && !((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.includes("loading-dots"))) {
@@ -445,30 +444,17 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     };
     DesktopFullScreenComponent.prototype.looper = function (array, timer) {
         var _this = this;
-        var _a, _b;
-        if (this.newMessage) {
-            clearTimeout(timer);
-            this.newMessage = false;
-            if (this.LastBotAnswer && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
-                var string = (_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text;
-                array = string.split("");
-                this.looper(array, timer);
+        if (array.length > 0) {
+            if (document.getElementById('text')) {
+                document.getElementById('text').innerHTML += array.shift();
             }
-            console.log('on passe bien ici');
         }
         else {
-            if (array.length > 0) {
-                if (document.getElementById('text')) {
-                    document.getElementById('text').innerHTML += array.shift();
-                }
-            }
-            else {
-                clearTimeout(timer);
-            }
-            timer = setTimeout(function () {
-                _this.looper(array, timer);
-            }, 30);
+            clearTimeout(timer);
         }
+        timer = setTimeout(function () {
+            _this.looper(array, timer);
+        }, 30);
     };
     DesktopFullScreenComponent.prototype.ngOnInit = function () {
         var _this = this;
