@@ -456,7 +456,9 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
     }
     userWriting() {
         this.botListening = true;
-        this.botListeningTimer += 1;
+        if (this.botListeningTimer < 5) {
+            this.botListeningTimer += 1;
+        }
     }
     emit($event) {
         this.firstVisit = false;
