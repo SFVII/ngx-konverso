@@ -14,6 +14,7 @@ export declare class DesktopFullScreenComponent implements OnChanges, OnInit {
     LastBotAnswer: OpenChatBotResponse;
     PlaceHolder: string[];
     IsMobile: boolean;
+    botHidden: boolean;
     readySend: EventEmitter<boolean>;
     send: EventEmitter<UserInput>;
     sendBotCommand: EventEmitter<string>;
