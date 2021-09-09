@@ -389,17 +389,17 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         });
     }
     ngOnChanges() {
-        var _a, _b, _c, _d, _e;
+        var _a, _b, _c;
         this.changed = false;
         if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
             document.getElementById('text').innerHTML = '';
         }
         console.log(this.LastBotAnswer);
         if (this.LastBotAnswer && !((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.includes("loading-dots"))) {
-            var string = (_c = this.LastBotAnswer) === null || _c === void 0 ? void 0 : _c.text.replace('&eacute;', 'é').replace(/<[^>]*>?/gm, '');
-            if (this.messageCurrent != ((_d = this.LastBotAnswer) === null || _d === void 0 ? void 0 : _d.text.replace('&eacute;', 'é').replace(/<[^>]*>?/gm, ''))) {
+            var string = (_c = this.LastBotAnswer) === null || _c === void 0 ? void 0 : _c.text.split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
+            if (this.messageCurrent != string) {
                 this.newMessage = true;
-                this.messageCurrent = (_e = this.LastBotAnswer) === null || _e === void 0 ? void 0 : _e.text.replace('&eacute;', 'é').replace(/<[^>]*>?/gm, '');
+                this.messageCurrent = string;
                 this.launchLoop();
             }
             this.msgArray = string.split("");
