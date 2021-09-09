@@ -493,7 +493,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 _this.botListeningTimer -= 1;
                 _this.botListening = _this.botListeningTimer > 0;
             }
-        }, 1000);
+        }, 500);
     };
     DesktopFullScreenComponent.prototype.userWriting = function () {
         this.botListening = true;

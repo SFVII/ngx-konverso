@@ -452,7 +452,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.botListeningTimer -= 1;
                 this.botListening = this.botListeningTimer > 0;
             }
-        }, 1000);
+        }, 500);
     }
     userWriting() {
         this.botListening = true;
