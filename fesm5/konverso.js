@@ -418,6 +418,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         this.changed = false;
         this.newMessage = false;
         this.messageCurrent = '';
+        this.msgArray = [];
         service.lang.subscribe(function (r) {
             if (service.locale) {
                 _this.sendBtn = translate.translate(service.locale, 'SEND');
@@ -439,24 +440,31 @@ var DesktopFullScreenComponent = /** @class */ (function () {
             if (this.messageCurrent != ((_d = this.LastBotAnswer) === null || _d === void 0 ? void 0 : _d.text)) {
                 this.newMessage = true;
                 this.messageCurrent = (_e = this.LastBotAnswer) === null || _e === void 0 ? void 0 : _e.text;
+                this.launchLoop();
             }
-            var array = string.split("");
+            this.msgArray = string.split("");
             var timer;
-            timer = setInterval(function () {
-                if (array.length == 0) {
-                    clearInterval(timer);
-                }
-                if (_this.newMessage) {
-                    document.getElementById('text').innerHTML = '';
-                    _this.newMessage = false;
-                }
-                _this.looper(array);
-            }, 30);
             //this.looper(array, timer);
         }
         setTimeout(function () {
             _this.changed = true;
         }, 100);
+    };
+    DesktopFullScreenComponent.prototype.launchLoop = function () {
+        var _this = this;
+        var timer = setInterval(function () {
+            if (_this.msgArray.length == 0) {
+                clearInterval(timer);
+            }
+            if (_this.newMessage) {
+                document.getElementById('text').innerHTML = '';
+                _this.newMessage = false;
+                _this.msgArray = _this.messageCurrent.split("");
+                clearInterval(timer);
+                _this.launchLoop();
+            }
+            _this.looper(_this.msgArray);
+        }, 30);
     };
     DesktopFullScreenComponent.prototype.looper = function (array) {
         if (array.length > 0) {

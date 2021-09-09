@@ -380,6 +380,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         this.changed = false;
         this.newMessage = false;
         this.messageCurrent = '';
+        this.msgArray = [];
         service.lang.subscribe((r) => {
             if (service.locale) {
                 this.sendBtn = translate.translate(service.locale, 'SEND');
@@ -400,24 +401,30 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
             if (this.messageCurrent != ((_d = this.LastBotAnswer) === null || _d === void 0 ? void 0 : _d.text)) {
                 this.newMessage = true;
                 this.messageCurrent = (_e = this.LastBotAnswer) === null || _e === void 0 ? void 0 : _e.text;
+                this.launchLoop();
             }
-            var array = string.split("");
+            this.msgArray = string.split("");
             var timer;
-            timer = setInterval(() => {
-                if (array.length == 0) {
-                    clearInterval(timer);
-                }
-                if (this.newMessage) {
-                    document.getElementById('text').innerHTML = '';
-                    this.newMessage = false;
-                }
-                this.looper(array);
-            }, 30);
             //this.looper(array, timer);
         }
         setTimeout(() => {
             this.changed = true;
         }, 100);
+    }
+    launchLoop() {
+        let timer = setInterval(() => {
+            if (this.msgArray.length == 0) {
+                clearInterval(timer);
+            }
+            if (this.newMessage) {
+                document.getElementById('text').innerHTML = '';
+                this.newMessage = false;
+                this.msgArray = this.messageCurrent.split("");
+                clearInterval(timer);
+                this.launchLoop();
+            }
+            this.looper(this.msgArray);
+        }, 30);
     }
     looper(array) {
         if (array.length > 0) {
