@@ -713,7 +713,7 @@
         };
         DesktopFullScreenComponent.prototype.userWriting = function () {
             this.botListening = true;
-            this.botListeningTimer += 2;
+            this.botListeningTimer += 1;
         };
         DesktopFullScreenComponent.prototype.emit = function ($event) {
             this.firstVisit = false;
