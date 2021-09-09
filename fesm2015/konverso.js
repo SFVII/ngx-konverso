@@ -457,14 +457,16 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
     userWriting(key) {
         if (key.code == 'Enter' || key.code == 'Backspace') {
             this.botListening = false;
-            return;
+            this.botListeningTimer = 0;
         }
-        this.botListening = true;
-        if (this.botListeningTimer == 0) {
-            this.botListeningTimer += 2;
-        }
-        else if (this.botListeningTimer < 5) {
-            this.botListeningTimer += 1;
+        else {
+            this.botListening = true;
+            if (this.botListeningTimer == 0) {
+                this.botListeningTimer += 2;
+            }
+            else if (this.botListeningTimer < 5) {
+                this.botListeningTimer += 1;
+            }
         }
     }
     emit($event) {
