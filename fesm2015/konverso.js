@@ -394,7 +394,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
             this.newMessage = true;
         }
         console.log(this.LastBotAnswer);
-        console.log(this.newMessage);
         if (this.LastBotAnswer && !((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.includes("loading-dots"))) {
             var string = (_c = this.LastBotAnswer) === null || _c === void 0 ? void 0 : _c.text;
             var array = string.split("");
@@ -406,9 +405,16 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }, 100);
     }
     looper(array, timer) {
+        var _a, _b;
         if (this.newMessage) {
             clearTimeout(timer);
             this.newMessage = false;
+            if (this.LastBotAnswer && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
+                var string = (_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text;
+                array = string.split("");
+                this.looper(array, timer);
+            }
+            console.log('on passe bien ici');
         }
         else {
             if (array.length > 0) {
