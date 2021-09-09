@@ -428,6 +428,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         var _this = this;
         var _a, _b, _c;
         this.changed = false;
+        console.log(this.newMessage);
         if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
             document.getElementById('text').innerHTML = '';
             this.newMessage = true;
