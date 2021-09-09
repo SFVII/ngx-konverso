@@ -396,10 +396,11 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }
         console.log(this.LastBotAnswer);
         if (this.LastBotAnswer && !((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.includes("loading-dots"))) {
-            var string = (_c = this.LastBotAnswer) === null || _c === void 0 ? void 0 : _c.text;
-            if (this.messageCurrent != ((_d = this.LastBotAnswer) === null || _d === void 0 ? void 0 : _d.text)) {
+            var string = (_c = this.LastBotAnswer) === null || _c === void 0 ? void 0 : _c.text.replace('&eacute;', 'é');
+            if (this.messageCurrent != ((_d = this.LastBotAnswer) === null || _d === void 0 ? void 0 : _d.text.replace('&eacute;', 'é'))) {
                 this.newMessage = true;
-                this.messageCurrent = (_e = this.LastBotAnswer) === null || _e === void 0 ? void 0 : _e.text;
+                this.messageCurrent = (_e = this.LastBotAnswer) === null || _e === void 0 ? void 0 : _e.text.replace('&eacute;', 'é');
+                ;
                 this.launchLoop();
             }
             this.msgArray = string.split("");
