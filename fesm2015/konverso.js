@@ -370,7 +370,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         this.AssistantMode = false;
         this.firstVisit = false;
         this.IsMobile = false;
-        this.botHidden = false;
         this.readySend = new EventEmitter(false);
         this.send = new EventEmitter(null);
         this.sendBotCommand = new EventEmitter(null);
@@ -415,8 +414,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
     }
     launchLoop() {
         let timer = setInterval(() => {
-            console.log(this.botHidden);
-            if (this.msgArray.length == 0 || this.botHidden) {
+            if (this.msgArray.length == 0) {
                 clearInterval(timer);
             }
             if (this.newMessage) {
@@ -550,9 +548,6 @@ __decorate([
 __decorate([
     Input()
 ], DesktopFullScreenComponent.prototype, "IsMobile", void 0);
-__decorate([
-    Input()
-], DesktopFullScreenComponent.prototype, "botHidden", void 0);
 __decorate([
     Output()
 ], DesktopFullScreenComponent.prototype, "readySend", void 0);
