@@ -496,9 +496,11 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         }, 500);
     };
     DesktopFullScreenComponent.prototype.userWriting = function (key) {
-        if (key.code == 'Enter' || key.code == 'Backspace') {
+        if (key.code == 'Enter') {
             this.botListening = false;
             this.botListeningTimer = 0;
+        }
+        else if (key.code == 'Backspace') {
         }
         else {
             this.botListening = true;
