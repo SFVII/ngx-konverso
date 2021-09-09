@@ -644,12 +644,12 @@
             var _this = this;
             var _a, _b, _c;
             this.changed = false;
-            console.log(this.newMessage);
             if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
                 document.getElementById('text').innerHTML = '';
                 this.newMessage = true;
             }
             console.log(this.LastBotAnswer);
+            console.log(this.newMessage);
             if (this.LastBotAnswer && !((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.includes("loading-dots"))) {
                 var string = (_c = this.LastBotAnswer) === null || _c === void 0 ? void 0 : _c.text;
                 var array = string.split("");
