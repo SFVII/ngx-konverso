@@ -382,6 +382,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         this.messageCurrent = '';
         this.msgArray = [];
         this.botListening = false;
+        this.botListeningTimer = 0;
         service.lang.subscribe((r) => {
             if (service.locale) {
                 this.sendBtn = translate.translate(service.locale, 'SEND');
@@ -446,12 +447,16 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
             }, 3000);
         }
+        setInterval(() => {
+            if (this.botListeningTimer > 0) {
+                this.botListeningTimer -= 1;
+                this.botListening = this.botListeningTimer > 0;
+            }
+        }, 1000);
     }
     userWriting() {
         this.botListening = true;
-        setTimeout(() => {
-            this.botListening = false;
-        }, 2000);
+        this.botListeningTimer += 2;
     }
     emit($event) {
         this.firstVisit = false;

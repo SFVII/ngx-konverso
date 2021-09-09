@@ -420,6 +420,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         this.messageCurrent = '';
         this.msgArray = [];
         this.botListening = false;
+        this.botListeningTimer = 0;
         service.lang.subscribe(function (r) {
             if (service.locale) {
                 _this.sendBtn = translate.translate(service.locale, 'SEND');
@@ -487,13 +488,16 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 _this.currentPlaceHolder = _this.PlaceHolder[Math.floor(Math.random() * _this.PlaceHolder.length)];
             }, 3000);
         }
+        setInterval(function () {
+            if (_this.botListeningTimer > 0) {
+                _this.botListeningTimer -= 1;
+                _this.botListening = _this.botListeningTimer > 0;
+            }
+        }, 1000);
     };
     DesktopFullScreenComponent.prototype.userWriting = function () {
-        var _this = this;
         this.botListening = true;
-        setTimeout(function () {
-            _this.botListening = false;
-        }, 2000);
+        this.botListeningTimer += 2;
     };
     DesktopFullScreenComponent.prototype.emit = function ($event) {
         this.firstVisit = false;
