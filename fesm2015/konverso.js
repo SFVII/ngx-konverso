@@ -448,7 +448,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
             }, 3000);
         }
-        console.log('ici');
+        console.log('ici df');
         runanim.run();
         setInterval(() => {
             if (this.botListeningTimer > 0) {
