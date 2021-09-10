@@ -176,43 +176,45 @@ class Orb {
   }
 }
 
-// Create PixiJS app
+function run() {
+    // Create PixiJS app
 const app = new PIXI.Application({
-  // render to <canvas class="orb-canvas"></canvas>
-  view: document.querySelector(".orb-canvas"),
-  // auto adjust size to fit the current window
-  resizeTo: window,
-  // transparent background, we will be creating a gradient background later using CSS
-  transparent: true
-});
-
-// Create colour palette
-const colorPalette = new ColorPalette();
-
-app.stage.filters = [new KawaseBlurFilter(30, 10, true)];
-
-// Create orbs
-const orbs = [];
-
-for (let i = 0; i < 10; i++) {
-  const orb = new Orb(colorPalette.randomColor());
-
-  app.stage.addChild(orb.graphics);
-
-  orbs.push(orb);
-}
-
-// Animate!
-if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  app.ticker.add(() => {
+    // render to <canvas class="orb-canvas"></canvas>
+    view: document.querySelector(".orb-canvas"),
+    // auto adjust size to fit the current window
+    resizeTo: window,
+    // transparent background, we will be creating a gradient background later using CSS
+    transparent: true
+  });
+  
+  // Create colour palette
+  const colorPalette = new ColorPalette();
+  
+  app.stage.filters = [new KawaseBlurFilter(30, 10, true)];
+  
+  // Create orbs
+  const orbs = [];
+  
+  for (let i = 0; i < 10; i++) {
+    const orb = new Orb(colorPalette.randomColor());
+  
+    app.stage.addChild(orb.graphics);
+  
+    orbs.push(orb);
+  }
+  
+  // Animate!
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    app.ticker.add(() => {
+      orbs.forEach((orb) => {
+        orb.update();
+        orb.render();
+      });
+    });
+  } else {
     orbs.forEach((orb) => {
       orb.update();
       orb.render();
     });
-  });
-} else {
-  orbs.forEach((orb) => {
-    orb.update();
-    orb.render();
-  });
+  }
 }
