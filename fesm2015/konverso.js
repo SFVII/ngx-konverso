@@ -447,8 +447,8 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
             }, 3000);
         }
-        console.log(run);
-        new run();
+        console.log('ici');
+        run();
         setInterval(() => {
             if (this.botListeningTimer > 0) {
                 this.botListeningTimer -= 1;
