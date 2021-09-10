@@ -218,3 +218,5 @@ const app = new PIXI.Application({
     });
   }
 }
+
+module.exports.run = run
