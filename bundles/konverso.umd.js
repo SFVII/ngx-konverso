@@ -706,7 +706,7 @@
                     _this.currentPlaceHolder = _this.PlaceHolder[Math.floor(Math.random() * _this.PlaceHolder.length)];
                 }, 3000);
             }
-            console.log('ici ds');
+            console.log('ici');
             run.run();
             setInterval(function () {
                 if (_this.botListeningTimer > 0) {
