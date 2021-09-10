@@ -219,4 +219,4 @@ const app = new PIXI.Application({
   }
 }
 
-module.exports.run = run
+module.exports.runanim = run

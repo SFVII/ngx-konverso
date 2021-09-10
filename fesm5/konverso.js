@@ -4,7 +4,7 @@ import { HttpHeaders, HttpClient, HttpClientModule } from '@angular/common/http'
 import { BehaviorSubject } from 'rxjs';
 import { render } from 'mustache';
 import { FormsModule } from '@angular/forms';
-import run from 'projects/konverso/assets/animatedback.js';
+import runanim from 'projects/konverso/assets/animatedback.js';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -490,7 +490,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
             }, 3000);
         }
         console.log('ici');
-        run.run();
+        runanim.run();
         setInterval(function () {
             if (_this.botListeningTimer > 0) {
                 _this.botListeningTimer -= 1;
