@@ -1,10 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common/http'), require('rxjs'), require('mustache'), require('@angular/forms'), require('projects/konverso/assets/animatedback.js'), require('@angular/common'), require('@angular/platform-browser')) :
-    typeof define === 'function' && define.amd ? define('konverso', ['exports', '@angular/core', '@angular/common/http', 'rxjs', 'mustache', '@angular/forms', 'projects/konverso/assets/animatedback.js', '@angular/common', '@angular/platform-browser'], factory) :
-    (global = global || self, factory(global.konverso = {}, global.ng.core, global.ng.common.http, global.rxjs, global.mustache, global.ng.forms, global.runanim, global.ng.common, global.ng.platformBrowser));
-}(this, (function (exports, core, http, rxjs, mustache, forms, runanim, common, platformBrowser) { 'use strict';
-
-    runanim = runanim && Object.prototype.hasOwnProperty.call(runanim, 'default') ? runanim['default'] : runanim;
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common/http'), require('rxjs'), require('mustache'), require('@angular/forms'), require('@angular/common'), require('@angular/platform-browser')) :
+    typeof define === 'function' && define.amd ? define('konverso', ['exports', '@angular/core', '@angular/common/http', 'rxjs', 'mustache', '@angular/forms', '@angular/common', '@angular/platform-browser'], factory) :
+    (global = global || self, factory(global.konverso = {}, global.ng.core, global.ng.common.http, global.rxjs, global.mustache, global.ng.forms, global.ng.common, global.ng.platformBrowser));
+}(this, (function (exports, core, http, rxjs, mustache, forms, common, platformBrowser) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -619,6 +617,7 @@
         return TranslateService;
     }());
 
+    //import runanim from 'projects/konverso/assets/animatedback.js';
     var DesktopFullScreenComponent = /** @class */ (function () {
         function DesktopFullScreenComponent(translate, service) {
             var _this = this;
@@ -707,7 +706,7 @@
                 }, 3000);
             }
             console.log('ici df');
-            runanim.run();
+            //runanim.run();
             setInterval(function () {
                 if (_this.botListeningTimer > 0) {
                     _this.botListeningTimer -= 1;
