@@ -468,7 +468,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 _this.launchLoop();
             }
             _this.looper(_this.msgArray);
-        }, 30);
+        }, 50);
     };
     DesktopFullScreenComponent.prototype.looper = function (array) {
         if (array.length > 0) {
