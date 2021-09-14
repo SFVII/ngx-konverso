@@ -696,7 +696,7 @@
                         document.getElementById('text').innerHTML = '';
                     }
                     _this.newMessage = false;
-                    _this.msgArray = _this.messageCurrent.split("");
+                    //this.msgArray = this.messageCurrent.split("");
                     clearInterval(timer);
                     _this.launchLoop();
                 }

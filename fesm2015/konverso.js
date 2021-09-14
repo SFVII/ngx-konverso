@@ -440,7 +440,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                     document.getElementById('text').innerHTML = '';
                 }
                 this.newMessage = false;
-                this.msgArray = this.messageCurrent.split("");
+                //this.msgArray = this.messageCurrent.split("");
                 clearInterval(timer);
                 this.launchLoop();
             }
