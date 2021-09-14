@@ -393,27 +393,39 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         });
     }
     ngOnChanges() {
-        var _a;
+        var _a, _b;
         this.changed = false;
         if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
             document.getElementById('text').innerHTML = '';
         }
         console.log(this.LastBotAnswer);
-        let t2 = setInterval(() => {
-            var _a, _b;
-            if (this.LastBotAnswer && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots")) && this.anim_done) {
-                clearInterval(t2);
-                var string = (_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(` `).split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
-                if (this.messageCurrent != string) {
-                    this.newMessage = true;
-                    this.messageCurrent = string;
-                    this.launchLoop();
+        if (!this.anim_done) {
+            let t2 = setInterval(() => {
+                var _a, _b;
+                if (this.LastBotAnswer && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots")) && this.anim_done) {
+                    clearInterval(t2);
+                    var string = (_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(` `).split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
+                    if (this.messageCurrent != string) {
+                        this.newMessage = true;
+                        this.messageCurrent = string;
+                        this.launchLoop();
+                    }
+                    this.msgArray = string.split("");
+                    var timer;
+                    //this.looper(array, timer);
                 }
-                this.msgArray = string.split("");
-                var timer;
-                //this.looper(array, timer);
+            }, 100);
+        }
+        else {
+            var string = (_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(` `).split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
+            if (this.messageCurrent != string) {
+                this.newMessage = true;
+                this.messageCurrent = string;
+                this.launchLoop();
             }
-        }, 100);
+            this.msgArray = string.split("");
+            var timer;
+        }
         setTimeout(() => {
             this.changed = true;
         }, 100);

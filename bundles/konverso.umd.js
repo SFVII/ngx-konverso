@@ -648,27 +648,39 @@
         }
         DesktopFullScreenComponent.prototype.ngOnChanges = function () {
             var _this = this;
-            var _a;
+            var _a, _b;
             this.changed = false;
             if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
                 document.getElementById('text').innerHTML = '';
             }
             console.log(this.LastBotAnswer);
-            var t2 = setInterval(function () {
-                var _a, _b;
-                if (_this.LastBotAnswer && !((_a = _this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots")) && _this.anim_done) {
-                    clearInterval(t2);
-                    var string = (_b = _this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(" ").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
-                    if (_this.messageCurrent != string) {
-                        _this.newMessage = true;
-                        _this.messageCurrent = string;
-                        _this.launchLoop();
+            if (!this.anim_done) {
+                var t2_1 = setInterval(function () {
+                    var _a, _b;
+                    if (_this.LastBotAnswer && !((_a = _this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots")) && _this.anim_done) {
+                        clearInterval(t2_1);
+                        var string = (_b = _this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(" ").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
+                        if (_this.messageCurrent != string) {
+                            _this.newMessage = true;
+                            _this.messageCurrent = string;
+                            _this.launchLoop();
+                        }
+                        _this.msgArray = string.split("");
+                        var timer;
+                        //this.looper(array, timer);
                     }
-                    _this.msgArray = string.split("");
-                    var timer;
-                    //this.looper(array, timer);
+                }, 100);
+            }
+            else {
+                var string = (_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(" ").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
+                if (this.messageCurrent != string) {
+                    this.newMessage = true;
+                    this.messageCurrent = string;
+                    this.launchLoop();
                 }
-            }, 100);
+                this.msgArray = string.split("");
+                var timer;
+            }
             setTimeout(function () {
                 _this.changed = true;
             }, 100);
