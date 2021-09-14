@@ -687,12 +687,6 @@
             }, 100);
         };
         DesktopFullScreenComponent.prototype.launchLoop = function () {
-            console.log(this.reloaded);
-            if (this.reloaded) {
-                clearInterval(this.timer);
-                console.log(this.msgArray);
-                this.reloaded = false;
-            }
             if (this.msgArray.length == 0) {
                 clearInterval(this.timer);
             }
