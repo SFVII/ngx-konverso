@@ -429,7 +429,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }, 100);
     }
     launchLoop() {
-        console.log(this.msgArray);
         let timer = setInterval(() => {
             if (this.msgArray.length == 0) {
                 clearInterval(timer);
@@ -447,6 +446,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }, 50);
     }
     looper(array) {
+        console.log(array);
         if (array.length > 0) {
             if (document.getElementById('text')) {
                 document.getElementById('text').innerHTML += array.shift();

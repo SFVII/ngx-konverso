@@ -469,7 +469,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     };
     DesktopFullScreenComponent.prototype.launchLoop = function () {
         var _this = this;
-        console.log(this.msgArray);
         var timer = setInterval(function () {
             if (_this.msgArray.length == 0) {
                 clearInterval(timer);
@@ -487,6 +486,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         }, 50);
     };
     DesktopFullScreenComponent.prototype.looper = function (array) {
+        console.log(array);
         if (array.length > 0) {
             if (document.getElementById('text')) {
                 document.getElementById('text').innerHTML += array.shift();
