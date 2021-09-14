@@ -476,6 +476,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 clearInterval(timer);
                 console.log(_this.msgArray);
                 _this.reloaded = false;
+                _this.newMessage = true;
             }
             if (_this.msgArray.length == 0) {
                 clearInterval(timer);
