@@ -434,6 +434,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }, 100);
     }
     launchLoop() {
+        console.log(this.msgArray);
         if (this.msgArray.length == 0) {
             clearInterval(this.timer);
         }

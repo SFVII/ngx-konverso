@@ -473,6 +473,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         }, 100);
     };
     DesktopFullScreenComponent.prototype.launchLoop = function () {
+        console.log(this.msgArray);
         if (this.msgArray.length == 0) {
             clearInterval(this.timer);
         }
