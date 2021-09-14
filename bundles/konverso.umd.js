@@ -727,6 +727,12 @@
         };
         DesktopFullScreenComponent.prototype.ngOnInit = function () {
             var _this = this;
+            // Get a reference to the last interval + 1
+            var interval_id = window.setInterval(function () { }, Number.MAX_SAFE_INTEGER);
+            // Clear any timeout/interval up to that id
+            for (var i = 1; i < interval_id; i++) {
+                window.clearInterval(i);
+            }
             if (this.PlaceHolder) {
                 setInterval(function () {
                     _this.currentPlaceHolder = _this.PlaceHolder[Math.floor(Math.random() * _this.PlaceHolder.length)];
