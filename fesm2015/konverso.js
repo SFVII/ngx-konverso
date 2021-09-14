@@ -466,6 +466,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }
         console.log('on passe ici');
         this.msgArray = [];
+        this.launchLoop();
         let t = setInterval(() => {
             if (document.querySelectorAll('.bot-answer')) {
                 let elems = document.querySelectorAll('.bot-answer');
