@@ -422,7 +422,9 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
             if (this.messageCurrent != string && string != '') {
                 this.newMessage = true;
                 this.messageCurrent = string;
-                this.launchLoop();
+                this.timer = setInterval(() => {
+                    this.launchLoop();
+                }, 60);
             }
         }
         setTimeout(() => {
@@ -430,32 +432,30 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }, 100);
     }
     launchLoop() {
-        let timer = setInterval(() => {
-            console.log(this.reloaded);
-            if (this.reloaded) {
-                clearInterval(timer);
-                console.log(this.msgArray);
-                this.reloaded = false;
+        console.log(this.reloaded);
+        if (this.reloaded) {
+            clearInterval(this.timer);
+            console.log(this.msgArray);
+            this.reloaded = false;
+        }
+        if (this.msgArray.length == 0) {
+            clearInterval(this.timer);
+        }
+        if (this.newMessage) {
+            if (document.getElementById('text')) {
+                document.getElementById('text').innerHTML = '';
             }
-            if (this.msgArray.length == 0) {
-                clearInterval(timer);
+            this.newMessage = false;
+            //this.msgArray = this.messageCurrent.split("");
+            clearInterval(this.timer);
+            this.launchLoop();
+        }
+        //this.looper();
+        if (this.msgArray.length > 0 && !this.reloaded) {
+            if (document.getElementById('text')) {
+                document.getElementById('text').innerHTML += this.msgArray.shift();
             }
-            if (this.newMessage) {
-                if (document.getElementById('text')) {
-                    document.getElementById('text').innerHTML = '';
-                }
-                this.newMessage = false;
-                //this.msgArray = this.messageCurrent.split("");
-                clearInterval(timer);
-                this.launchLoop();
-            }
-            //this.looper();
-            if (this.msgArray.length > 0 && !this.reloaded) {
-                if (document.getElementById('text')) {
-                    document.getElementById('text').innerHTML += this.msgArray.shift();
-                }
-            }
-        }, 60);
+        }
     }
     looper() {
         if (this.msgArray.length > 0 && !this.reloaded) {
@@ -470,12 +470,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }, 30);*/
     }
     ngOnInit() {
-        // Get a reference to the last interval + 1
-        const interval_id = window.setInterval(function () { }, Number.MAX_SAFE_INTEGER);
-        // Clear any timeout/interval up to that id
-        for (let i = 1; i < interval_id; i++) {
-            window.clearInterval(i);
-        }
         if (this.PlaceHolder) {
             setInterval(() => {
                 this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];

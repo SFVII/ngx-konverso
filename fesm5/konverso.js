@@ -461,7 +461,9 @@ var DesktopFullScreenComponent = /** @class */ (function () {
             if (this.messageCurrent != string && string != '') {
                 this.newMessage = true;
                 this.messageCurrent = string;
-                this.launchLoop();
+                this.timer = setInterval(function () {
+                    _this.launchLoop();
+                }, 60);
             }
         }
         setTimeout(function () {
@@ -469,33 +471,30 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         }, 100);
     };
     DesktopFullScreenComponent.prototype.launchLoop = function () {
-        var _this = this;
-        var timer = setInterval(function () {
-            console.log(_this.reloaded);
-            if (_this.reloaded) {
-                clearInterval(timer);
-                console.log(_this.msgArray);
-                _this.reloaded = false;
+        console.log(this.reloaded);
+        if (this.reloaded) {
+            clearInterval(this.timer);
+            console.log(this.msgArray);
+            this.reloaded = false;
+        }
+        if (this.msgArray.length == 0) {
+            clearInterval(this.timer);
+        }
+        if (this.newMessage) {
+            if (document.getElementById('text')) {
+                document.getElementById('text').innerHTML = '';
             }
-            if (_this.msgArray.length == 0) {
-                clearInterval(timer);
+            this.newMessage = false;
+            //this.msgArray = this.messageCurrent.split("");
+            clearInterval(this.timer);
+            this.launchLoop();
+        }
+        //this.looper();
+        if (this.msgArray.length > 0 && !this.reloaded) {
+            if (document.getElementById('text')) {
+                document.getElementById('text').innerHTML += this.msgArray.shift();
             }
-            if (_this.newMessage) {
-                if (document.getElementById('text')) {
-                    document.getElementById('text').innerHTML = '';
-                }
-                _this.newMessage = false;
-                //this.msgArray = this.messageCurrent.split("");
-                clearInterval(timer);
-                _this.launchLoop();
-            }
-            //this.looper();
-            if (_this.msgArray.length > 0 && !_this.reloaded) {
-                if (document.getElementById('text')) {
-                    document.getElementById('text').innerHTML += _this.msgArray.shift();
-                }
-            }
-        }, 60);
+        }
     };
     DesktopFullScreenComponent.prototype.looper = function () {
         if (this.msgArray.length > 0 && !this.reloaded) {
@@ -511,12 +510,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     };
     DesktopFullScreenComponent.prototype.ngOnInit = function () {
         var _this = this;
-        // Get a reference to the last interval + 1
-        var interval_id = window.setInterval(function () { }, Number.MAX_SAFE_INTEGER);
-        // Clear any timeout/interval up to that id
-        for (var i = 1; i < interval_id; i++) {
-            window.clearInterval(i);
-        }
         if (this.PlaceHolder) {
             setInterval(function () {
                 _this.currentPlaceHolder = _this.PlaceHolder[Math.floor(Math.random() * _this.PlaceHolder.length)];
