@@ -654,9 +654,26 @@
                 document.getElementById('text').innerHTML = '';
             }
             console.log(this.LastBotAnswer);
-            setTimeout(function () {
+            var t = setInterval(function () {
+                if (document.querySelectorAll('.bot-discussion-wrapper')) {
+                    var elems = document.querySelectorAll('.bot-discussion-wrapper');
+                    if (elems.length > 0) {
+                        var index = 0, length_1 = elems.length;
+                        var rep = true;
+                        for (; index < length_1; index++) {
+                            var temp = elems[index];
+                            if (temp.style.opacity == '0') {
+                                rep = false;
+                            }
+                        }
+                        _this.anim_done = rep;
+                        if (_this.anim_done) {
+                            clearInterval(t);
+                        }
+                    }
+                }
             }, 1000);
-            if (this.LastBotAnswer && !((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.includes("loading-dots"))) {
+            if (this.LastBotAnswer && !((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.includes("loading-dots")) && this.anim_done) {
                 var string = (_c = this.LastBotAnswer) === null || _c === void 0 ? void 0 : _c.text.split('<br/>').join(" ").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
                 if (this.messageCurrent != string) {
                     this.newMessage = true;

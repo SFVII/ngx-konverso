@@ -399,9 +399,26 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
             document.getElementById('text').innerHTML = '';
         }
         console.log(this.LastBotAnswer);
-        setTimeout(() => {
+        let t = setInterval(() => {
+            if (document.querySelectorAll('.bot-discussion-wrapper')) {
+                let elems = document.querySelectorAll('.bot-discussion-wrapper');
+                if (elems.length > 0) {
+                    let index = 0, length = elems.length;
+                    let rep = true;
+                    for (; index < length; index++) {
+                        let temp = elems[index];
+                        if (temp.style.opacity == '0') {
+                            rep = false;
+                        }
+                    }
+                    this.anim_done = rep;
+                    if (this.anim_done) {
+                        clearInterval(t);
+                    }
+                }
+            }
         }, 1000);
-        if (this.LastBotAnswer && !((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.includes("loading-dots"))) {
+        if (this.LastBotAnswer && !((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.includes("loading-dots")) && this.anim_done) {
             var string = (_c = this.LastBotAnswer) === null || _c === void 0 ? void 0 : _c.text.split('<br/>').join(` `).split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
             if (this.messageCurrent != string) {
                 this.newMessage = true;
