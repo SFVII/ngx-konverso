@@ -431,6 +431,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
     }
     launchLoop() {
         let timer = setInterval(() => {
+            console.log(this.reloaded);
             if (this.reloaded) {
                 clearInterval(timer);
                 this.reloaded = false;
@@ -451,7 +452,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }, 60);
     }
     looper() {
-        console.log(this.msgArray);
         if (this.msgArray.length > 0 && !this.reloaded) {
             if (document.getElementById('text')) {
                 document.getElementById('text').innerHTML += this.msgArray.shift();

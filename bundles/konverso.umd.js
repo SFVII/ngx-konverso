@@ -687,6 +687,7 @@
         DesktopFullScreenComponent.prototype.launchLoop = function () {
             var _this = this;
             var timer = setInterval(function () {
+                console.log(_this.reloaded);
                 if (_this.reloaded) {
                     clearInterval(timer);
                     _this.reloaded = false;
@@ -707,7 +708,6 @@
             }, 60);
         };
         DesktopFullScreenComponent.prototype.looper = function () {
-            console.log(this.msgArray);
             if (this.msgArray.length > 0 && !this.reloaded) {
                 if (document.getElementById('text')) {
                     document.getElementById('text').innerHTML += this.msgArray.shift();
