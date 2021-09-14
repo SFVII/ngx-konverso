@@ -690,7 +690,7 @@
                 console.log(_this.reloaded);
                 if (_this.reloaded) {
                     clearInterval(timer);
-                    _this.msgArray = [];
+                    console.log(_this.msgArray);
                     _this.reloaded = false;
                 }
                 if (_this.msgArray.length == 0) {
