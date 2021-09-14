@@ -364,7 +364,6 @@ TranslateService = __decorate([
     })
 ], TranslateService);
 
-//import * as run from 'projects/konverso/assets/animatedback.js';
 let DesktopFullScreenComponent = class DesktopFullScreenComponent {
     constructor(translate, service) {
         this.service = service;
@@ -472,7 +471,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
             }, 3000);
         }
-        console.log('on passe ici');
+        console.log(PIXI);
         this.reloaded = true;
         let t = setInterval(() => {
             if (document.querySelectorAll('.bot-answer')) {

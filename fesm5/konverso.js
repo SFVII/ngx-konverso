@@ -401,7 +401,6 @@ var TranslateService = /** @class */ (function () {
     return TranslateService;
 }());
 
-//import * as run from 'projects/konverso/assets/animatedback.js';
 var DesktopFullScreenComponent = /** @class */ (function () {
     function DesktopFullScreenComponent(translate, service) {
         var _this = this;
@@ -512,7 +511,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 _this.currentPlaceHolder = _this.PlaceHolder[Math.floor(Math.random() * _this.PlaceHolder.length)];
             }, 3000);
         }
-        console.log('on passe ici');
+        console.log(PIXI);
         this.reloaded = true;
         var t = setInterval(function () {
             if (document.querySelectorAll('.bot-answer')) {
