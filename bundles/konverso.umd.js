@@ -721,7 +721,7 @@
                     _this.currentPlaceHolder = _this.PlaceHolder[Math.floor(Math.random() * _this.PlaceHolder.length)];
                 }, 3000);
             }
-            console.log(KawaseBlurFilter);
+            //console.log(KawaseBlurFilter);
             var t = setInterval(function () {
                 if (document.querySelectorAll('.bot-answer')) {
                     var elems = document.querySelectorAll('.bot-answer');

@@ -464,7 +464,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
             }, 3000);
         }
-        console.log(KawaseBlurFilter);
+        //console.log(KawaseBlurFilter);
         let t = setInterval(() => {
             if (document.querySelectorAll('.bot-answer')) {
                 let elems = document.querySelectorAll('.bot-answer');
