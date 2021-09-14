@@ -696,7 +696,7 @@
                     _this.newMessage = false;
                     //this.msgArray = this.messageCurrent.split("");
                     clearInterval(timer);
-                    //this.launchLoop();
+                    _this.launchLoop();
                 }
                 _this.looper(_this.msgArray);
             }, 50);
