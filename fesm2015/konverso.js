@@ -393,7 +393,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         });
     }
     ngOnChanges() {
-        var _a, _b, _c;
+        var _a;
         this.changed = false;
         if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
             document.getElementById('text').innerHTML = '';
@@ -417,18 +417,22 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                     }
                 }
             }
-        }, 1000);
-        if (this.LastBotAnswer && !((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.includes("loading-dots")) && this.anim_done) {
-            var string = (_c = this.LastBotAnswer) === null || _c === void 0 ? void 0 : _c.text.split('<br/>').join(` `).split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
-            if (this.messageCurrent != string) {
-                this.newMessage = true;
-                this.messageCurrent = string;
-                this.launchLoop();
+        }, 100);
+        let t2 = setInterval(() => {
+            var _a, _b;
+            if (this.LastBotAnswer && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots")) && this.anim_done) {
+                clearInterval(t2);
+                var string = (_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(` `).split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
+                if (this.messageCurrent != string) {
+                    this.newMessage = true;
+                    this.messageCurrent = string;
+                    this.launchLoop();
+                }
+                this.msgArray = string.split("");
+                var timer;
+                //this.looper(array, timer);
             }
-            this.msgArray = string.split("");
-            var timer;
-            //this.looper(array, timer);
-        }
+        }, 100);
         setTimeout(() => {
             this.changed = true;
         }, 100);
