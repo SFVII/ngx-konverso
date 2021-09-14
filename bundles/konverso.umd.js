@@ -654,7 +654,6 @@
                 document.getElementById('text').innerHTML = '';
             }
             console.log(this.LastBotAnswer);
-            console.log(this.msgArray);
             if (!this.anim_done) {
                 var t2_1 = setInterval(function () {
                     var _a, _b;
@@ -703,6 +702,7 @@
             }, 60);
         };
         DesktopFullScreenComponent.prototype.looper = function (array) {
+            console.log(array);
             if (array.length > 0) {
                 if (document.getElementById('text')) {
                     document.getElementById('text').innerHTML += array.shift();

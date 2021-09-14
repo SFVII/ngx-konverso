@@ -399,7 +399,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
             document.getElementById('text').innerHTML = '';
         }
         console.log(this.LastBotAnswer);
-        console.log(this.msgArray);
         if (!this.anim_done) {
             let t2 = setInterval(() => {
                 var _a, _b;
@@ -447,6 +446,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }, 60);
     }
     looper(array) {
+        console.log(array);
         if (array.length > 0) {
             if (document.getElementById('text')) {
                 document.getElementById('text').innerHTML += array.shift();
