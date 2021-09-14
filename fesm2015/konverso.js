@@ -446,6 +446,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }, 60);
     }
     looper() {
+        console.log(this.msgArray);
         if (this.msgArray.length > 0) {
             if (document.getElementById('text')) {
                 document.getElementById('text').innerHTML += this.msgArray.shift();
