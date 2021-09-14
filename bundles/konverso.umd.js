@@ -703,7 +703,7 @@
                 this.launchLoop();
             }
             //this.looper();
-            if (this.msgArray.length > 0 && !this.reloaded) {
+            if (this.msgArray.length > 0) {
                 if (document.getElementById('text')) {
                     document.getElementById('text').innerHTML += this.msgArray.shift();
                 }
