@@ -385,6 +385,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         this.botListening = false;
         this.botListeningTimer = 0;
         this.anim_done = false;
+        this.reloaded = false;
         service.lang.subscribe((r) => {
             if (service.locale) {
                 this.sendBtn = translate.translate(service.locale, 'SEND');
@@ -430,6 +431,10 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
     }
     launchLoop() {
         let timer = setInterval(() => {
+            if (this.reloaded) {
+                clearInterval(timer);
+                this.reloaded = false;
+            }
             if (this.msgArray.length == 0) {
                 clearInterval(timer);
             }
@@ -447,7 +452,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
     }
     looper() {
         console.log(this.msgArray);
-        if (this.msgArray.length > 0) {
+        if (this.msgArray.length > 0 && !this.reloaded) {
             if (document.getElementById('text')) {
                 document.getElementById('text').innerHTML += this.msgArray.shift();
             }
@@ -465,8 +470,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
             }, 3000);
         }
         console.log('on passe ici');
-        this.msgArray = [];
-        this.launchLoop();
+        this.reloaded = true;
         let t = setInterval(() => {
             if (document.querySelectorAll('.bot-answer')) {
                 let elems = document.querySelectorAll('.bot-answer');

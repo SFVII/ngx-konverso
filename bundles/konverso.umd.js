@@ -639,6 +639,7 @@
             this.botListening = false;
             this.botListeningTimer = 0;
             this.anim_done = false;
+            this.reloaded = false;
             service.lang.subscribe(function (r) {
                 if (service.locale) {
                     _this.sendBtn = translate.translate(service.locale, 'SEND');
@@ -686,6 +687,10 @@
         DesktopFullScreenComponent.prototype.launchLoop = function () {
             var _this = this;
             var timer = setInterval(function () {
+                if (_this.reloaded) {
+                    clearInterval(timer);
+                    _this.reloaded = false;
+                }
                 if (_this.msgArray.length == 0) {
                     clearInterval(timer);
                 }
@@ -703,7 +708,7 @@
         };
         DesktopFullScreenComponent.prototype.looper = function () {
             console.log(this.msgArray);
-            if (this.msgArray.length > 0) {
+            if (this.msgArray.length > 0 && !this.reloaded) {
                 if (document.getElementById('text')) {
                     document.getElementById('text').innerHTML += this.msgArray.shift();
                 }
@@ -722,8 +727,7 @@
                 }, 3000);
             }
             console.log('on passe ici');
-            this.msgArray = [];
-            this.launchLoop();
+            this.reloaded = true;
             var t = setInterval(function () {
                 if (document.querySelectorAll('.bot-answer')) {
                     var elems = document.querySelectorAll('.bot-answer');
