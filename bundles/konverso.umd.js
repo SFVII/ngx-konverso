@@ -700,7 +700,7 @@
                     _this.launchLoop();
                 }
                 _this.looper(_this.msgArray);
-            }, 70);
+            }, 60);
         };
         DesktopFullScreenComponent.prototype.looper = function (array) {
             if (array.length > 0) {

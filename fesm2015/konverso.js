@@ -444,7 +444,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.launchLoop();
             }
             this.looper(this.msgArray);
-        }, 70);
+        }, 60);
     }
     looper(array) {
         if (array.length > 0) {
