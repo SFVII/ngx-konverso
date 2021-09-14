@@ -399,25 +399,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
             document.getElementById('text').innerHTML = '';
         }
         console.log(this.LastBotAnswer);
-        let t = setInterval(() => {
-            if (document.querySelectorAll('.bot-answer')) {
-                let elems = document.querySelectorAll('.bot-answer');
-                if (elems.length > 0) {
-                    let index = 0, length = elems.length;
-                    let rep = true;
-                    for (; index < length; index++) {
-                        let temp = elems[index];
-                        if (temp.style.opacity == '0') {
-                            rep = false;
-                        }
-                    }
-                    this.anim_done = rep;
-                    if (this.anim_done) {
-                        clearInterval(t);
-                    }
-                }
-            }
-        }, 100);
         let t2 = setInterval(() => {
             var _a, _b;
             if (this.LastBotAnswer && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots")) && this.anim_done) {
@@ -472,6 +453,25 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
             }, 3000);
         }
+        let t = setInterval(() => {
+            if (document.querySelectorAll('.bot-answer')) {
+                let elems = document.querySelectorAll('.bot-answer');
+                if (elems.length > 0) {
+                    let index = 0, length = elems.length;
+                    let rep = true;
+                    for (; index < length; index++) {
+                        let temp = elems[index];
+                        if (temp.style.opacity == '0') {
+                            rep = false;
+                        }
+                    }
+                    this.anim_done = rep;
+                    if (this.anim_done) {
+                        clearInterval(t);
+                    }
+                }
+            }
+        }, 100);
         //run.run();
         setInterval(() => {
             if (this.botListeningTimer > 0) {

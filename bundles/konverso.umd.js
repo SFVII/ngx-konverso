@@ -654,25 +654,6 @@
                 document.getElementById('text').innerHTML = '';
             }
             console.log(this.LastBotAnswer);
-            var t = setInterval(function () {
-                if (document.querySelectorAll('.bot-answer')) {
-                    var elems = document.querySelectorAll('.bot-answer');
-                    if (elems.length > 0) {
-                        var index = 0, length_1 = elems.length;
-                        var rep = true;
-                        for (; index < length_1; index++) {
-                            var temp = elems[index];
-                            if (temp.style.opacity == '0') {
-                                rep = false;
-                            }
-                        }
-                        _this.anim_done = rep;
-                        if (_this.anim_done) {
-                            clearInterval(t);
-                        }
-                    }
-                }
-            }, 100);
             var t2 = setInterval(function () {
                 var _a, _b;
                 if (_this.LastBotAnswer && !((_a = _this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots")) && _this.anim_done) {
@@ -729,6 +710,25 @@
                     _this.currentPlaceHolder = _this.PlaceHolder[Math.floor(Math.random() * _this.PlaceHolder.length)];
                 }, 3000);
             }
+            var t = setInterval(function () {
+                if (document.querySelectorAll('.bot-answer')) {
+                    var elems = document.querySelectorAll('.bot-answer');
+                    if (elems.length > 0) {
+                        var index = 0, length_1 = elems.length;
+                        var rep = true;
+                        for (; index < length_1; index++) {
+                            var temp = elems[index];
+                            if (temp.style.opacity == '0') {
+                                rep = false;
+                            }
+                        }
+                        _this.anim_done = rep;
+                        if (_this.anim_done) {
+                            clearInterval(t);
+                        }
+                    }
+                }
+            }, 100);
             //run.run();
             setInterval(function () {
                 if (_this.botListeningTimer > 0) {
