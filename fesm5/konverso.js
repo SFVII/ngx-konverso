@@ -449,7 +449,9 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                     if (_this.messageCurrent != string) {
                         _this.newMessage = true;
                         _this.messageCurrent = string;
-                        _this.launchLoop();
+                        _this.timer = setInterval(function () {
+                            _this.launchLoop();
+                        }, 60);
                     }
                     //this.looper(array, timer);
                 }

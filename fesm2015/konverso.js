@@ -410,7 +410,9 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                     if (this.messageCurrent != string) {
                         this.newMessage = true;
                         this.messageCurrent = string;
-                        this.launchLoop();
+                        this.timer = setInterval(() => {
+                            this.launchLoop();
+                        }, 60);
                     }
                     //this.looper(array, timer);
                 }
