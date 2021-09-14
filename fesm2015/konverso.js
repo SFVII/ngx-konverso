@@ -411,7 +411,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                         this.launchLoop();
                     }
                     this.msgArray = string.split("");
-                    var timer;
                     //this.looper(array, timer);
                 }
             }, 100);
@@ -424,13 +423,13 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.launchLoop();
             }
             this.msgArray = string.split("");
-            var timer;
         }
         setTimeout(() => {
             this.changed = true;
         }, 100);
     }
     launchLoop() {
+        console.log(this.msgArray);
         let timer = setInterval(() => {
             if (this.msgArray.length == 0) {
                 clearInterval(timer);

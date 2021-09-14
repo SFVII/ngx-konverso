@@ -450,7 +450,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                         _this.launchLoop();
                     }
                     _this.msgArray = string.split("");
-                    var timer;
                     //this.looper(array, timer);
                 }
             }, 100);
@@ -463,7 +462,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 this.launchLoop();
             }
             this.msgArray = string.split("");
-            var timer;
         }
         setTimeout(function () {
             _this.changed = true;
@@ -471,6 +469,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     };
     DesktopFullScreenComponent.prototype.launchLoop = function () {
         var _this = this;
+        console.log(this.msgArray);
         var timer = setInterval(function () {
             if (_this.msgArray.length == 0) {
                 clearInterval(timer);

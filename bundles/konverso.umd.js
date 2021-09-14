@@ -666,7 +666,6 @@
                             _this.launchLoop();
                         }
                         _this.msgArray = string.split("");
-                        var timer;
                         //this.looper(array, timer);
                     }
                 }, 100);
@@ -679,7 +678,6 @@
                     this.launchLoop();
                 }
                 this.msgArray = string.split("");
-                var timer;
             }
             setTimeout(function () {
                 _this.changed = true;
@@ -687,6 +685,7 @@
         };
         DesktopFullScreenComponent.prototype.launchLoop = function () {
             var _this = this;
+            console.log(this.msgArray);
             var timer = setInterval(function () {
                 if (_this.msgArray.length == 0) {
                     clearInterval(timer);
