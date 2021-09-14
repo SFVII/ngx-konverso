@@ -654,7 +654,7 @@
                 document.getElementById('text').innerHTML = '';
             }
             console.log(this.LastBotAnswer);
-            console.log(this.messageCurrent);
+            console.log(this.msgArray);
             if (!this.anim_done) {
                 var t2_1 = setInterval(function () {
                     var _a, _b;

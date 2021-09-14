@@ -399,7 +399,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
             document.getElementById('text').innerHTML = '';
         }
         console.log(this.LastBotAnswer);
-        console.log(this.messageCurrent);
+        console.log(this.msgArray);
         if (!this.anim_done) {
             let t2 = setInterval(() => {
                 var _a, _b;
