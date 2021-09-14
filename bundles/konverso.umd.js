@@ -674,8 +674,7 @@
             else {
                 var string = (_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(" ").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
                 this.msgArray = string.split("");
-                console.log(this.messageCurrent, string);
-                if (this.messageCurrent != string) {
+                if (this.messageCurrent != string && string != '') {
                     this.newMessage = true;
                     this.messageCurrent = string;
                     this.launchLoop();
