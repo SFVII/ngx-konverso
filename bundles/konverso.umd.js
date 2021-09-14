@@ -664,9 +664,7 @@
                         if (_this.messageCurrent != string) {
                             _this.newMessage = true;
                             _this.messageCurrent = string;
-                            _this.timer = setInterval(function () {
-                                _this.launchLoop();
-                            }, 60);
+                            _this.launchLoop();
                         }
                         //this.looper(array, timer);
                     }
@@ -678,9 +676,7 @@
                 if (this.messageCurrent != string && string != '') {
                     this.newMessage = true;
                     this.messageCurrent = string;
-                    this.timer = setInterval(function () {
-                        _this.launchLoop();
-                    }, 60);
+                    this.launchLoop();
                 }
             }
             setTimeout(function () {
@@ -688,20 +684,23 @@
             }, 100);
         };
         DesktopFullScreenComponent.prototype.launchLoop = function () {
-            console.log(this.msgArray);
-            if (this.msgArray.length == 0) {
-                clearInterval(this.timer);
-            }
-            if (this.newMessage) {
-                if (document.getElementById('text')) {
-                    document.getElementById('text').innerHTML = '';
+            var _this = this;
+            this.timer = setInterval(function () {
+                console.log(_this.msgArray);
+                if (_this.msgArray.length == 0) {
+                    clearInterval(_this.timer);
                 }
-                this.newMessage = false;
-                //this.msgArray = this.messageCurrent.split("");
-                clearInterval(this.timer);
-                this.launchLoop();
-            }
-            this.looper();
+                if (_this.newMessage) {
+                    if (document.getElementById('text')) {
+                        document.getElementById('text').innerHTML = '';
+                    }
+                    _this.newMessage = false;
+                    //this.msgArray = this.messageCurrent.split("");
+                    clearInterval(_this.timer);
+                    _this.launchLoop();
+                }
+                _this.looper();
+            }, 60);
         };
         DesktopFullScreenComponent.prototype.looper = function () {
             if (this.msgArray.length > 0 && !this.reloaded) {

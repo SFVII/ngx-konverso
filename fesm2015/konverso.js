@@ -409,9 +409,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                     if (this.messageCurrent != string) {
                         this.newMessage = true;
                         this.messageCurrent = string;
-                        this.timer = setInterval(() => {
-                            this.launchLoop();
-                        }, 60);
+                        this.launchLoop();
                     }
                     //this.looper(array, timer);
                 }
@@ -423,9 +421,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
             if (this.messageCurrent != string && string != '') {
                 this.newMessage = true;
                 this.messageCurrent = string;
-                this.timer = setInterval(() => {
-                    this.launchLoop();
-                }, 60);
+                this.launchLoop();
             }
         }
         setTimeout(() => {
@@ -433,20 +429,22 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }, 100);
     }
     launchLoop() {
-        console.log(this.msgArray);
-        if (this.msgArray.length == 0) {
-            clearInterval(this.timer);
-        }
-        if (this.newMessage) {
-            if (document.getElementById('text')) {
-                document.getElementById('text').innerHTML = '';
+        this.timer = setInterval(() => {
+            console.log(this.msgArray);
+            if (this.msgArray.length == 0) {
+                clearInterval(this.timer);
             }
-            this.newMessage = false;
-            //this.msgArray = this.messageCurrent.split("");
-            clearInterval(this.timer);
-            this.launchLoop();
-        }
-        this.looper();
+            if (this.newMessage) {
+                if (document.getElementById('text')) {
+                    document.getElementById('text').innerHTML = '';
+                }
+                this.newMessage = false;
+                //this.msgArray = this.messageCurrent.split("");
+                clearInterval(this.timer);
+                this.launchLoop();
+            }
+            this.looper();
+        }, 60);
     }
     looper() {
         if (this.msgArray.length > 0 && !this.reloaded) {
