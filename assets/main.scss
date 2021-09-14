@@ -281,7 +281,7 @@
             width: 100%;
             margin: auto;
             vertical-align: middle;
-            opacity: 0;
+            //opacity: 0;
 
             img {
               margin-left: auto;
@@ -392,6 +392,7 @@
             margin: 0 auto;
             overflow-y: scroll;
             direction: rtl;
+            //opacity: 0;
 
             &::-webkit-scrollbar {
               width: 0 !important

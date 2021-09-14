@@ -28,6 +28,7 @@ export declare class DesktopFullScreenComponent implements OnChanges, OnInit {
     private msgArray;
     botListening: boolean;
     private botListeningTimer;
+    private anim_done;
     constructor(translate: TranslateService, service: KonversoService);
     ngOnChanges(): void;
     launchLoop(): void;
