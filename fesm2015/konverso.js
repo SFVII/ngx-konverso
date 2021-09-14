@@ -446,12 +446,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
             clearInterval(this.timer);
             this.launchLoop();
         }
-        //this.looper();
-        if (this.msgArray.length > 0) {
-            if (document.getElementById('text')) {
-                document.getElementById('text').innerHTML += this.msgArray.shift();
-            }
-        }
+        this.looper();
     }
     looper() {
         if (this.msgArray.length > 0 && !this.reloaded) {
@@ -471,7 +466,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
             }, 3000);
         }
-        console.log(PIXI);
+        console.log(KawaseBlurFilter);
         this.reloaded = true;
         let t = setInterval(() => {
             if (document.querySelectorAll('.bot-answer')) {

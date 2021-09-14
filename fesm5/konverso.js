@@ -485,12 +485,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
             clearInterval(this.timer);
             this.launchLoop();
         }
-        //this.looper();
-        if (this.msgArray.length > 0) {
-            if (document.getElementById('text')) {
-                document.getElementById('text').innerHTML += this.msgArray.shift();
-            }
-        }
+        this.looper();
     };
     DesktopFullScreenComponent.prototype.looper = function () {
         if (this.msgArray.length > 0 && !this.reloaded) {
@@ -511,7 +506,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 _this.currentPlaceHolder = _this.PlaceHolder[Math.floor(Math.random() * _this.PlaceHolder.length)];
             }, 3000);
         }
-        console.log(PIXI);
+        console.log(KawaseBlurFilter);
         this.reloaded = true;
         var t = setInterval(function () {
             if (document.querySelectorAll('.bot-answer')) {
