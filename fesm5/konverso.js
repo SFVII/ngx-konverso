@@ -506,7 +506,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
             }, 3000);
         }
         console.log(KawaseBlurFilter);
-        this.reloaded = true;
         var t = setInterval(function () {
             if (document.querySelectorAll('.bot-answer')) {
                 var elems = document.querySelectorAll('.bot-answer');
