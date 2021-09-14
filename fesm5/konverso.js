@@ -476,7 +476,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 clearInterval(timer);
                 console.log(_this.msgArray);
                 _this.reloaded = false;
-                _this.newMessage = true;
             }
             if (_this.msgArray.length == 0) {
                 clearInterval(timer);
@@ -490,7 +489,12 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 clearInterval(timer);
                 _this.launchLoop();
             }
-            _this.looper();
+            //this.looper();
+            if (_this.msgArray.length > 0 && !_this.reloaded) {
+                if (document.getElementById('text')) {
+                    document.getElementById('text').innerHTML += _this.msgArray.shift();
+                }
+            }
         }, 60);
     };
     DesktopFullScreenComponent.prototype.looper = function () {

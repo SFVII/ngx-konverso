@@ -436,7 +436,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 clearInterval(timer);
                 console.log(this.msgArray);
                 this.reloaded = false;
-                this.newMessage = true;
             }
             if (this.msgArray.length == 0) {
                 clearInterval(timer);
@@ -450,7 +449,12 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 clearInterval(timer);
                 this.launchLoop();
             }
-            this.looper();
+            //this.looper();
+            if (this.msgArray.length > 0 && !this.reloaded) {
+                if (document.getElementById('text')) {
+                    document.getElementById('text').innerHTML += this.msgArray.shift();
+                }
+            }
         }, 60);
     }
     looper() {
