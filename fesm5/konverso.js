@@ -458,6 +458,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         else {
             var string = (_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(" ").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
             this.msgArray = string.split("");
+            console.log(this.messageCurrent, string);
             if (this.messageCurrent != string) {
                 this.newMessage = true;
                 this.messageCurrent = string;
@@ -484,7 +485,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 _this.launchLoop();
             }
             _this.looper(_this.msgArray);
-        }, 50);
+        }, 70);
     };
     DesktopFullScreenComponent.prototype.looper = function (array) {
         if (array.length > 0) {
