@@ -446,7 +446,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }, 60);
     }
     looper(array) {
-        console.log(array);
         if (array.length > 0) {
             if (document.getElementById('text')) {
                 document.getElementById('text').innerHTML += array.shift();
@@ -464,6 +463,8 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
             }, 3000);
         }
+        console.log('on passe ici');
+        this.msgArray = [];
         let t = setInterval(() => {
             if (document.querySelectorAll('.bot-answer')) {
                 let elems = document.querySelectorAll('.bot-answer');

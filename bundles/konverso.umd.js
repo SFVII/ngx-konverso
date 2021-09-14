@@ -702,7 +702,6 @@
             }, 60);
         };
         DesktopFullScreenComponent.prototype.looper = function (array) {
-            console.log(array);
             if (array.length > 0) {
                 if (document.getElementById('text')) {
                     document.getElementById('text').innerHTML += array.shift();
@@ -721,6 +720,8 @@
                     _this.currentPlaceHolder = _this.PlaceHolder[Math.floor(Math.random() * _this.PlaceHolder.length)];
                 }, 3000);
             }
+            console.log('on passe ici');
+            this.msgArray = [];
             var t = setInterval(function () {
                 if (document.querySelectorAll('.bot-answer')) {
                     var elems = document.querySelectorAll('.bot-answer');
