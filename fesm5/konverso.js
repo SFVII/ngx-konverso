@@ -482,13 +482,13 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 clearInterval(timer);
                 _this.launchLoop();
             }
-            _this.looper(_this.msgArray);
+            _this.looper();
         }, 60);
     };
-    DesktopFullScreenComponent.prototype.looper = function (array) {
-        if (array.length > 0) {
+    DesktopFullScreenComponent.prototype.looper = function () {
+        if (this.msgArray.length > 0) {
             if (document.getElementById('text')) {
-                document.getElementById('text').innerHTML += array.shift();
+                document.getElementById('text').innerHTML += this.msgArray.shift();
             }
         } /*else {
           clearTimeout(timer);

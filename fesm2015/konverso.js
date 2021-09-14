@@ -442,13 +442,13 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 clearInterval(timer);
                 this.launchLoop();
             }
-            this.looper(this.msgArray);
+            this.looper();
         }, 60);
     }
-    looper(array) {
-        if (array.length > 0) {
+    looper() {
+        if (this.msgArray.length > 0) {
             if (document.getElementById('text')) {
-                document.getElementById('text').innerHTML += array.shift();
+                document.getElementById('text').innerHTML += this.msgArray.shift();
             }
         } /*else {
           clearTimeout(timer);
