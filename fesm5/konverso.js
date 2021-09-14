@@ -439,8 +439,8 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         }
         console.log(this.LastBotAnswer);
         var t = setInterval(function () {
-            if (document.querySelectorAll('.bot-discussion-wrapper')) {
-                var elems = document.querySelectorAll('.bot-discussion-wrapper');
+            if (document.querySelectorAll('.bot-answer')) {
+                var elems = document.querySelectorAll('.bot-answer');
                 if (elems.length > 0) {
                     var index = 0, length_1 = elems.length;
                     var rep = true;

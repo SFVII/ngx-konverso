@@ -400,8 +400,8 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }
         console.log(this.LastBotAnswer);
         let t = setInterval(() => {
-            if (document.querySelectorAll('.bot-discussion-wrapper')) {
-                let elems = document.querySelectorAll('.bot-discussion-wrapper');
+            if (document.querySelectorAll('.bot-answer')) {
+                let elems = document.querySelectorAll('.bot-answer');
                 if (elems.length > 0) {
                     let index = 0, length = elems.length;
                     let rep = true;
