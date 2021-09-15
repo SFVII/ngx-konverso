@@ -345,6 +345,10 @@
             position: absolute;
             width: 100%;
             bottom: 2%;
+            animation: fadeinanswer 0.7s ease-in 2.5s both;
+            -moz-animation: fadeinanswer 0.7s ease-in 2.5s both; /* Firefox */
+            -webkit-animation: fadeinanswer 0.7s ease-in 2.5s both; /* Safari and Chrome */
+            -o-animation: fadeinanswer 0.7s ease-in 2.5s both; /* Opera */
 
             input {
               text-align: center;
