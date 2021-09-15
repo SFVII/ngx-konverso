@@ -283,10 +283,10 @@
             margin: auto;
             vertical-align: middle;
             //opacity: 0;
-            animation: fadeinanswer 0.7s ease-in 1.8s both;
-            -moz-animation: fadeinanswer 0.7s ease-in 1.8s both; /* Firefox */
-            -webkit-animation: fadeinanswer 0.7s ease-in 1.8s both; /* Safari and Chrome */
-            -o-animation: fadeinanswer 0.7s ease-in 1.8s both; /* Opera */
+            animation: movetop 0.7s ease-in 1.8s both;
+            -moz-animation: movetop 0.7s ease-in 1.8s both; /* Firefox */
+            -webkit-animation: movetop 0.7s ease-in 1.8s both; /* Safari and Chrome */
+            -o-animation: movetop 0.7s ease-in 1.8s both; /* Opera */
 
             img {
               margin-left: auto;
@@ -584,6 +584,38 @@
   }
 }
 
+@keyframes movetop {
+  from {
+      margin-top: 10%;
+  }
+  to {
+      margin-top: 0;
+  }
+}
+@-moz-keyframes movetop { /* Firefox */
+  from {
+      margin-top: 10%;
+  }
+  to {
+      margin-top: 0;
+  }
+}
+@-webkit-keyframes movetop { /* Safari and Chrome */
+  from {
+      margin-top: 10%;
+  }
+  to {
+      margin-top: 0;
+  }
+}
+@-o-keyframes movetop { /* Opera */
+  from {
+      margin-top: 10%;
+  }
+  to {
+      margin-top: 0;
+  }
+}
 
 .fade {
   animation: fadeinanswer 0.7s;
