@@ -283,6 +283,10 @@
             margin: auto;
             vertical-align: middle;
             //opacity: 0;
+            animation: fadeinanswer 0.7s ease-in 1.8s both;
+            -moz-animation: fadeinanswer 0.7s ease-in 1.8s both; /* Firefox */
+            -webkit-animation: fadeinanswer 0.7s ease-in 1.8s both; /* Safari and Chrome */
+            -o-animation: fadeinanswer 0.7s ease-in 1.8s both; /* Opera */
 
             img {
               margin-left: auto;
