@@ -354,22 +354,24 @@
               text-align: center;
               display: inline-block;
               padding: 10px;
-              border-radius: 25px;
               color: black;
               width: 40% !important;
               //margin: auto;
-              border: 1px solid rgba(0, 0, 0, 0.2);
               background: #E5E8EE 0% 0% no-repeat padding-box;
-              border-radius: 25px;
+              border: 2px solid #171F26;
+              border-radius: 6px;
               margin-right: 10px;
             }
 
             button {
+              background: #171F26 0% 0% no-repeat padding-box;
+              border: 2px solid #171F26;
+              border-radius: 6px;
               display: inline-block;
               width: calc(10% - 15px);
               padding: 11px;
-              background: transparent linear-gradient(243deg, #9D107D 0%, #4862AB 100%) 0% 0% no-repeat padding-box !important;
-              border-radius: 25px !important;
+              //background: transparent linear-gradient(243deg, #9D107D 0%, #4862AB 100%) 0% 0% no-repeat padding-box !important;
+              //border-radius: 25px !important;
             }
           }
         }
