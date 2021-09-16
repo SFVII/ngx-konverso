@@ -467,7 +467,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         }
         setTimeout(() => {
             this.showWrapper = true;
-        }, 1200);
+        }, 1700);
         //console.log(KawaseBlurFilter);
         let t = setInterval(() => {
             if (document.querySelectorAll('.bot-answer')) {
