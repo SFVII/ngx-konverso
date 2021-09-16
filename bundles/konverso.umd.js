@@ -724,7 +724,7 @@
             }
             setTimeout(function () {
                 _this.showWrapper = true;
-            }, 1700);
+            }, 2000);
             //console.log(KawaseBlurFilter);
             var t = setInterval(function () {
                 if (document.querySelectorAll('.bot-answer')) {
