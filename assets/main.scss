@@ -625,10 +625,10 @@
 }
 
 .fade {
-  animation: fadeinanswer 0.7s !important;
-  -moz-animation: fadeinanswer 0.7s !important; /* Firefox */
-  -webkit-animation: fadeinanswer 0.7s !important; /* Safari and Chrome */
-  -o-animation: fadeinanswer 0.7s !important; /* Opera */
+  animation: fadeinanswer 0.3s ease-in 2.5s both !important;
+  -moz-animation: fadeinanswer 0.3s ease-in 2.5s both !important; /* Firefox */
+  -webkit-animation: fadeinanswer 0.3s ease-in 2.5s both !important; /* Safari and Chrome */
+  -o-animation: fadeinanswer 0.3s ease-in 2.5s both !important; /* Opera */
 }
 
 @keyframes fadeinanswer {
