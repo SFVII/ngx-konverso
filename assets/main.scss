@@ -183,12 +183,24 @@
         display: inline-block;
       }
 
-      .bot-button-grey {
+      /*.bot-button-grey {
         background: #E5E8EE 0% 0% no-repeat padding-box !important;
         border: 2px solid #C2C8D5 !important;
         border-radius: 10px !important;
         min-height: 44px !important;
         color: #77839B !important;
+        display: inline-block !important;
+        margin-right: 25px !important;
+      }*/
+
+      .bot-button-grey {
+        background: none !important;
+        border: 2px solid #171F26;
+        border-radius: 25px;
+        min-height: 44px !important;
+        font: normal normal normal 16px/25px 'Nexa Text';
+        letter-spacing: 0px;
+        color: #171F26;
         display: inline-block !important;
         margin-right: 25px !important;
       }
