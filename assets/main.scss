@@ -412,7 +412,8 @@
             width: 100%;
             position: relative;
             max-width: 600px;
-            height: calc(85vh - 50px);
+            //height: calc(85vh - 50px);
+            max-height: 120px !important;
             padding: 15px 30px;
             margin: 0 auto;
             overflow-y: scroll;
