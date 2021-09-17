@@ -118,7 +118,7 @@
         padding: 5px;
         position: relative;
         //display: block;
-        margin: 30px auto;
+        //margin: 30px auto;
         overflow: hidden;
         border-width: 0;
         outline: none;
@@ -200,7 +200,7 @@
         min-height: 44px !important;
         font: normal normal normal 16px/25px 'Nexa Text';
         letter-spacing: 0px;
-        color: #171F26;
+        color: #171F26 !important;
         display: inline-block !important;
         margin-right: 25px !important;
       }
