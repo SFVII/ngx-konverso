@@ -652,6 +652,13 @@
   -o-animation: fadeinanswer 0.3s ease-in 2.5s both !important; /* Opera */
 }
 
+.fadebtn {
+  animation: fadeinanswer 0.3s !important;
+  -moz-animation: fadeinanswer 0.3s !important; /* Firefox */
+  -webkit-animation: fadeinanswer 0.3s !important; /* Safari and Chrome */
+  -o-animation: fadeinanswer 0.3s !important; /* Opera */
+}
+
 @keyframes fadeinanswer {
   from {
       opacity:0;
