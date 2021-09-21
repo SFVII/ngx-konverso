@@ -281,6 +281,7 @@
 
         .bot-assistant-wrapper {
           display: table;
+          height: 100%;
           //height: 70%;
           //margin-top: -12%;
           //max-height: 70%;
@@ -314,7 +315,7 @@
             text-align: center;
             margin: 2.5% auto auto;
             font-size: 25px;
-            height: 80%;
+            height: 60%;
 
             /*span {
               color: #FFFFFF !important;
@@ -451,7 +452,7 @@
                 padding: 10px 20px;
                 border-radius: 25px;
                 color: #000;
-                height: 80%;
+                height: 60%;
                 background-color: transparent;
                 max-width: 550px;
                 width: -webkit-fit-content;
