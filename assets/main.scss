@@ -357,7 +357,7 @@
 
           .bot-input-wrapper {
             text-align: center;
-            position: absolute;
+            //position: absolute;
             width: 100%;
             bottom: 2%;
             animation: fadeinanswer 0.7s ease-in 3.2s both;
@@ -415,7 +415,8 @@
             position: relative;
             max-width: 600px;
             //height: calc(85vh - 50px);
-            max-height: 120px !important;
+            //max-height: 120px !important;
+            height: 60%;
             padding: 15px 30px;
             margin: 0 auto;
             overflow-y: scroll;
@@ -449,6 +450,7 @@
                 padding: 10px 20px;
                 border-radius: 25px;
                 color: #000;
+                height: 80%;
                 background-color: transparent;
                 max-width: 550px;
                 width: -webkit-fit-content;
