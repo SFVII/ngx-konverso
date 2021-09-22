@@ -928,6 +928,7 @@
                 else {
                     clearInterval(clear);
                 }
+                console.log(_this.current);
             }, 5000);
         };
         FirstVisitComponent.prototype.goTo = function (pos) {

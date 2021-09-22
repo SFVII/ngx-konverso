@@ -644,6 +644,7 @@ let FirstVisitComponent = class FirstVisitComponent {
             else {
                 clearInterval(clear);
             }
+            console.log(this.current);
         }, 5000);
     }
     goTo(pos) {
