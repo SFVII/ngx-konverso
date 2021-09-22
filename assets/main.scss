@@ -425,6 +425,14 @@
             overflow-y: scroll;
             direction: rtl;
             //opacity: 0;
+            display: grid; 
+            grid-template-columns: 1fr; 
+            grid-template-rows: 0.3fr 1.4fr 0.3fr; 
+            gap: 0px 0px; 
+            grid-template-areas: 
+              "user-input"
+              "bot-answer"
+              "bot-input-wrapper";
 
             &::-webkit-scrollbar {
               width: 0 !important
@@ -464,6 +472,7 @@
                 word-break: break-all;
                 transform: rotate(180deg);
                 direction: ltr;
+                grid-area: bot-answer;
 
                 button {
                   padding: 10px;
@@ -475,6 +484,7 @@
                 font-size: 15px;
                 transform: rotate(180deg);
                 direction: ltr;
+                grid-area: user-input; 
 
                 .data {
                   padding: 10px 20px;
@@ -510,6 +520,7 @@
             display: table;
             width: 100%;
             margin: auto;
+            grid-area: bot-input-wrapper;
 
             .bot-input-disable {
               width: 100%;
