@@ -110,6 +110,7 @@ var KonversoService = /** @class */ (function () {
                         if (((_c = (_b = config) === null || _b === void 0 ? void 0 : _b.BotInitMessage) === null || _c === void 0 ? void 0 : _c.FirstUsage) &&
                             _this.locale && ((_e = (_d = config) === null || _d === void 0 ? void 0 : _d.BotInitMessage) === null || _e === void 0 ? void 0 : _e.FirstUsage[_this.locale])) {
                             _this.firstUsageStory = [];
+                            console.log(_this.locale, config.BotInitMessage.FirstUsage[_this.locale]);
                             try {
                                 for (var _f = __values(config.BotInitMessage.FirstUsage[_this.locale]), _g = _f.next(); !_g.done; _g = _f.next()) {
                                     var history_1 = _g.value;
