@@ -677,16 +677,16 @@
 }
 
 .fade {
-  animation: fadeinanswer 1.5s !important;
-  -moz-animation: fadeinanswer 1.5s !important; /* Firefox */
-  -webkit-animation: fadeinanswer 1.5s !important; /* Safari and Chrome */
-  -o-animation: fadeinanswer 1.5s !important; /* Opera */
+  animation: fadeinanswer 1.5s ease-in 0.5s both !important;
+  -moz-animation: fadeinanswer 1.5s ease-in 0.5s both !important; /* Firefox */
+  -webkit-animation: fadeinanswer 1.5s ease-in 0.5s both !important; /* Safari and Chrome */
+  -o-animation: fadeinanswer 1.5s ease-in 0.5s both !important; /* Opera */
 
   p {
-    animation: fadeinanswer 1.5s !important;
-    -moz-animation: fadeinanswer 1.5s !important; /* Firefox */
-    -webkit-animation: fadeinanswer 1.5s !important; /* Safari and Chrome */
-    -o-animation: fadeinanswer 1.5s !important; /* Opera */
+    animation: fadeinanswer 1.5s ease-in 0.5s both !important;
+    -moz-animation: fadeinanswer 1.5s ease-in 0.5s both !important; /* Firefox */
+    -webkit-animation: fadeinanswer 1.5s ease-in 0.5s both !important; /* Safari and Chrome */
+    -o-animation: fadeinanswer 1.5s ease-in 0.5s both !important; /* Opera */
   }
 }
 
