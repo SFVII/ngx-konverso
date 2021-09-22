@@ -203,10 +203,10 @@
         color: #171F26 !important;
         display: inline-block !important;
         margin-right: 25px !important;
-        animation: fadeinbutton 3s ease-in 1s both !important;
-        -moz-animation: fadeinbutton 3s ease-in 1s both !important; /* Firefox */
-        -webkit-animation: fadeinbutton 3s ease-in 1s both !important; /* Safari and Chrome */
-        -o-animation: fadeinbutton 3s ease-in 1s both !important; /* Opera */
+        animation: fadeinbutton 3s ease-in 0.5s both !important;
+        -moz-animation: fadeinbutton 3s ease-in 0.5s both !important; /* Firefox */
+        -webkit-animation: fadeinbutton 3s ease-in 0.5s both !important; /* Safari and Chrome */
+        -o-animation: fadeinbutton 3s ease-in 0.5s both !important; /* Opera */
       }
 
       .bot-container {
