@@ -203,10 +203,10 @@
         color: #171F26 !important;
         display: inline-block !important;
         margin-right: 25px !important;
-        animation: fadeinbutton 3s ease-in 0.5s both !important;
-        -moz-animation: fadeinbutton 3s ease-in 0.5s both !important; /* Firefox */
-        -webkit-animation: fadeinbutton 3s ease-in 0.5s both !important; /* Safari and Chrome */
-        -o-animation: fadeinbutton 3s ease-in 0.5s both !important; /* Opera */
+        animation: fadeinbutton 2s ease-in 0.5s both !important;
+        -moz-animation: fadeinbutton 2s ease-in 0.5s both !important; /* Firefox */
+        -webkit-animation: fadeinbutton 2s ease-in 0.5s both !important; /* Safari and Chrome */
+        -o-animation: fadeinbutton 2s ease-in 0.5s both !important; /* Opera */
       }
 
       .bot-container {
@@ -677,16 +677,16 @@
 }
 
 .fade {
-  animation: fadeinanswer 1.5s ease-in 0.2s both !important;
-  -moz-animation: fadeinanswer 1.5s ease-in 0.2s both !important; /* Firefox */
-  -webkit-animation: fadeinanswer 1.5s ease-in 0.2s both !important; /* Safari and Chrome */
-  -o-animation: fadeinanswer 1.5s ease-in 0.2s both !important; /* Opera */
+  animation: fadeinanswer 1s ease-in 0.2s both !important;
+  -moz-animation: fadeinanswer 1s ease-in 0.2s both !important; /* Firefox */
+  -webkit-animation: fadeinanswer 1s ease-in 0.2s both !important; /* Safari and Chrome */
+  -o-animation: fadeinanswer 1s ease-in 0.2s both !important; /* Opera */
 
   p {
-    animation: fadeinanswer 1.5s ease-in 0.2s both !important;
-    -moz-animation: fadeinanswer 1.5s ease-in 0.2s both !important; /* Firefox */
-    -webkit-animation: fadeinanswer 1.5s ease-in 0.2s both !important; /* Safari and Chrome */
-    -o-animation: fadeinanswer 1.5s ease-in 0.2s both !important; /* Opera */
+    animation: fadeinanswer 1s ease-in 0.2s both !important;
+    -moz-animation: fadeinanswer 1s ease-in 0.2s both !important; /* Firefox */
+    -webkit-animation: fadeinanswer 1s ease-in 0.2s both !important; /* Safari and Chrome */
+    -o-animation: fadeinanswer 1s ease-in 0.2s both !important; /* Opera */
   }
 }
 
