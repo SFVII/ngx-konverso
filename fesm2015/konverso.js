@@ -104,7 +104,6 @@ let KonversoService = class KonversoService {
                         if (((_b = (_a = config) === null || _a === void 0 ? void 0 : _a.BotInitMessage) === null || _b === void 0 ? void 0 : _b.FirstUsage) &&
                             this.locale && ((_d = (_c = config) === null || _c === void 0 ? void 0 : _c.BotInitMessage) === null || _d === void 0 ? void 0 : _d.FirstUsage[this.locale])) {
                             this.firstUsageStory = [];
-                            console.log(this.locale, config.BotInitMessage.FirstUsage[this.locale]);
                             for (const history of config.BotInitMessage.FirstUsage[this.locale]) {
                                 this.firstUsageStory.push(render(history, user));
                             }
@@ -638,7 +637,6 @@ let FirstVisitComponent = class FirstVisitComponent {
     }
     ngOnInit() {
         this.current = this.firstUsageStory[this.position];
-        console.log(this.firstUsageStory);
         const clear = setInterval(() => {
             if (this.position < (this.firstUsageStory.length - 1)) {
                 this.current = this.firstUsageStory[++this.position];
@@ -646,7 +644,6 @@ let FirstVisitComponent = class FirstVisitComponent {
             else {
                 clearInterval(clear);
             }
-            console.log(this.current);
         }, 5000);
     }
     goTo(pos) {

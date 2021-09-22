@@ -326,7 +326,6 @@
                             if (((_c = (_b = config) === null || _b === void 0 ? void 0 : _b.BotInitMessage) === null || _c === void 0 ? void 0 : _c.FirstUsage) &&
                                 _this.locale && ((_e = (_d = config) === null || _d === void 0 ? void 0 : _d.BotInitMessage) === null || _e === void 0 ? void 0 : _e.FirstUsage[_this.locale])) {
                                 _this.firstUsageStory = [];
-                                console.log(_this.locale, config.BotInitMessage.FirstUsage[_this.locale]);
                                 try {
                                     for (var _f = __values(config.BotInitMessage.FirstUsage[_this.locale]), _g = _f.next(); !_g.done; _g = _f.next()) {
                                         var history_1 = _g.value;
@@ -922,7 +921,6 @@
         FirstVisitComponent.prototype.ngOnInit = function () {
             var _this = this;
             this.current = this.firstUsageStory[this.position];
-            console.log(this.firstUsageStory);
             var clear = setInterval(function () {
                 if (_this.position < (_this.firstUsageStory.length - 1)) {
                     _this.current = _this.firstUsageStory[++_this.position];
@@ -930,7 +928,6 @@
                 else {
                     clearInterval(clear);
                 }
-                console.log(_this.current);
             }, 5000);
         };
         FirstVisitComponent.prototype.goTo = function (pos) {
