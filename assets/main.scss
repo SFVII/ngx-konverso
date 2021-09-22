@@ -680,10 +680,10 @@
 }
 
 .fadebtn {
-  animation: fadeinanswer 0.3s !important;
-  -moz-animation: fadeinanswer 0.3s !important; /* Firefox */
-  -webkit-animation: fadeinanswer 0.3s !important; /* Safari and Chrome */
-  -o-animation: fadeinanswer 0.3s !important; /* Opera */
+  animation: fadeinanswer 1s !important;
+  -moz-animation: fadeinanswer 1s !important; /* Firefox */
+  -webkit-animation: fadeinanswer 1s !important; /* Safari and Chrome */
+  -o-animation: fadeinanswer 1s !important; /* Opera */
 }
 
 @keyframes fadeinanswer {
