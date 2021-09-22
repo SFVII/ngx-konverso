@@ -396,6 +396,25 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
     }
     ngOnChanges() {
         var _a, _b;
+        let t = setInterval(() => {
+            if (document.querySelectorAll('.bot-answer')) {
+                let elems = document.querySelectorAll('.bot-answer');
+                if (elems.length > 0) {
+                    let index = 0, length = elems.length;
+                    let rep = true;
+                    for (; index < length; index++) {
+                        let temp = elems[index];
+                        if (temp.style.opacity == '0') {
+                            temp.style.opacity = '1';
+                        }
+                    }
+                    this.anim_done = rep;
+                    if (this.anim_done) {
+                        clearInterval(t);
+                    }
+                }
+            }
+        }, 100);
         this.changed = false;
         if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
             document.getElementById('text').innerHTML = '';

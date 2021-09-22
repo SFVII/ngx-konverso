@@ -435,6 +435,25 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     DesktopFullScreenComponent.prototype.ngOnChanges = function () {
         var _this = this;
         var _a, _b;
+        var t = setInterval(function () {
+            if (document.querySelectorAll('.bot-answer')) {
+                var elems = document.querySelectorAll('.bot-answer');
+                if (elems.length > 0) {
+                    var index = 0, length_1 = elems.length;
+                    var rep = true;
+                    for (; index < length_1; index++) {
+                        var temp = elems[index];
+                        if (temp.style.opacity == '0') {
+                            temp.style.opacity = '1';
+                        }
+                    }
+                    _this.anim_done = rep;
+                    if (_this.anim_done) {
+                        clearInterval(t);
+                    }
+                }
+            }
+        }, 100);
         this.changed = false;
         if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
             document.getElementById('text').innerHTML = '';
@@ -518,9 +537,9 @@ var DesktopFullScreenComponent = /** @class */ (function () {
             if (document.querySelectorAll('.bot-answer')) {
                 var elems = document.querySelectorAll('.bot-answer');
                 if (elems.length > 0) {
-                    var index = 0, length_1 = elems.length;
+                    var index = 0, length_2 = elems.length;
                     var rep = true;
-                    for (; index < length_1; index++) {
+                    for (; index < length_2; index++) {
                         var temp = elems[index];
                         if (temp.style.opacity == '0') {
                             rep = false;
