@@ -921,6 +921,7 @@
         FirstVisitComponent.prototype.ngOnInit = function () {
             var _this = this;
             this.current = this.firstUsageStory[this.position];
+            console.log(this.position);
             var clear = setInterval(function () {
                 if (_this.position < (_this.firstUsageStory.length - 1)) {
                     _this.current = _this.firstUsageStory[++_this.position];
