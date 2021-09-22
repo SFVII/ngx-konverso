@@ -637,7 +637,7 @@ let FirstVisitComponent = class FirstVisitComponent {
     }
     ngOnInit() {
         this.current = this.firstUsageStory[this.position];
-        console.log(this.position);
+        console.log(this.firstUsageStory);
         const clear = setInterval(() => {
             if (this.position < (this.firstUsageStory.length - 1)) {
                 this.current = this.firstUsageStory[++this.position];
