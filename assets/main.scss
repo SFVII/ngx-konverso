@@ -335,6 +335,7 @@
               "user-input"
               "bot-answer"
               "bot-input-wrapper";
+            overflow: auto !important;
 
             .bot-answer {
               width: 600px;
@@ -462,6 +463,7 @@
               "user-input"
               "bot-answer"
               "bot-input-wrapper";
+            overflow: auto;
 
             &::-webkit-scrollbar {
               width: 0 !important
