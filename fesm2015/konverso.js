@@ -419,7 +419,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
             document.getElementById('text').innerHTML = '';
         }
-        console.log(this.LastBotAnswer);
+        //console.log(this.LastBotAnswer);
         if (!this.anim_done) {
             let t2 = setInterval(() => {
                 var _a, _b;
@@ -491,7 +491,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         setTimeout(() => {
             this.showText = true;
         }, 2500);
-        //console.log(KawaseBlurFilter);
         let t = setInterval(() => {
             if (document.querySelectorAll('.bot-answer')) {
                 let elems = document.querySelectorAll('.bot-answer');

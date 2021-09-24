@@ -674,7 +674,7 @@
             if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
                 document.getElementById('text').innerHTML = '';
             }
-            console.log(this.LastBotAnswer);
+            //console.log(this.LastBotAnswer);
             if (!this.anim_done) {
                 var t2_1 = setInterval(function () {
                     var _a, _b;
@@ -748,7 +748,6 @@
             setTimeout(function () {
                 _this.showText = true;
             }, 2500);
-            //console.log(KawaseBlurFilter);
             var t = setInterval(function () {
                 if (document.querySelectorAll('.bot-answer')) {
                     var elems = document.querySelectorAll('.bot-answer');
