@@ -649,7 +649,8 @@
             }
 
             .bot-input-wrapper {
-              background: white;
+              background: none;
+              //background: white;
               bottom: 10vh!important;
               input {
                 width: 90% !important;
