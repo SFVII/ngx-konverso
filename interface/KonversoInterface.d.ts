@@ -137,6 +137,7 @@ export interface OpenChatBotResponse {
     medias?: [OpenChatBotMedia];
     context?: WildCardObject[];
     suggestions?: OpenChatBotAction[];
+    EndOfTopic?: boolean;
 }
 interface OpenChatBotMeta {
     version: number;

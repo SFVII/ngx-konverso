@@ -395,7 +395,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         });
     }
     ngOnChanges() {
-        var _a, _b;
+        var _a, _b, _c;
         let t = setInterval(() => {
             if (document.querySelectorAll('.bot-answer')) {
                 let elems = document.querySelectorAll('.bot-answer');
@@ -420,6 +420,9 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
             document.getElementById('text').innerHTML = '';
         }
         console.log(this.LastBotAnswer);
+        if ((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.EndOfTopic) {
+            this.LastUserInput.message = '';
+        }
         if (!this.anim_done) {
             let t2 = setInterval(() => {
                 var _a, _b;
@@ -437,7 +440,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
             }, 100);
         }
         else {
-            var string = (_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(` `).split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
+            var string = (_c = this.LastBotAnswer) === null || _c === void 0 ? void 0 : _c.text.split('<br/>').join(` `).split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
             this.msgArray = string.split("");
             if (this.messageCurrent != string && string != '') {
                 this.newMessage = true;
