@@ -459,7 +459,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
             document.getElementById('text').innerHTML = '';
         }
         console.log(this.LastBotAnswer);
-        if ((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.EndOfTopic) {
+        if ((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.endOfTopic) {
             this.LastUserInput.message = '';
         }
         if (!this.anim_done) {
