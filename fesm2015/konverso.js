@@ -83,11 +83,11 @@ let KonversoService = class KonversoService {
             }
             if (config.auth) {
                 this.authentication.subscribe((user) => {
-                    var _a, _b, _c, _d;
+                    var _a, _b, _c, _d, _e, _f, _g, _h;
                     if (!user.lang && config.lang) {
                         user.lang = config.lang;
                     }
-                    this.locale = user.lang;
+                    this.locale = (_a = user) === null || _a === void 0 ? void 0 : _a.lang;
                     this.lang.next(this.locale);
                     if (config.InputPlaceHolder && config.InputPlaceHolder[this.locale]) {
                         this.PlaceHolder = config.InputPlaceHolder[this.locale];
@@ -95,14 +95,14 @@ let KonversoService = class KonversoService {
                     if (config.CustomWelcome && config.BotInitMessage.Welcome && config.BotInitMessage.Welcome[this.locale]) {
                         this.Welcome = render(config.BotInitMessage.Welcome[this.locale], user);
                     }
-                    if (user.token) {
-                        this.token.next(user.token);
+                    if ((_b = user) === null || _b === void 0 ? void 0 : _b.token) {
+                        this.token.next((_c = user) === null || _c === void 0 ? void 0 : _c.token);
                     }
-                    if (user.firstVisit) {
+                    if ((_d = user) === null || _d === void 0 ? void 0 : _d.firstVisit) {
                         this.firstVisit = true;
                         delete user.firstVisit;
-                        if (((_b = (_a = config) === null || _a === void 0 ? void 0 : _a.BotInitMessage) === null || _b === void 0 ? void 0 : _b.FirstUsage) &&
-                            this.locale && ((_d = (_c = config) === null || _c === void 0 ? void 0 : _c.BotInitMessage) === null || _d === void 0 ? void 0 : _d.FirstUsage[this.locale])) {
+                        if (((_f = (_e = config) === null || _e === void 0 ? void 0 : _e.BotInitMessage) === null || _f === void 0 ? void 0 : _f.FirstUsage) &&
+                            this.locale && ((_h = (_g = config) === null || _g === void 0 ? void 0 : _g.BotInitMessage) === null || _h === void 0 ? void 0 : _h.FirstUsage[this.locale])) {
                             this.firstUsageStory = [];
                             for (const history of config.BotInitMessage.FirstUsage[this.locale]) {
                                 this.firstUsageStory.push(render(history, user));
@@ -419,7 +419,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
             document.getElementById('text').innerHTML = '';
         }
-        //console.log(this.LastBotAnswer);
+        console.log(this.LastBotAnswer);
         if (!this.anim_done) {
             let t2 = setInterval(() => {
                 var _a, _b;

@@ -305,11 +305,11 @@
                 if (config.auth) {
                     this.authentication.subscribe(function (user) {
                         var e_1, _a;
-                        var _b, _c, _d, _e;
+                        var _b, _c, _d, _e, _f, _g, _h, _j;
                         if (!user.lang && config.lang) {
                             user.lang = config.lang;
                         }
-                        _this.locale = user.lang;
+                        _this.locale = (_b = user) === null || _b === void 0 ? void 0 : _b.lang;
                         _this.lang.next(_this.locale);
                         if (config.InputPlaceHolder && config.InputPlaceHolder[_this.locale]) {
                             _this.PlaceHolder = config.InputPlaceHolder[_this.locale];
@@ -317,25 +317,25 @@
                         if (config.CustomWelcome && config.BotInitMessage.Welcome && config.BotInitMessage.Welcome[_this.locale]) {
                             _this.Welcome = mustache.render(config.BotInitMessage.Welcome[_this.locale], user);
                         }
-                        if (user.token) {
-                            _this.token.next(user.token);
+                        if ((_c = user) === null || _c === void 0 ? void 0 : _c.token) {
+                            _this.token.next((_d = user) === null || _d === void 0 ? void 0 : _d.token);
                         }
-                        if (user.firstVisit) {
+                        if ((_e = user) === null || _e === void 0 ? void 0 : _e.firstVisit) {
                             _this.firstVisit = true;
                             delete user.firstVisit;
-                            if (((_c = (_b = config) === null || _b === void 0 ? void 0 : _b.BotInitMessage) === null || _c === void 0 ? void 0 : _c.FirstUsage) &&
-                                _this.locale && ((_e = (_d = config) === null || _d === void 0 ? void 0 : _d.BotInitMessage) === null || _e === void 0 ? void 0 : _e.FirstUsage[_this.locale])) {
+                            if (((_g = (_f = config) === null || _f === void 0 ? void 0 : _f.BotInitMessage) === null || _g === void 0 ? void 0 : _g.FirstUsage) &&
+                                _this.locale && ((_j = (_h = config) === null || _h === void 0 ? void 0 : _h.BotInitMessage) === null || _j === void 0 ? void 0 : _j.FirstUsage[_this.locale])) {
                                 _this.firstUsageStory = [];
                                 try {
-                                    for (var _f = __values(config.BotInitMessage.FirstUsage[_this.locale]), _g = _f.next(); !_g.done; _g = _f.next()) {
-                                        var history_1 = _g.value;
+                                    for (var _k = __values(config.BotInitMessage.FirstUsage[_this.locale]), _l = _k.next(); !_l.done; _l = _k.next()) {
+                                        var history_1 = _l.value;
                                         _this.firstUsageStory.push(mustache.render(history_1, user));
                                     }
                                 }
                                 catch (e_1_1) { e_1 = { error: e_1_1 }; }
                                 finally {
                                     try {
-                                        if (_g && !_g.done && (_a = _f.return)) _a.call(_f);
+                                        if (_l && !_l.done && (_a = _k.return)) _a.call(_k);
                                     }
                                     finally { if (e_1) throw e_1.error; }
                                 }
@@ -674,7 +674,7 @@
             if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
                 document.getElementById('text').innerHTML = '';
             }
-            //console.log(this.LastBotAnswer);
+            console.log(this.LastBotAnswer);
             if (!this.anim_done) {
                 var t2_1 = setInterval(function () {
                     var _a, _b;
