@@ -538,14 +538,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 _this.currentPlaceHolder = _this.PlaceHolder[Math.floor(Math.random() * _this.PlaceHolder.length)];
             }, 3000);
         }
-        var buttonCreate = document.querySelector('.bot-button > a');
-        if (buttonCreate) {
-            buttonCreate = buttonCreate.closest('.bot-button');
-            buttonCreate.addEventListener("click", function ($event) {
-                console.log('creation ticket');
-                _this.creatingTicket = true;
-            });
-        }
         setTimeout(function () {
             _this.showWrapper = true;
         }, 2000);
@@ -586,6 +578,22 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 _this.botListening = _this.botListeningTimer > 0;
             }
         }, 500);
+    };
+    DesktopFullScreenComponent.prototype.ngAfterInit = function () {
+        var _this = this;
+        var elementFocus = document.querySelector('.k-event');
+        if (window.addEventListener && elementFocus) {
+            elementFocus.addEventListener('DOMSubtreeModified', function ($event) {
+                var buttonCreate = document.querySelector('.bot-button > a');
+                if (buttonCreate) {
+                    buttonCreate = buttonCreate.closest('.bot-button');
+                    buttonCreate.addEventListener("click", function ($event) {
+                        console.log('creation ticket');
+                        _this.creatingTicket = true;
+                    });
+                }
+            });
+        }
     };
     DesktopFullScreenComponent.prototype.userWriting = function (key) {
         if (key.code == 'Enter') {

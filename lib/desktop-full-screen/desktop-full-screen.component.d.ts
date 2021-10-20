@@ -40,6 +40,7 @@ export declare class DesktopFullScreenComponent implements OnChanges, OnInit {
     launchLoop(): void;
     looper(): void;
     ngOnInit(): void;
+    ngAfterInit(): void;
     userWriting(key: any): void;
     emit($event: any): void;
     _send(): void;

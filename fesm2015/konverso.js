@@ -497,14 +497,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
             }, 3000);
         }
-        let buttonCreate = document.querySelector('.bot-button > a');
-        if (buttonCreate) {
-            buttonCreate = buttonCreate.closest('.bot-button');
-            buttonCreate.addEventListener("click", ($event) => {
-                console.log('creation ticket');
-                this.creatingTicket = true;
-            });
-        }
         setTimeout(() => {
             this.showWrapper = true;
         }, 2000);
@@ -545,6 +537,21 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.botListening = this.botListeningTimer > 0;
             }
         }, 500);
+    }
+    ngAfterInit() {
+        const elementFocus = document.querySelector('.k-event');
+        if (window.addEventListener && elementFocus) {
+            elementFocus.addEventListener('DOMSubtreeModified', ($event) => {
+                let buttonCreate = document.querySelector('.bot-button > a');
+                if (buttonCreate) {
+                    buttonCreate = buttonCreate.closest('.bot-button');
+                    buttonCreate.addEventListener("click", ($event) => {
+                        console.log('creation ticket');
+                        this.creatingTicket = true;
+                    });
+                }
+            });
+        }
     }
     userWriting(key) {
         if (key.code == 'Enter') {
