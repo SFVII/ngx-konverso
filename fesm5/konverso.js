@@ -425,8 +425,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         this.reloaded = false;
         this.showWrapper = false;
         this.showText = false;
-        this.creatingMsg = '';
-        this.creatingTicket = false;
         service.lang.subscribe(function (r) {
             if (service.locale) {
                 _this.sendBtn = translate.translate(service.locale, 'SEND');
@@ -437,16 +435,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     DesktopFullScreenComponent.prototype.ngOnChanges = function () {
         var _this = this;
         var _a, _b;
-        if (this.creatingTicket) {
-            switch (this.service.locale) {
-                case 'Français':
-                    this.creatingMsg = 'Le ticket est en cours de création, merci de patienter ...';
-                    break;
-                case 'Anglais':
-                    this.creatingMsg = 'The ticket is creating, plase be patient ...';
-                    break;
-            }
-        }
         var t = setInterval(function () {
             if (document.querySelectorAll('.bot-answer')) {
                 var elems = document.querySelectorAll('.bot-answer');
@@ -578,22 +566,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
                 _this.botListening = _this.botListeningTimer > 0;
             }
         }, 500);
-    };
-    DesktopFullScreenComponent.prototype.ngAfterInit = function () {
-        var _this = this;
-        var elementFocus = document.querySelector('.k-event');
-        if (window.addEventListener && elementFocus) {
-            elementFocus.addEventListener('DOMSubtreeModified', function ($event) {
-                var buttonCreate = document.querySelector('.bot-button > a');
-                if (buttonCreate) {
-                    buttonCreate = buttonCreate.closest('.bot-button');
-                    buttonCreate.addEventListener("click", function ($event) {
-                        console.log('creation ticket');
-                        _this.creatingTicket = true;
-                    });
-                }
-            });
-        }
     };
     DesktopFullScreenComponent.prototype.userWriting = function (key) {
         if (key.code == 'Enter') {

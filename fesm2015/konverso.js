@@ -387,8 +387,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         this.reloaded = false;
         this.showWrapper = false;
         this.showText = false;
-        this.creatingMsg = '';
-        this.creatingTicket = false;
         service.lang.subscribe((r) => {
             if (service.locale) {
                 this.sendBtn = translate.translate(service.locale, 'SEND');
@@ -398,16 +396,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
     }
     ngOnChanges() {
         var _a, _b;
-        if (this.creatingTicket) {
-            switch (this.service.locale) {
-                case 'Français':
-                    this.creatingMsg = 'Le ticket est en cours de création, merci de patienter ...';
-                    break;
-                case 'Anglais':
-                    this.creatingMsg = 'The ticket is creating, plase be patient ...';
-                    break;
-            }
-        }
         let t = setInterval(() => {
             if (document.querySelectorAll('.bot-answer')) {
                 let elems = document.querySelectorAll('.bot-answer');
@@ -537,21 +525,6 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.botListening = this.botListeningTimer > 0;
             }
         }, 500);
-    }
-    ngAfterInit() {
-        const elementFocus = document.querySelector('.k-event');
-        if (window.addEventListener && elementFocus) {
-            elementFocus.addEventListener('DOMSubtreeModified', ($event) => {
-                let buttonCreate = document.querySelector('.bot-button > a');
-                if (buttonCreate) {
-                    buttonCreate = buttonCreate.closest('.bot-button');
-                    buttonCreate.addEventListener("click", ($event) => {
-                        console.log('creation ticket');
-                        this.creatingTicket = true;
-                    });
-                }
-            });
-        }
     }
     userWriting(key) {
         if (key.code == 'Enter') {
