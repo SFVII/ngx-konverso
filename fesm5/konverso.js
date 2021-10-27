@@ -209,6 +209,7 @@ var KonversoComponent = /** @class */ (function () {
         this.service = service;
         this._ready = new EventEmitter();
         this.ready = new EventEmitter();
+        this.sended = new EventEmitter();
         this.AssistantMode = false;
         this.disableUserInput = false;
         if (service._auth) {
@@ -257,6 +258,7 @@ var KonversoComponent = /** @class */ (function () {
                             this.sendBotCommand('exit', false).catch(function (err) { return console.log('fail reset session'); });
                             return [2 /*return*/, false];
                         }
+                        this.sended.emit(true);
                         this.LastBotAnswer.text = '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
                         this.History.push($event);
                         if (this.AssistantMode) {
@@ -364,6 +366,9 @@ var KonversoComponent = /** @class */ (function () {
     __decorate([
         Output()
     ], KonversoComponent.prototype, "ready", void 0);
+    __decorate([
+        Output()
+    ], KonversoComponent.prototype, "sended", void 0);
     KonversoComponent = __decorate([
         Component({
             selector: 'ngx-konverso',
