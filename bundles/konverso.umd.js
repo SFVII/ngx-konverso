@@ -518,6 +518,7 @@
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
+                            console.log($event);
                             this.LastBotAnswer.text = '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
                             if ($event === 'yes_response' || $event === 'no_response' || $event == 'exit') {
                                 this.LastUserInput = null;
