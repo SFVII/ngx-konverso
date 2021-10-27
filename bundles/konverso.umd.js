@@ -807,7 +807,7 @@
         };
         DesktopFullScreenComponent.prototype._send = function () {
             var _a;
-            if ((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.endOfTopic) {
+            if (((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.endOfTopic) && this.LastUserInput) {
                 this.LastUserInput.message = '';
             }
             this.botListening = false;
