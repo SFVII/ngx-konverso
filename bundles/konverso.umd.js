@@ -519,7 +519,7 @@
                     switch (_a.label) {
                         case 0:
                             this.LastBotAnswer.text = '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
-                            if ($event === 'yes_response' || $event === 'no_response') {
+                            if ($event === 'yes_response' || $event === 'no_response' || $event == 'exit') {
                                 this.LastUserInput = null;
                             }
                             return [4 /*yield*/, this.service.send($event).catch(function (err) {

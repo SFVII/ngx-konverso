@@ -273,7 +273,7 @@ let KonversoComponent = class KonversoComponent {
     sendBotCommand($event, push = true) {
         return __awaiter(this, void 0, void 0, function* () {
             this.LastBotAnswer.text = '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
-            if ($event === 'yes_response' || $event === 'no_response') {
+            if ($event === 'yes_response' || $event === 'no_response' || $event == 'exit') {
                 this.LastUserInput = null;
             }
             const response = yield this.service.send($event).catch((err) => {
