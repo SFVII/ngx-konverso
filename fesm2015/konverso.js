@@ -233,7 +233,6 @@ let KonversoComponent = class KonversoComponent {
     }
     send($event) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log($event.message);
             if ($event.message === 'exit') {
                 this.sendBotCommand('exit', false).catch((err) => console.log('fail reset session'));
                 return false;
@@ -420,7 +419,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
             document.getElementById('text').innerHTML = '';
         }
-        console.log(this.LastBotAnswer);
+        //console.log(this.LastBotAnswer);
         if (!this.anim_done) {
             let t2 = setInterval(() => {
                 var _a, _b;

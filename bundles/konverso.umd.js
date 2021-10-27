@@ -469,7 +469,6 @@
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
-                            console.log($event.message);
                             if ($event.message === 'exit') {
                                 this.sendBotCommand('exit', false).catch(function (err) { return console.log('fail reset session'); });
                                 return [2 /*return*/, false];
@@ -675,7 +674,7 @@
             if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
                 document.getElementById('text').innerHTML = '';
             }
-            console.log(this.LastBotAnswer);
+            //console.log(this.LastBotAnswer);
             if (!this.anim_done) {
                 var t2_1 = setInterval(function () {
                     var _a, _b;
