@@ -233,6 +233,7 @@ let KonversoComponent = class KonversoComponent {
     }
     send($event) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log($event.message);
             if ($event.message === 'exit') {
                 this.sendBotCommand('exit', false).catch((err) => console.log('fail reset session'));
                 return false;
@@ -272,7 +273,6 @@ let KonversoComponent = class KonversoComponent {
     }
     sendBotCommand($event, push = true) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log($event);
             this.LastBotAnswer.text = '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
             if ($event === 'yes_response' || $event === 'no_response' || $event == 'exit') {
                 this.LastUserInput = null;
