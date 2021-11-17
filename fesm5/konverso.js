@@ -18,6 +18,7 @@ var KonversoService = /** @class */ (function () {
         // tslint:disable-next-line:variable-name
         this._token = this.token.asObservable();
         this.lang = new BehaviorSubject('');
+        this.customData = new BehaviorSubject(null);
         this.buildHeaders();
         this.initInstance(config);
     }
@@ -159,7 +160,8 @@ var KonversoService = /** @class */ (function () {
      */
     KonversoService.prototype.buildQuery = function (query) {
         // @ts-ignore
-        return __assign(__assign({}, this.user), { query: query.replace(/\s+/g, ' ').trim(), isSending: true });
+        var custom = this.customData.getValue();
+        return __assign(__assign(__assign({}, custom), this.user), { query: query.replace(/\s+/g, ' ').trim(), isSending: true });
     };
     /**
      * @private

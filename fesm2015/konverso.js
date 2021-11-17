@@ -18,6 +18,7 @@ let KonversoService = class KonversoService {
         // tslint:disable-next-line:variable-name
         this._token = this.token.asObservable();
         this.lang = new BehaviorSubject('');
+        this.customData = new BehaviorSubject(null);
         this.buildHeaders();
         this.initInstance(config);
     }
@@ -143,7 +144,8 @@ let KonversoService = class KonversoService {
      */
     buildQuery(query) {
         // @ts-ignore
-        return Object.assign(Object.assign({}, this.user), { query: query.replace(/\s+/g, ' ').trim(), isSending: true });
+        const custom = this.customData.getValue();
+        return Object.assign(Object.assign(Object.assign({}, custom), this.user), { query: query.replace(/\s+/g, ' ').trim(), isSending: true });
     }
     /**
      * @private

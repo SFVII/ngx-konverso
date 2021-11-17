@@ -21,6 +21,9 @@ export declare class KonversoService {
     private endpoint;
     _auth: boolean;
     lang: BehaviorSubject<string>;
+    customData: BehaviorSubject<{
+        [key: string]: any;
+    }>;
     constructor(config: KonversoInterface, http: HttpClient);
     /**
      * Send Query To backend server and get a response
