@@ -61,7 +61,7 @@ class KonversoService {
                 console.log('error trigger emulation', err);
             });
             if (response) {
-                this.emulationTrigger.next(response);
+                this.emulationTrigger.next(Object.assign({ input: query }, response));
             }
         });
     }
@@ -1052,6 +1052,8 @@ class KonversoComponent {
         }
         this.service.emulationTrigger.subscribe((response) => {
             if (response) {
+                this.LastUserInput.message += ' ' + response.input;
+                this.LastUserInput.date = new Date().toISOString();
                 this.triggerKbotResponse(response);
             }
         });

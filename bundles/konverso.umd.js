@@ -285,7 +285,7 @@
                         case 1:
                             response = _a.sent();
                             if (response) {
-                                this.emulationTrigger.next(response);
+                                this.emulationTrigger.next(__assign({ input: query }, response));
                             }
                             return [2 /*return*/];
                     }
@@ -1324,6 +1324,8 @@
             }
             this.service.emulationTrigger.subscribe(function (response) {
                 if (response) {
+                    _this.LastUserInput.message += ' ' + response.input;
+                    _this.LastUserInput.date = new Date().toISOString();
                     _this.triggerKbotResponse(response);
                 }
             });

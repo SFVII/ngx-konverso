@@ -1,4 +1,4 @@
-import { __awaiter, __generator, __values, __assign } from 'tslib';
+import { __awaiter, __generator, __assign, __values } from 'tslib';
 import { EventEmitter, ɵɵinject, ɵɵdefineInjectable, ɵsetClassMetadata, Injectable, Inject, ɵɵdirectiveInject, ɵɵdefinePipe, Pipe, ɵɵgetCurrentView, ɵɵelementStart, ɵɵlistener, ɵɵrestoreView, ɵɵnextContext, ɵɵelementEnd, ɵɵstyleMap, ɵɵpureFunction2, ɵɵdefineComponent, ɵɵelementContainerStart, ɵɵelement, ɵɵpipe, ɵɵtemplate, ɵɵtext, ɵɵelementContainerEnd, ɵɵadvance, ɵɵproperty, ɵɵpipeBind1, ɵɵsanitizeHtml, ɵɵpureFunction1, ɵɵtextInterpolate, Component, Input, Output, ɵɵtextInterpolate1, ɵɵelementContainer, ɵɵpureFunction0, ɵɵreference, ɵɵsanitizeUrl, ɵɵNgOnChangesFeature, ɵɵclassMap, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
@@ -69,7 +69,7 @@ var KonversoService = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         if (response) {
-                            this.emulationTrigger.next(response);
+                            this.emulationTrigger.next(__assign({ input: query }, response));
                         }
                         return [2 /*return*/];
                 }
@@ -1108,6 +1108,8 @@ var KonversoComponent = /** @class */ (function () {
         }
         this.service.emulationTrigger.subscribe(function (response) {
             if (response) {
+                _this.LastUserInput.message += ' ' + response.input;
+                _this.LastUserInput.date = new Date().toISOString();
                 _this.triggerKbotResponse(response);
             }
         });
