@@ -2,6 +2,7 @@ import { EventEmitter } from '@angular/core';
 import { ColorSet, DefaultAssets, KonversoInterface, KonversoUser } from '../interface/KonversoInterface';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import * as i0 from "@angular/core";
 export declare class KonversoService {
     private http;
     authentication: EventEmitter<KonversoUser>;
@@ -24,12 +25,18 @@ export declare class KonversoService {
     customData: BehaviorSubject<{
         [key: string]: any;
     }>;
+    emulationTrigger: BehaviorSubject<any>;
     constructor(config: KonversoInterface, http: HttpClient);
     /**
      * Send Query To backend server and get a response
      * @param query
      */
     send(query: string): Promise<string | any>;
+    /**
+     * Emulate user entry Query To backend server and get a response
+     * @param query
+     */
+    sendTriggerEmulation(query: string): Promise<void>;
     /**
      * @private
      * Generate Header for backend call
@@ -52,4 +59,6 @@ export declare class KonversoService {
      * Generate Random uniq Id for Konverso Instance
      */
     private guid;
+    static ɵfac: i0.ɵɵFactoryDef<KonversoService>;
+    static ɵprov: i0.ɵɵInjectableDef<KonversoService>;
 }
