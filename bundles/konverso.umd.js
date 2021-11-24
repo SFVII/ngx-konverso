@@ -1324,6 +1324,13 @@
             }
             this.service.emulationTrigger.subscribe(function (response) {
                 if (response) {
+                    if (!_this.LastUserInput) {
+                        _this.LastUserInput = {
+                            message: '',
+                            date: '',
+                            error: null
+                        };
+                    }
                     _this.LastUserInput.message += ' ' + response.input;
                     _this.LastUserInput.date = new Date().toISOString();
                     _this.triggerKbotResponse(response);
