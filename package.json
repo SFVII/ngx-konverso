@@ -2,8 +2,8 @@
   "name": "konverso",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "~9.0.7",
-    "@angular/core": "~9.0.7"
+    "@angular/common": ">=9.0.7",
+    "@angular/core": ">=9.0.7"
   },
   "dependencies": {
     "@pixi/filter-kawase-blur": "^4.1.3",
