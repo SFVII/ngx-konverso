@@ -420,14 +420,14 @@
         KonversoService.prototype.buildHeaders = function () {
             var _this = this;
             this._token.subscribe(function (token) {
-                if (token) {
-                    var bearer = 'Bearer ' + token;
-                    _this.header = new http.HttpHeaders({
-                        //'Content-Type': 'application/json',
-                        // 'Access-Control-Allow-Origin': window.location.origin,
-                        'Authorization': bearer
-                    });
-                }
+                //if (token) {
+                var bearer = 'Bearer ' + token;
+                _this.header = new http.HttpHeaders({
+                //'Content-Type': 'application/json',
+                // 'Access-Control-Allow-Origin': window.location.origin,
+                //   'Authorization': bearer
+                });
+                //}
             });
         };
         /**

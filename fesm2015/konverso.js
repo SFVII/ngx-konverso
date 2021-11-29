@@ -80,14 +80,14 @@ class KonversoService {
      */
     buildHeaders() {
         this._token.subscribe((token) => {
-            if (token) {
-                const bearer = 'Bearer ' + token;
-                this.header = new HttpHeaders({
-                    //'Content-Type': 'application/json',
-                    // 'Access-Control-Allow-Origin': window.location.origin,
-                    'Authorization': bearer
-                });
-            }
+            //if (token) {
+            const bearer = 'Bearer ' + token;
+            this.header = new HttpHeaders({
+            //'Content-Type': 'application/json',
+            // 'Access-Control-Allow-Origin': window.location.origin,
+            //   'Authorization': bearer
+            });
+            //}
         });
     }
     /**
