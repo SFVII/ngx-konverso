@@ -31,27 +31,27 @@ export interface BotInitMessage {
     Welcome?: WildCardObject;
 }
 export interface ColorSet {
-    Primary?: string;
-    Secondary?: string;
-    Default?: string;
+    Primary?: string | null | undefined;
+    Secondary?: string | null | undefined;
+    Default?: string | null | undefined;
 }
 /**
  * Default Assets
  */
 export interface DefaultAssets {
-    FullSizeLogo?: string;
-    SmallSizeLogo?: string;
-    Background?: string;
+    FullSizeLogo?: string | null | undefined;
+    SmallSizeLogo?: string | null | undefined;
+    Background?: string | null | undefined;
     ColorSet?: ColorSet;
 }
 /**
  * Interface setting forRoot Konverso
  */
 export interface KonversoInterface {
-    endpoint: string;
-    token?: string;
+    endpoint: string | null | undefined;
+    token?: string | null | undefined;
     auth?: boolean;
-    lang?: string;
+    lang?: string | null | undefined;
     CustomWelcome?: boolean;
     defaultAssets?: DefaultAssets;
     BotInitMessage?: BotInitMessage;
@@ -60,16 +60,16 @@ export interface KonversoInterface {
 }
 /**
  *  Inteface setting for authentication
- *  @userId: string;  // unique user ID (any type of format accepted)
- *  @lang: string; // 2 digits language used (like "fr", "en", etc.)
- *  @location?: string; // simple address string
+ *  @userId: string | null  | undefined;  // unique user ID (any type of format accepted)
+ *  @lang: string | null  | undefined; // 2 digits language used (like "fr", "en", etc.)
+ *  @location?: string | null  | undefined; // simple address string
  *  @firstVisit?:boolean; // enable first visite message if is set to true
- *  @[index: string]: string; // All other stuff put here for bot knowledge;
+ *  @[index: string]: string | null  | undefined; // All other stuff put here for bot knowledge;
  */
 export interface KonversoUser {
-    userId: string;
-    lang: string;
-    location?: string;
+    userId: string | null | undefined;
+    lang: string | null | undefined;
+    location?: string | null | undefined;
     firstVisit?: any;
     [index: string]: any;
 }
@@ -77,9 +77,9 @@ export interface KonversoUser {
  *  Inteface Query Konverso
  */
 export interface KonversoQuery {
-    userId: string;
-    lang: string;
-    query: string;
+    userId: string | null | undefined;
+    lang: string | null | undefined;
+    query: string | null | undefined;
     isSending: true;
     [index: string]: any;
 }
@@ -89,7 +89,7 @@ export interface KonversoQuery {
  */
 interface OpenChatBotChannelPayload {
     type: ('html' | 'plainText');
-    payload: string;
+    payload: string | null | undefined;
 }
 interface OpenChatBotChannel {
     markup: OpenChatBotChannelPayload;
@@ -98,35 +98,35 @@ interface OpenChatBotChannel {
     tts: OpenChatBotChannelPayload;
 }
 interface OpenChatBotAction {
-    type: string;
-    label?: string;
-    payload?: string;
+    type: string | null | undefined;
+    label?: string | null | undefined;
+    payload?: string | null | undefined;
     value?: {
-        onClick?: string;
-        title?: string;
-        displayedMessage: string;
+        onClick?: string | null | undefined;
+        title?: string | null | undefined;
+        displayedMessage: string | null | undefined;
     };
 }
 interface OpenChatBotMedia {
-    shortDesc: string;
-    longDesc: string;
-    title: string;
-    mimeType: string;
-    src: string;
+    shortDesc: string | null | undefined;
+    longDesc: string | null | undefined;
+    title: string | null | undefined;
+    mimeType: string | null | undefined;
+    src: string | null | undefined;
     required_actions: OpenChatBotAction[];
     suggested_actions: OpenChatBotAction[];
     default_actions: OpenChatBotAction;
     buttons: OpenChatBotAction[];
 }
 interface WildCardObject {
-    [index: string]: string;
+    [index: string]: string | null | undefined;
 }
 export interface OpenChatBotResponse {
-    query?: string;
-    userId?: string;
+    query?: string | null | undefined;
+    userId?: string | null | undefined;
     timestamp?: number;
-    text?: string;
-    infoURL?: string;
+    text?: string | null | undefined;
+    infoURL?: string | null | undefined;
     echo?: {
         session: string;
     };
@@ -141,9 +141,9 @@ export interface OpenChatBotResponse {
 }
 interface OpenChatBotMeta {
     version: number;
-    botIcon: string;
-    botName: string;
-    copyright: string;
+    botIcon: string | null | undefined;
+    botName: string | null | undefined;
+    copyright: string | null | undefined;
     authors: string[];
 }
 interface OpenChatBotStatus {
@@ -156,8 +156,8 @@ export interface KonversoAnswer {
     status: OpenChatBotStatus;
 }
 export interface UserInput {
-    message: string;
-    date: string;
-    error?: boolean;
+    message: string | null | undefined;
+    date: string | null | undefined;
+    error?: boolean | null;
 }
 export {};
