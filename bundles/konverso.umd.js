@@ -29,14 +29,13 @@
         }
         return KonversoService;
     }());
-    KonversoService.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: KonversoService, deps: [], target: i0__namespace.ɵɵFactoryTarget.Injectable });
-    KonversoService.ɵprov = i0__namespace.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: KonversoService, providedIn: 'root' });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: KonversoService, decorators: [{
-                type: i0.Injectable,
-                args: [{
-                        providedIn: 'root'
-                    }]
-            }], ctorParameters: function () { return []; } });
+    KonversoService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function KonversoService_Factory() { return new KonversoService(); }, token: KonversoService, providedIn: "root" });
+    KonversoService.decorators = [
+        { type: i0.Injectable, args: [{
+                    providedIn: 'root'
+                },] }
+    ];
+    KonversoService.ctorParameters = function () { return []; };
 
     var KonversoComponent = /** @class */ (function () {
         function KonversoComponent() {
@@ -45,37 +44,30 @@
         };
         return KonversoComponent;
     }());
-    KonversoComponent.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: KonversoComponent, deps: [], target: i0__namespace.ɵɵFactoryTarget.Component });
-    KonversoComponent.ɵcmp = i0__namespace.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "12.2.13", type: KonversoComponent, selector: "lib-konverso", ngImport: i0__namespace, template: "\n    <p>\n      konverso works!\n    </p>\n  ", isInline: true });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: KonversoComponent, decorators: [{
-                type: i0.Component,
-                args: [{
-                        selector: 'lib-konverso',
-                        template: "\n    <p>\n      konverso works!\n    </p>\n  ",
-                        styles: []
-                    }]
-            }], ctorParameters: function () { return []; } });
+    KonversoComponent.decorators = [
+        { type: i0.Component, args: [{
+                    selector: 'lib-konverso',
+                    template: "\n    <p>\n      konverso works!\n    </p>\n  "
+                },] }
+    ];
+    KonversoComponent.ctorParameters = function () { return []; };
 
     var KonversoModule = /** @class */ (function () {
         function KonversoModule() {
         }
         return KonversoModule;
     }());
-    KonversoModule.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: KonversoModule, deps: [], target: i0__namespace.ɵɵFactoryTarget.NgModule });
-    KonversoModule.ɵmod = i0__namespace.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: KonversoModule, declarations: [KonversoComponent], exports: [KonversoComponent] });
-    KonversoModule.ɵinj = i0__namespace.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: KonversoModule, imports: [[]] });
-    i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.13", ngImport: i0__namespace, type: KonversoModule, decorators: [{
-                type: i0.NgModule,
-                args: [{
-                        declarations: [
-                            KonversoComponent
-                        ],
-                        imports: [],
-                        exports: [
-                            KonversoComponent
-                        ]
-                    }]
-            }] });
+    KonversoModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    declarations: [
+                        KonversoComponent
+                    ],
+                    imports: [],
+                    exports: [
+                        KonversoComponent
+                    ]
+                },] }
+    ];
 
     /*
      * Public API Surface of konverso

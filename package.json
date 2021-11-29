@@ -18,5 +18,6 @@
   "esm2015": "esm2015/konverso.js",
   "fesm2015": "fesm2015/konverso.js",
   "typings": "konverso.d.ts",
+  "metadata": "konverso.metadata.json",
   "sideEffects": false
 }
