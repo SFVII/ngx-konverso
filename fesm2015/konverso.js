@@ -231,6 +231,7 @@ class KonversoComponent {
         this.ready = new EventEmitter();
         this.sended = new EventEmitter();
         this.AssistantMode = false;
+        this.History = [];
         this.disableUserInput = false;
         if (service._auth) {
             this.service.authentication.subscribe(() => {

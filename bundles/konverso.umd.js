@@ -581,6 +581,7 @@
             this.ready = new i0.EventEmitter();
             this.sended = new i0.EventEmitter();
             this.AssistantMode = false;
+            this.History = [];
             this.disableUserInput = false;
             if (service._auth) {
                 this.service.authentication.subscribe(function () {
