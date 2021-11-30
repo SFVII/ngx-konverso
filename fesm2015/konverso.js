@@ -223,6 +223,13 @@ let KonversoComponent = class KonversoComponent {
         this.service.emulationTrigger.subscribe((response) => {
             console.log(response);
             if (response) {
+                if (!this.LastUserInput) {
+                    this.LastUserInput = {
+                        message: '',
+                        date: '',
+                        error: null
+                    };
+                }
                 this.LastUserInput.message += ' ' + response.input;
                 this.LastUserInput.date = new Date().toISOString();
                 this.triggerKbotResponse(response);
