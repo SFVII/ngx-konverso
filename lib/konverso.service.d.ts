@@ -24,12 +24,18 @@ export declare class KonversoService {
     customData: BehaviorSubject<{
         [key: string]: any;
     }>;
+    emulationTrigger: BehaviorSubject<any>;
     constructor(config: KonversoInterface, http: HttpClient);
     /**
      * Send Query To backend server and get a response
      * @param query
      */
     send(query: string): Promise<string | any>;
+    /**
+     * Emulate user entry Query To backend server and get a response
+     * @param query
+     */
+    sendTriggerEmulation(query: string): Promise<void>;
     /**
      * @private
      * Generate Header for backend call
