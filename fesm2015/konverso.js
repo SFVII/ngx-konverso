@@ -258,7 +258,7 @@ let KonversoComponent = class KonversoComponent {
         this.AssistantMode = this.service.AssistantMode;
         this.PlaceHolder = this.service.PlaceHolder;
         this.Welcome = this.service.Welcome;
-        //this.sendBotCommand('exit', false).catch((err: any) => console.log('fail reset session'));
+        this.sendBotCommand('exit', false).catch((err) => console.log('fail reset session'));
         this.History = [];
         if (this.service.ColorSet) {
             this.colorSet = this.service.ColorSet;
