@@ -2,7 +2,7 @@ import { __awaiter, __generator, __assign, __values, __decorate, __param } from 
 import { EventEmitter, Inject, Injectable, Output, Component, ɵɵdefineInjectable, Input, Pipe, Optional, SkipSelf, NgModule } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { render } from 'mustache';
+import mustache from 'mustache';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -123,7 +123,7 @@ var KonversoService = /** @class */ (function () {
                         _this.PlaceHolder = config.InputPlaceHolder[_this.locale];
                     }
                     if (config.CustomWelcome && config.BotInitMessage.Welcome && config.BotInitMessage.Welcome[_this.locale]) {
-                        _this.Welcome = render(config.BotInitMessage.Welcome[_this.locale], user);
+                        _this.Welcome = mustache.render(config.BotInitMessage.Welcome[_this.locale], user);
                     }
                     if ((_c = user) === null || _c === void 0 ? void 0 : _c.token) {
                         _this.token.next((_d = user) === null || _d === void 0 ? void 0 : _d.token);
@@ -137,7 +137,7 @@ var KonversoService = /** @class */ (function () {
                             try {
                                 for (var _k = __values(config.BotInitMessage.FirstUsage[_this.locale]), _l = _k.next(); !_l.done; _l = _k.next()) {
                                     var history_1 = _l.value;
-                                    _this.firstUsageStory.push(render(history_1, user));
+                                    _this.firstUsageStory.push(mustache.render(history_1, user));
                                 }
                             }
                             catch (e_1_1) { e_1 = { error: e_1_1 }; }

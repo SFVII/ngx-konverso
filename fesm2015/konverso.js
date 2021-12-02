@@ -2,7 +2,7 @@ import { __awaiter, __decorate, __param } from 'tslib';
 import { EventEmitter, Inject, Injectable, Output, Component, ɵɵdefineInjectable, Input, Pipe, Optional, SkipSelf, NgModule } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { render } from 'mustache';
+import mustache from 'mustache';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -109,7 +109,7 @@ let KonversoService = class KonversoService {
                         this.PlaceHolder = config.InputPlaceHolder[this.locale];
                     }
                     if (config.CustomWelcome && config.BotInitMessage.Welcome && config.BotInitMessage.Welcome[this.locale]) {
-                        this.Welcome = render(config.BotInitMessage.Welcome[this.locale], user);
+                        this.Welcome = mustache.render(config.BotInitMessage.Welcome[this.locale], user);
                     }
                     if ((_b = user) === null || _b === void 0 ? void 0 : _b.token) {
                         this.token.next((_c = user) === null || _c === void 0 ? void 0 : _c.token);
@@ -121,7 +121,7 @@ let KonversoService = class KonversoService {
                             this.locale && ((_h = (_g = config) === null || _g === void 0 ? void 0 : _g.BotInitMessage) === null || _h === void 0 ? void 0 : _h.FirstUsage[this.locale])) {
                             this.firstUsageStory = [];
                             for (const history of config.BotInitMessage.FirstUsage[this.locale]) {
-                                this.firstUsageStory.push(render(history, user));
+                                this.firstUsageStory.push(mustache.render(history, user));
                             }
                         }
                     }

@@ -4,6 +4,8 @@
     (global = global || self, factory(global.konverso = {}, global.ng.core, global.ng.common.http, global.rxjs, global.mustache, global.ng.forms, global.ng.common, global.ng.platformBrowser));
 }(this, (function (exports, core, http, rxjs, mustache, forms, common, platformBrowser) { 'use strict';
 
+    mustache = mustache && Object.prototype.hasOwnProperty.call(mustache, 'default') ? mustache['default'] : mustache;
+
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
 
