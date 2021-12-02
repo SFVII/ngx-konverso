@@ -2,11 +2,12 @@ import { __awaiter, __generator, __assign, __values, __decorate, __param } from 
 import { EventEmitter, Inject, Injectable, Output, Component, ɵɵdefineInjectable, Input, Pipe, Optional, SkipSelf, NgModule } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { render } from 'mustache';
+import { render as render$1 } from 'mustache';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 
+var render = render$1;
 var KonversoService = /** @class */ (function () {
     function KonversoService(config, http) {
         this.http = http;
@@ -14,12 +15,12 @@ var KonversoService = /** @class */ (function () {
         this.firstVisit = false;
         this.AssistantMode = false;
         this.readyState = false;
-        this.token = new BehaviorSubject(null);
-        // tslint:disable-next-line:variable-name
-        this._token = this.token.asObservable();
         this.lang = new BehaviorSubject('');
         this.customData = new BehaviorSubject(null);
         this.emulationTrigger = new BehaviorSubject(null);
+        this.token = new BehaviorSubject(null);
+        // tslint:disable-next-line:variable-name
+        this._token = this.token.asObservable();
         this.buildHeaders();
         this.initInstance(config);
     }

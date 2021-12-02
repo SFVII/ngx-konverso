@@ -4,7 +4,8 @@
   "peerDependencies": {
     "@angular/common": ">=9.0.7",
     "@angular/core": ">=9.0.7",
-    "mustache": ">=4.2.0"
+    "mustache": "4.2.0",
+    "@types/mustache": "4.1.1"
   },
   "dependencies": {
     "@pixi/filter-kawase-blur": "^4.1.3",

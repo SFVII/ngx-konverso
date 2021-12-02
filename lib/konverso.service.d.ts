@@ -14,17 +14,17 @@ export declare class KonversoService {
     Welcome: string;
     readyState: boolean;
     locale: string;
-    private token;
-    private _token;
-    private user;
-    private header;
-    private endpoint;
     _auth: boolean;
     lang: BehaviorSubject<string>;
     customData: BehaviorSubject<{
         [key: string]: any;
     }>;
     emulationTrigger: BehaviorSubject<any>;
+    private token;
+    private _token;
+    private user;
+    private header;
+    private endpoint;
     constructor(config: KonversoInterface, http: HttpClient);
     /**
      * Send Query To backend server and get a response

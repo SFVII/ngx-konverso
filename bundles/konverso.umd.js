@@ -223,6 +223,7 @@
         return value;
     }
 
+    var render = mustache.render;
     var KonversoService = /** @class */ (function () {
         function KonversoService(config, http) {
             this.http = http;
@@ -230,12 +231,12 @@
             this.firstVisit = false;
             this.AssistantMode = false;
             this.readyState = false;
-            this.token = new rxjs.BehaviorSubject(null);
-            // tslint:disable-next-line:variable-name
-            this._token = this.token.asObservable();
             this.lang = new rxjs.BehaviorSubject('');
             this.customData = new rxjs.BehaviorSubject(null);
             this.emulationTrigger = new rxjs.BehaviorSubject(null);
+            this.token = new rxjs.BehaviorSubject(null);
+            // tslint:disable-next-line:variable-name
+            this._token = this.token.asObservable();
             this.buildHeaders();
             this.initInstance(config);
         }
@@ -339,7 +340,7 @@
                             _this.PlaceHolder = config.InputPlaceHolder[_this.locale];
                         }
                         if (config.CustomWelcome && config.BotInitMessage.Welcome && config.BotInitMessage.Welcome[_this.locale]) {
-                            _this.Welcome = mustache.render(config.BotInitMessage.Welcome[_this.locale], user);
+                            _this.Welcome = render(config.BotInitMessage.Welcome[_this.locale], user);
                         }
                         if ((_c = user) === null || _c === void 0 ? void 0 : _c.token) {
                             _this.token.next((_d = user) === null || _d === void 0 ? void 0 : _d.token);
@@ -353,7 +354,7 @@
                                 try {
                                     for (var _k = __values(config.BotInitMessage.FirstUsage[_this.locale]), _l = _k.next(); !_l.done; _l = _k.next()) {
                                         var history_1 = _l.value;
-                                        _this.firstUsageStory.push(mustache.render(history_1, user));
+                                        _this.firstUsageStory.push(render(history_1, user));
                                     }
                                 }
                                 catch (e_1_1) { e_1 = { error: e_1_1 }; }
