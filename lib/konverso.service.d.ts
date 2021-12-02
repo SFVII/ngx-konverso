@@ -2,6 +2,7 @@ import { EventEmitter } from '@angular/core';
 import { ColorSet, DefaultAssets, KonversoInterface, KonversoUser } from '../interface/KonversoInterface';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import * as i0 from "@angular/core";
 export declare class KonversoService {
     private http;
     authentication: EventEmitter<KonversoUser>;
@@ -58,4 +59,6 @@ export declare class KonversoService {
      * Generate Random uniq Id for Konverso Instance
      */
     private guid;
+    static ɵfac: i0.ɵɵFactoryDef<KonversoService>;
+    static ɵprov: i0.ɵɵInjectableDef<KonversoService>;
 }
