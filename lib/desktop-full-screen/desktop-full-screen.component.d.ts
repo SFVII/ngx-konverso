@@ -15,6 +15,7 @@ export declare class DesktopFullScreenComponent implements OnChanges, OnInit {
     PlaceHolder: string[];
     IsMobile: boolean;
     showInput: boolean;
+    mailToBotMsg: '';
     readySend: EventEmitter<boolean>;
     send: EventEmitter<UserInput>;
     sendBotCommand: EventEmitter<string>;
