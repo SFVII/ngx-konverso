@@ -700,6 +700,7 @@
   -moz-animation: fadeinanswer 0.7s ease-in 0.2s both !important; /* Firefox */
   -webkit-animation: fadeinanswer 0.7s ease-in 0.2s both !important; /* Safari and Chrome */
   -o-animation: fadeinanswer 0.7s ease-in 0.2s both !important; /* Opera */
+  display: block;
 
   p {
     animation: fadeinanswer 0.7s ease-in 0.2s both !important;
