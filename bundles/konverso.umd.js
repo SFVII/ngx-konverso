@@ -1067,7 +1067,7 @@
         }
         DesktopFullScreenComponent.prototype.ngOnChanges = function () {
             var _this = this;
-            var _a, _b;
+            var _a, _b, _c, _d, _e, _f;
             var t = setInterval(function () {
                 if (document.querySelectorAll('.bot-answer')) {
                     var elems = document.querySelectorAll('.bot-answer');
@@ -1091,8 +1091,8 @@
             if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes('loading-dots'))) {
                 document.getElementById('text').innerHTML = '';
             }
-            console.log('-------> enter', document.querySelector('.bot-answer number'));
-            if (document.querySelector('.bot-answer number')) {
+            console.log('-------> enter', ((_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.includes('<number>')) && ((_c = this.LastBotAnswer) === null || _c === void 0 ? void 0 : _c.text.includes('</number>')));
+            if (((_d = this.LastBotAnswer) === null || _d === void 0 ? void 0 : _d.text.includes('<number>')) && ((_e = this.LastBotAnswer) === null || _e === void 0 ? void 0 : _e.text.includes('</number>'))) {
                 this.inputType = 'number';
                 this.inputLimit = 999;
                 this.currentPlaceHolder = this.NumberPlaceHolder[Math.floor(Math.random() * this.NumberPlaceHolder.length)];
@@ -1121,7 +1121,7 @@
                 }, 100);
             }
             else {
-                var string = (_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(" ").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
+                var string = (_f = this.LastBotAnswer) === null || _f === void 0 ? void 0 : _f.text.split('<br/>').join(" ").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
                 this.msgArray = string.split('');
                 if (this.messageCurrent !== string && string !== '') {
                     this.newMessage = true;
