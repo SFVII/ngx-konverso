@@ -317,8 +317,8 @@ var KonversoComponent = /** @class */ (function () {
                         if (parseInt($event.message) == NaN) {
                             this.History.push($event);
                         }
-                        if (this.AssistantMode) {
-                            if (this.LastUserInput && parseInt($event.message) == NaN) {
+                        if (this.AssistantMode && parseInt($event.message) == NaN) {
+                            if (this.LastUserInput) {
                                 this.LastUserInput.message += ' ' + $event.message;
                                 this.LastUserInput.date = $event.date;
                             }
