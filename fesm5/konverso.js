@@ -317,17 +317,19 @@ var KonversoComponent = /** @class */ (function () {
                         if (parseInt($event.message) == NaN) {
                             this.History.push($event);
                         }
-                        if (this.AssistantMode && parseInt($event.message) == NaN) {
-                            if (this.LastUserInput) {
-                                this.LastUserInput.message += ' ' + $event.message;
-                                this.LastUserInput.date = $event.date;
+                        if (parseInt($event.message) == NaN) {
+                            if (this.AssistantMode) {
+                                if (this.LastUserInput) {
+                                    this.LastUserInput.message += ' ' + $event.message;
+                                    this.LastUserInput.date = $event.date;
+                                }
+                                else {
+                                    this.LastUserInput = $event;
+                                }
                             }
                             else {
                                 this.LastUserInput = $event;
                             }
-                        }
-                        else {
-                            this.LastUserInput = $event;
                         }
                         index = this.History.length - 1;
                         return [4 /*yield*/, this.service.send($event.message).catch(function (err) {
