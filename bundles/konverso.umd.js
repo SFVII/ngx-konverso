@@ -530,7 +530,9 @@
                             }
                             this.sended.emit(true);
                             this.LastBotAnswer.text = '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
-                            this.History.push($event);
+                            if (parseInt($event.message) == NaN) {
+                                this.History.push($event);
+                            }
                             if (this.AssistantMode) {
                                 if (this.LastUserInput) {
                                     this.LastUserInput.message += ' ' + $event.message;
