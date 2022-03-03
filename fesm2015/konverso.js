@@ -280,6 +280,7 @@ let KonversoComponent = class KonversoComponent {
     }
     send($event) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log($event.message);
             if ($event.message === 'exit') {
                 this.sendBotCommand('exit', false).catch((err) => console.log('fail reset session'));
                 return false;

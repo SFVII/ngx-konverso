@@ -308,6 +308,7 @@ var KonversoComponent = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        console.log($event.message);
                         if ($event.message === 'exit') {
                             this.sendBotCommand('exit', false).catch(function (err) { return console.log('fail reset session'); });
                             return [2 /*return*/, false];
