@@ -289,17 +289,21 @@ let KonversoComponent = class KonversoComponent {
             if (parseInt($event.message) == NaN) {
                 this.History.push($event);
             }
-            if (parseInt($event.message) == NaN) {
-                if (this.AssistantMode) {
-                    if (this.LastUserInput) {
+            if (this.AssistantMode) {
+                if (this.LastUserInput) {
+                    if (parseInt($event.message) == NaN) {
                         this.LastUserInput.message += ' ' + $event.message;
                         this.LastUserInput.date = $event.date;
                     }
-                    else {
+                }
+                else {
+                    if (parseInt($event.message) == NaN) {
                         this.LastUserInput = $event;
                     }
                 }
-                else {
+            }
+            else {
+                if (parseInt($event.message) == NaN) {
                     this.LastUserInput = $event;
                 }
             }
