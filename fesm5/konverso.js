@@ -876,7 +876,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
             document.getElementById('text').innerHTML = '';
         }
         var displayZone = document.querySelector('.bot-answer');
-        if (displayZone.querySelector('number')) {
+        if (displayZone && displayZone.querySelector('number')) {
             this.inputType = 'number';
             this.inputLimit = 999;
             this.currentPlaceHolder = this.NumberPlaceHolder[Math.floor(Math.random() * this.NumberPlaceHolder.length)];
