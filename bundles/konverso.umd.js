@@ -524,7 +524,6 @@
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
-                            console.log($event.message);
                             if ($event.message === 'exit') {
                                 this.sendBotCommand('exit', false).catch(function (err) { return console.log('fail reset session'); });
                                 return [2 /*return*/, false];
@@ -535,7 +534,7 @@
                                 this.History.push($event);
                             }
                             if (this.AssistantMode) {
-                                if (this.LastUserInput) {
+                                if (this.LastUserInput && parseInt($event.message) == NaN) {
                                     this.LastUserInput.message += ' ' + $event.message;
                                     this.LastUserInput.date = $event.date;
                                 }

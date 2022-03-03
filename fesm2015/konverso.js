@@ -280,7 +280,6 @@ let KonversoComponent = class KonversoComponent {
     }
     send($event) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log($event.message);
             if ($event.message === 'exit') {
                 this.sendBotCommand('exit', false).catch((err) => console.log('fail reset session'));
                 return false;
@@ -291,7 +290,7 @@ let KonversoComponent = class KonversoComponent {
                 this.History.push($event);
             }
             if (this.AssistantMode) {
-                if (this.LastUserInput) {
+                if (this.LastUserInput && parseInt($event.message) == NaN) {
                     this.LastUserInput.message += ' ' + $event.message;
                     this.LastUserInput.date = $event.date;
                 }
