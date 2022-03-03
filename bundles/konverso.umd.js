@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common/http'), require('rxjs'), require('mustache'), require('@angular/forms'), require('@angular/common'), require('@angular/platform-browser')) :
-    typeof define === 'function' && define.amd ? define('konverso', ['exports', '@angular/core', '@angular/common/http', 'rxjs', 'mustache', '@angular/forms', '@angular/common', '@angular/platform-browser'], factory) :
-    (global = global || self, factory(global.konverso = {}, global.ng.core, global.ng.common.http, global.rxjs, global.mustache, global.ng.forms, global.ng.common, global.ng.platformBrowser));
-}(this, (function (exports, core, http, rxjs, mustache, forms, common, platformBrowser) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common/http'), require('rxjs'), require('mustache'), require('@angular/common'), require('@angular/platform-browser'), require('@angular/forms')) :
+    typeof define === 'function' && define.amd ? define('konverso', ['exports', '@angular/core', '@angular/common/http', 'rxjs', 'mustache', '@angular/common', '@angular/platform-browser', '@angular/forms'], factory) :
+    (global = global || self, factory(global.konverso = {}, global.ng.core, global.ng.common.http, global.rxjs, global.mustache, global.ng.common, global.ng.platformBrowser, global.ng.forms));
+}(this, (function (exports, core, http, rxjs, mustache, common, platformBrowser, forms) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -338,6 +338,9 @@
                         if (config.InputPlaceHolder && config.InputPlaceHolder[_this.locale]) {
                             _this.PlaceHolder = config.InputPlaceHolder[_this.locale];
                         }
+                        if (config.InputNumberPlaceHolder && config.InputNumberPlaceHolder[_this.locale]) {
+                            _this.NumberPlaceHolder = config.InputNumberPlaceHolder[_this.locale];
+                        }
                         if (config.CustomWelcome && config.BotInitMessage.Welcome && config.BotInitMessage.Welcome[_this.locale]) {
                             _this.Welcome = mustache.render(config.BotInitMessage.Welcome[_this.locale], user);
                         }
@@ -374,6 +377,9 @@
                     this.lang.next(this.locale);
                     if (config.InputPlaceHolder && config.InputPlaceHolder[this.locale]) {
                         this.PlaceHolder = config.InputPlaceHolder[this.locale];
+                    }
+                    if (config.InputNumberPlaceHolder && config.InputNumberPlaceHolder[this.locale]) {
+                        this.NumberPlaceHolder = config.InputNumberPlaceHolder[this.locale];
                     }
                     if (config.CustomWelcome && config.BotInitMessage.Welcome && config.BotInitMessage.Welcome[this.locale]) {
                         this.Welcome = config.BotInitMessage.Welcome[this.locale];
@@ -414,16 +420,16 @@
             };
             return random() + random() + '-' + random() + '-' + random() + '-' + random() + '-' + random() + random() + random();
         };
-        KonversoService.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: core.Inject, args: ['__NgxKonverso__',] }] },
-            { type: http.HttpClient }
-        ]; };
-        KonversoService = __decorate([
-            core.Injectable(),
-            __param(0, core.Inject('__NgxKonverso__'))
-        ], KonversoService);
+        KonversoService.ɵfac = function KonversoService_Factory(t) { return new (t || KonversoService)(core.ɵɵinject('__NgxKonverso__'), core.ɵɵinject(http.HttpClient)); };
+        KonversoService.ɵprov = core.ɵɵdefineInjectable({ token: KonversoService, factory: KonversoService.ɵfac });
         return KonversoService;
     }());
+    /*@__PURE__*/ (function () { core.ɵsetClassMetadata(KonversoService, [{
+            type: core.Injectable
+        }], function () { return [{ type: undefined, decorators: [{
+                    type: core.Inject,
+                    args: ['__NgxKonverso__']
+                }] }, { type: http.HttpClient }]; }, null); })();
 
     var BotMessageSample = {
         query: null,
@@ -442,6 +448,916 @@
      **  @Date 07/04/2021                                         **
      ***********************************************************/
     var DotLoaderTemplate = function (color) { return "<div class=\"loading-dots\">\n<div class=\"loading-dots--dot\" style=\"background-color: " + color + "\"></div>\n  <div class=\"loading-dots--dot\" style=\"background-color: " + color + "\"></div>\n  <div class=\"loading-dots--dot\" style=\"background-color: " + color + "\"></div>\n  </div>"; };
+
+    var TranslateService = /** @class */ (function () {
+        function TranslateService() {
+            this.lang = {
+                'fr': {
+                    'GO': "C'est parti",
+                    'SEND': 'Envoyer',
+                    'SELECT': 'Vous devez sélectionner une réponse',
+                },
+                'en': {
+                    'GO': "Let's go",
+                    'SEND': 'Send',
+                    'SELECT': 'You must select an answer',
+                }
+            };
+        }
+        TranslateService.prototype.translate = function (l, word) {
+            return this.lang[l][word];
+        };
+        TranslateService.ɵfac = function TranslateService_Factory(t) { return new (t || TranslateService)(); };
+        TranslateService.ɵprov = core.ɵɵdefineInjectable({ token: TranslateService, factory: TranslateService.ɵfac, providedIn: 'root' });
+        return TranslateService;
+    }());
+    /*@__PURE__*/ (function () { core.ɵsetClassMetadata(TranslateService, [{
+            type: core.Injectable,
+            args: [{
+                    providedIn: 'root'
+                }]
+        }], function () { return []; }, null); })();
+
+    var SafeHtmlPipe = /** @class */ (function () {
+        function SafeHtmlPipe(sanitizer) {
+            this.sanitizer = sanitizer;
+        }
+        SafeHtmlPipe.prototype.transform = function (value) {
+            return this.sanitizer.bypassSecurityTrustHtml(value);
+        };
+        SafeHtmlPipe.ɵfac = function SafeHtmlPipe_Factory(t) { return new (t || SafeHtmlPipe)(core.ɵɵdirectiveInject(platformBrowser.DomSanitizer)); };
+        SafeHtmlPipe.ɵpipe = core.ɵɵdefinePipe({ name: "safeHtml", type: SafeHtmlPipe, pure: true });
+        return SafeHtmlPipe;
+    }());
+    /*@__PURE__*/ (function () { core.ɵsetClassMetadata(SafeHtmlPipe, [{
+            type: core.Pipe,
+            args: [{
+                    name: 'safeHtml'
+                }]
+        }], function () { return [{ type: platformBrowser.DomSanitizer }]; }, null); })();
+
+    var _c0 = function (a0, a1) { return { backgroundColor: a0, borderColor: a1 }; };
+    function FirstVisitComponent_span_8_Template(rf, ctx) { if (rf & 1) {
+        var _r167 = core.ɵɵgetCurrentView();
+        core.ɵɵelementStart(0, "span", 9);
+        core.ɵɵlistener("click", function FirstVisitComponent_span_8_Template_span_click_0_listener() { core.ɵɵrestoreView(_r167); var pos_r165 = ctx.index; var ctx_r166 = core.ɵɵnextContext(); return ctx_r166.goTo(pos_r165); });
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var pos_r165 = ctx.index;
+        var ctx_r163 = core.ɵɵnextContext();
+        core.ɵɵstyleMap(pos_r165 === ctx_r163.position ? core.ɵɵpureFunction2(2, _c0, ctx_r163.assets == null ? null : ctx_r163.assets.ColorSet == null ? null : ctx_r163.assets.ColorSet.Primary, ctx_r163.assets == null ? null : ctx_r163.assets.ColorSet == null ? null : ctx_r163.assets.ColorSet.Primary) : core.ɵɵpureFunction2(5, _c0, ctx_r163.assets == null ? null : ctx_r163.assets.ColorSet == null ? null : ctx_r163.assets.ColorSet.Secondary, ctx_r163.assets == null ? null : ctx_r163.assets.ColorSet == null ? null : ctx_r163.assets.ColorSet.Primary));
+    } }
+    var _c1 = function (a1) { return { backgroundColor: "#171F26", color: a1 }; };
+    var FirstVisitComponent = /** @class */ (function () {
+        function FirstVisitComponent(translate, service) {
+            var _this = this;
+            this.service = service;
+            this.ready = new core.EventEmitter();
+            this.position = 0;
+            this.current = '';
+            this.go = '';
+            service.lang.subscribe(function (r) {
+                if (service.locale) {
+                    _this.go = translate.translate(service.locale, 'GO');
+                }
+            });
+        }
+        FirstVisitComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            this.current = this.firstUsageStory[this.position];
+            var clear = setInterval(function () {
+                if (_this.position < (_this.firstUsageStory.length - 1)) {
+                    _this.current = _this.firstUsageStory[++_this.position];
+                }
+                else {
+                    clearInterval(clear);
+                }
+            }, 5000);
+        };
+        FirstVisitComponent.prototype.goTo = function (pos) {
+            this.position = pos;
+            this.current = this.firstUsageStory[this.position];
+        };
+        FirstVisitComponent.prototype.start = function () {
+            //console.log('OOOKKKK')
+            this.ready.emit(true);
+        };
+        FirstVisitComponent.ɵfac = function FirstVisitComponent_Factory(t) { return new (t || FirstVisitComponent)(core.ɵɵdirectiveInject(TranslateService), core.ɵɵdirectiveInject(KonversoService)); };
+        FirstVisitComponent.ɵcmp = core.ɵɵdefineComponent({ type: FirstVisitComponent, selectors: [["bot-first-visit"]], inputs: { firstUsageStory: "firstUsageStory", assets: "assets" }, outputs: { ready: "ready" }, decls: 12, vars: 9, consts: [[1, "bot-logo-init-wrapper"], [1, "m-carl-notification"], [1, "m-carl-notification-cue", "m-cue"], ["id", "bot-icon", 1, "a-cue-icon"], [1, "bot-init-text", 3, "innerHTML"], [1, "bot-init-bullet-step"], ["class", "bot-init-dot", 3, "style", "click", 4, "ngFor", "ngForOf"], [1, "bot-init-button-wrapper"], ["mat-button", "", 1, "bot-button", "button-lg", 3, "click"], [1, "bot-init-dot", 3, "click"]], template: function FirstVisitComponent_Template(rf, ctx) { if (rf & 1) {
+                core.ɵɵelementContainerStart(0);
+                core.ɵɵelementStart(1, "div", 0);
+                core.ɵɵelementStart(2, "div", 1);
+                core.ɵɵelementStart(3, "div", 2);
+                core.ɵɵelement(4, "div", 3);
+                core.ɵɵelementEnd();
+                core.ɵɵelementEnd();
+                core.ɵɵelementEnd();
+                core.ɵɵelement(5, "div", 4);
+                core.ɵɵpipe(6, "safeHtml");
+                core.ɵɵelementStart(7, "div", 5);
+                core.ɵɵtemplate(8, FirstVisitComponent_span_8_Template, 1, 8, "span", 6);
+                core.ɵɵelementEnd();
+                core.ɵɵelementStart(9, "div", 7);
+                core.ɵɵelementStart(10, "button", 8);
+                core.ɵɵlistener("click", function FirstVisitComponent_Template_button_click_10_listener() { return ctx.start(); });
+                core.ɵɵtext(11);
+                core.ɵɵelementEnd();
+                core.ɵɵelementEnd();
+                core.ɵɵelementContainerEnd();
+            } if (rf & 2) {
+                core.ɵɵadvance(5);
+                core.ɵɵproperty("innerHTML", core.ɵɵpipeBind1(6, 5, ctx.current), core.ɵɵsanitizeHtml);
+                core.ɵɵadvance(3);
+                core.ɵɵproperty("ngForOf", ctx.firstUsageStory);
+                core.ɵɵadvance(2);
+                core.ɵɵstyleMap(core.ɵɵpureFunction1(7, _c1, ctx.assets == null ? null : ctx.assets.ColorSet == null ? null : ctx.assets.ColorSet.Secondary));
+                core.ɵɵadvance(1);
+                core.ɵɵtextInterpolate(ctx.go);
+            } }, directives: [common.NgForOf], pipes: [SafeHtmlPipe], styles: ["@keyframes pulsebot{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}@-webkit-keyframes pulsebot{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}.bot-listening[_ngcontent-%COMP%]{height:100%;background:0 0}.bot-listening[_ngcontent-%COMP%]:before{content:\"\";position:absolute;top:-60vw;left:-80vw;width:150vw;height:150vw;border-radius:50%;background:0 0}.bot-listening[_ngcontent-%COMP%]:after{content:\"\";position:absolute;top:-40vw;left:-50vw;width:90vw;height:90vw;border-radius:50%;background:0 0}.m-carl-notification[_ngcontent-%COMP%]{position:relative;top:50%}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]{width:168px;height:168px;margin:0 auto 50px;display:flex;justify-content:center;align-items:center}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-icon[_ngcontent-%COMP%]{position:absolute;width:100px;height:100px;transform:translateX(5px) translateY(5px);border-radius:50%;background:radial-gradient(circle at 50% 50%,#9d107d 1px,#9d107d 3%,#580b58 60%);box-shadow:0 0 10px 5px rgba(0,0,0,.25);-webkit-animation:3.5s infinite pulsebot;animation:3.5s infinite pulsebot}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice[_ngcontent-%COMP%]{transform-origin:center center;height:190px;width:190px;position:absolute;display:flex;justify-content:center;align-items:center}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice-el[_ngcontent-%COMP%]{position:absolute;width:150px;height:150px;border-radius:50%;background:#fff;opacity:.2;filter:blur(2px)}.voice1[_ngcontent-%COMP%]{background:#9a147f!important}.voice2[_ngcontent-%COMP%]{background:#773691!important}.voice3[_ngcontent-%COMP%]{background:#4e5ca8!important}.voice4[_ngcontent-%COMP%]{background:#abc1f1!important}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice-el[_ngcontent-%COMP%]:nth-child(1){animation:6s infinite reverse both hovering}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice-el[_ngcontent-%COMP%]:nth-child(2){-webkit-animation:7s infinite both hovering;animation:7s infinite both hovering}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice-el[_ngcontent-%COMP%]:nth-child(3){animation:8s infinite reverse both hovering}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice-el[_ngcontent-%COMP%]:nth-child(4){-webkit-animation:9s infinite both hovering;animation:9s infinite both hovering}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice-el[_ngcontent-%COMP%]:nth-child(5){animation:10s infinite reverse both hovering}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .speaking[_ngcontent-%COMP%]{-webkit-animation:2s infinite pulse;animation:2s infinite pulse}.m-carl-notification[_ngcontent-%COMP%]   .a-caption[_ngcontent-%COMP%]{color:#fff;font-size:1.5em;line-height:1.8em;text-shadow:0 1px 2px rgba(0,0,0,.26);text-align:center}.m-carl-notification[_ngcontent-%COMP%]   .a-caption.speaking[_ngcontent-%COMP%]{text-shadow:0 0 0;opacity:.4}@-webkit-keyframes hovering{from{transform:rotate(0) translateX(18px) rotate(0)}to{transform:rotate(360deg) translateX(18px) rotate(-360deg)}}@keyframes hovering{from{transform:rotate(0) translateX(18px) rotate(0)}to{transform:rotate(360deg) translateX(18px) rotate(-360deg)}}@-webkit-keyframes pulse{0%,40%,60%{transform:scale(1)}10%,80%{transform:scale(1.15)}15%,50%,90%{transform:scale(1.25)}100%,20%{transform:scale(1.05)}30%,65%{transform:scale(1.3)}55%{transform:scale(1.1)}70%{transform:scale(1.2)}}@keyframes pulse{0%,40%,60%{transform:scale(1)}10%,80%{transform:scale(1.15)}15%,50%,90%{transform:scale(1.25)}100%,20%{transform:scale(1.05)}30%,65%{transform:scale(1.3)}55%{transform:scale(1.1)}70%{transform:scale(1.2)}}"] });
+        return FirstVisitComponent;
+    }());
+    /*@__PURE__*/ (function () { core.ɵsetClassMetadata(FirstVisitComponent, [{
+            type: core.Component,
+            args: [{
+                    selector: 'bot-first-visit',
+                    templateUrl: './first-visit.component.html',
+                    styleUrls: ['./first-visit.component.scss']
+                }]
+        }], function () { return [{ type: TranslateService }, { type: KonversoService }]; }, { firstUsageStory: [{
+                type: core.Input
+            }], assets: [{
+                type: core.Input
+            }], ready: [{
+                type: core.Output
+            }] }); })();
+
+    function DesktopFullScreenComponent_ng_container_2_Template(rf, ctx) { if (rf & 1) {
+        var _r87 = core.ɵɵgetCurrentView();
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵelementStart(1, "bot-first-visit", 3);
+        core.ɵɵlistener("ready", function DesktopFullScreenComponent_ng_container_2_Template_bot_first_visit_ready_1_listener($event) { core.ɵɵrestoreView(_r87); var ctx_r86 = core.ɵɵnextContext(); return ctx_r86.emit($event); });
+        core.ɵɵelementEnd();
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var ctx_r84 = core.ɵɵnextContext();
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("firstUsageStory", ctx_r84.firstUsageStory)("assets", ctx_r84.assets);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_div_4_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementStart(0, "div", 17);
+        core.ɵɵelement(1, "div", 18);
+        core.ɵɵelement(2, "div", 19);
+        core.ɵɵelement(3, "div", 20);
+        core.ɵɵelement(4, "div", 21);
+        core.ɵɵelement(5, "div", 22);
+        core.ɵɵelementEnd();
+    } }
+    var _c0$1 = function (a0) { return { color: a0 }; };
+    function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_7_div_1_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementStart(0, "div", 24);
+        core.ɵɵelementStart(1, "div", 25);
+        core.ɵɵtext(2);
+        core.ɵɵelementEnd();
+        core.ɵɵelementStart(3, "span", 26);
+        core.ɵɵtext(4);
+        core.ɵɵelementEnd();
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var ctx_r95 = core.ɵɵnextContext(4);
+        core.ɵɵadvance(1);
+        core.ɵɵstyleMap(core.ɵɵpureFunction1(4, _c0$1, ctx_r95.assets == null ? null : ctx_r95.assets.ColorSet == null ? null : ctx_r95.assets.ColorSet.Secondary));
+        core.ɵɵadvance(1);
+        core.ɵɵtextInterpolate1(" ", ctx_r95.LastUserInput.message, " ");
+        core.ɵɵadvance(2);
+        core.ɵɵtextInterpolate(ctx_r95.LastUserInput.date);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_7_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_div_2_ng_container_7_div_1_Template, 5, 6, "div", 23);
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var ctx_r91 = core.ɵɵnextContext(3);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", ctx_r91.LastUserInput && (ctx_r91.LastUserInput == null ? null : ctx_r91.LastUserInput.message) != "");
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_3_span_1_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelement(0, "span", 30);
+        core.ɵɵpipe(1, "safeHtml");
+    } if (rf & 2) {
+        var ctx_r98 = core.ɵɵnextContext(5);
+        core.ɵɵproperty("innerHTML", core.ɵɵpipeBind1(1, 1, ctx_r98.LastBotAnswer.text), core.ɵɵsanitizeHtml);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_3_span_2_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelement(0, "span", 31);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_3_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_3_span_1_Template, 2, 3, "span", 28);
+        core.ɵɵtemplate(2, DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_3_span_2_Template, 1, 0, "span", 29);
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var ctx_r96 = core.ɵɵnextContext(4);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", !ctx_r96.LastBotAnswer.text.includes("loading-dots") && ctx_r96.changed && ctx_r96.showText);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", ctx_r96.LastBotAnswer.text.includes("loading-dots"));
+    } }
+    var _c1$1 = function (a0, a1) { return { borderColor: a0, color: a1 }; };
+    function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_ng_container_1_ng_container_1_button_1_Template(rf, ctx) { if (rf & 1) {
+        var _r109 = core.ɵɵgetCurrentView();
+        core.ɵɵelementStart(0, "button", 36);
+        core.ɵɵlistener("click", function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_ng_container_1_ng_container_1_button_1_Template_button_click_0_listener() { core.ɵɵrestoreView(_r109); var ctx_r108 = core.ɵɵnextContext(2); var suggest_r101 = ctx_r108.$implicit; var i_r102 = ctx_r108.index; var ctx_r107 = core.ɵɵnextContext(5); return ctx_r107.byPassUserInput(suggest_r101 == null ? null : suggest_r101.value == null ? null : suggest_r101.value.onClick, i_r102); });
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var suggest_r101 = core.ɵɵnextContext(2).$implicit;
+        var ctx_r104 = core.ɵɵnextContext(5);
+        core.ɵɵstyleMap(core.ɵɵpureFunction2(3, _c1$1, ctx_r104.assets == null ? null : ctx_r104.assets.ColorSet == null ? null : ctx_r104.assets.ColorSet.Primary, ctx_r104.assets == null ? null : ctx_r104.assets.ColorSet == null ? null : ctx_r104.assets.ColorSet.Primary));
+        core.ɵɵproperty("innerHTML", suggest_r101.label || (suggest_r101.value == null ? null : suggest_r101.value.displayedMessage) || (suggest_r101.value == null ? null : suggest_r101.value.title), core.ɵɵsanitizeHtml);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_ng_container_1_ng_container_1_button_2_Template(rf, ctx) { if (rf & 1) {
+        var _r113 = core.ɵɵgetCurrentView();
+        core.ɵɵelementStart(0, "button", 37);
+        core.ɵɵlistener("click", function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_ng_container_1_ng_container_1_button_2_Template_button_click_0_listener() { core.ɵɵrestoreView(_r113); var ctx_r112 = core.ɵɵnextContext(2); var suggest_r101 = ctx_r112.$implicit; var i_r102 = ctx_r112.index; var ctx_r111 = core.ɵɵnextContext(5); return ctx_r111.byPassUserInput(suggest_r101 == null ? null : suggest_r101.value == null ? null : suggest_r101.value.onClick, i_r102); });
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var suggest_r101 = core.ɵɵnextContext(2).$implicit;
+        var ctx_r105 = core.ɵɵnextContext(5);
+        core.ɵɵstyleMap(core.ɵɵpureFunction2(3, _c1$1, ctx_r105.assets == null ? null : ctx_r105.assets.ColorSet == null ? null : ctx_r105.assets.ColorSet.Primary, ctx_r105.assets == null ? null : ctx_r105.assets.ColorSet == null ? null : ctx_r105.assets.ColorSet.Primary));
+        core.ɵɵproperty("innerHTML", suggest_r101.label || (suggest_r101.value == null ? null : suggest_r101.value.displayedMessage) || (suggest_r101.value == null ? null : suggest_r101.value.title), core.ɵɵsanitizeHtml);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_ng_container_1_ng_container_1_button_3_Template(rf, ctx) { if (rf & 1) {
+        var _r117 = core.ɵɵgetCurrentView();
+        core.ɵɵelementStart(0, "button", 38);
+        core.ɵɵlistener("click", function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_ng_container_1_ng_container_1_button_3_Template_button_click_0_listener() { core.ɵɵrestoreView(_r117); var ctx_r116 = core.ɵɵnextContext(2); var suggest_r101 = ctx_r116.$implicit; var i_r102 = ctx_r116.index; var ctx_r115 = core.ɵɵnextContext(5); return ctx_r115.byPassUserInput(suggest_r101 == null ? null : suggest_r101.value == null ? null : suggest_r101.value.onClick, i_r102); });
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var suggest_r101 = core.ɵɵnextContext(2).$implicit;
+        var ctx_r106 = core.ɵɵnextContext(5);
+        core.ɵɵstyleMap(core.ɵɵpureFunction2(3, _c1$1, ctx_r106.assets == null ? null : ctx_r106.assets.ColorSet == null ? null : ctx_r106.assets.ColorSet.Primary, ctx_r106.assets == null ? null : ctx_r106.assets.ColorSet == null ? null : ctx_r106.assets.ColorSet.Primary));
+        core.ɵɵproperty("innerHTML", suggest_r101.label || (suggest_r101.value == null ? null : suggest_r101.value.displayedMessage) || (suggest_r101.value == null ? null : suggest_r101.value.title), core.ɵɵsanitizeHtml);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_ng_container_1_ng_container_1_button_1_Template, 1, 6, "button", 33);
+        core.ɵɵtemplate(2, DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_ng_container_1_ng_container_1_button_2_Template, 1, 6, "button", 34);
+        core.ɵɵtemplate(3, DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_ng_container_1_ng_container_1_button_3_Template, 1, 6, "button", 35);
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var suggest_r101 = core.ɵɵnextContext().$implicit;
+        var ctx_r103 = core.ɵɵnextContext(5);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", (suggest_r101.value == null ? null : suggest_r101.value.title) == "Terminer" && ctx_r103.changed || (suggest_r101.value == null ? null : suggest_r101.value.title) == "Quit" && ctx_r103.changed);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", (suggest_r101.value == null ? null : suggest_r101.value.title) == "Nouvelle Demande" && ctx_r103.changed || (suggest_r101.value == null ? null : suggest_r101.value.title) == "New Request" && ctx_r103.changed);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", (suggest_r101.value == null ? null : suggest_r101.value.title) && (suggest_r101.value == null ? null : suggest_r101.value.title) != "Terminer" && (suggest_r101.value == null ? null : suggest_r101.value.title) != "Quit" && (suggest_r101.value == null ? null : suggest_r101.value.title) != "Nouvelle Demande" && (suggest_r101.value == null ? null : suggest_r101.value.title) != "New Request" && ctx_r103.changed);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_ng_container_1_ng_container_1_Template, 4, 3, "ng-container", 2);
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var suggest_r101 = ctx.$implicit;
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", suggest_r101.format === "button");
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_ng_container_1_Template, 2, 1, "ng-container", 32);
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var ctx_r97 = core.ɵɵnextContext(4);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngForOf", ctx_r97.LastBotAnswer.medias[0].required_actions);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵelementStart(1, "div", 27);
+        core.ɵɵelementContainer(2);
+        core.ɵɵtemplate(3, DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_3_Template, 3, 2, "ng-container", 2);
+        core.ɵɵtemplate(4, DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_ng_container_4_Template, 2, 1, "ng-container", 2);
+        core.ɵɵelementEnd();
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var ctx_r92 = core.ɵɵnextContext(3);
+        core.ɵɵadvance(3);
+        core.ɵɵproperty("ngIf", ctx_r92.LastBotAnswer.text);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", ctx_r92.LastBotAnswer.medias && ctx_r92.LastBotAnswer.medias.length && ctx_r92.LastBotAnswer.medias[0].required_actions && ctx_r92.LastBotAnswer.medias[0].required_actions.length > 0 && !ctx_r92.LastBotAnswer.text.includes("loading-dots"));
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_div_10_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+        var _r123 = core.ɵɵgetCurrentView();
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵelementStart(1, "input", 41);
+        core.ɵɵlistener("ngModelChange", function DesktopFullScreenComponent_ng_container_3_div_2_div_10_ng_container_1_Template_input_ngModelChange_1_listener($event) { core.ɵɵrestoreView(_r123); var ctx_r122 = core.ɵɵnextContext(4); return ctx_r122.userInput = $event; })("keyup.enter", function DesktopFullScreenComponent_ng_container_3_div_2_div_10_ng_container_1_Template_input_keyup_enter_1_listener() { core.ɵɵrestoreView(_r123); var ctx_r124 = core.ɵɵnextContext(4); return ctx_r124.userInput && ctx_r124._send(); })("keyup", function DesktopFullScreenComponent_ng_container_3_div_2_div_10_ng_container_1_Template_input_keyup_1_listener($event) { core.ɵɵrestoreView(_r123); var ctx_r125 = core.ɵɵnextContext(4); return ctx_r125.userWriting($event); });
+        core.ɵɵelementEnd();
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var ctx_r120 = core.ɵɵnextContext(4);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("type", ctx_r120.inputType)("ngModel", ctx_r120.userInput)("max", ctx_r120.inputLimit)("placeholder", ctx_r120.currentPlaceHolder);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_div_10_ng_container_2_Template(rf, ctx) { if (rf & 1) {
+        var _r127 = core.ɵɵgetCurrentView();
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵelementStart(1, "input", 42);
+        core.ɵɵlistener("ngModelChange", function DesktopFullScreenComponent_ng_container_3_div_2_div_10_ng_container_2_Template_input_ngModelChange_1_listener($event) { core.ɵɵrestoreView(_r127); var ctx_r126 = core.ɵɵnextContext(4); return ctx_r126.userInput = $event; })("keyup.enter", function DesktopFullScreenComponent_ng_container_3_div_2_div_10_ng_container_2_Template_input_keyup_enter_1_listener() { core.ɵɵrestoreView(_r127); var ctx_r128 = core.ɵɵnextContext(4); return ctx_r128.userInput && ctx_r128._send(); })("keyup", function DesktopFullScreenComponent_ng_container_3_div_2_div_10_ng_container_2_Template_input_keyup_1_listener($event) { core.ɵɵrestoreView(_r127); var ctx_r129 = core.ɵɵnextContext(4); return ctx_r129.userWriting($event); });
+        core.ɵɵelementEnd();
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var ctx_r121 = core.ɵɵnextContext(4);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("type", ctx_r121.inputType)("ngModel", ctx_r121.userInput)("maxlength", ctx_r121.inputLimit)("placeholder", ctx_r121.currentPlaceHolder);
+    } }
+    var _c2 = function (a0, a1) { return { backgroundColor: a0, color: a1 }; };
+    function DesktopFullScreenComponent_ng_container_3_div_2_div_10_Template(rf, ctx) { if (rf & 1) {
+        var _r131 = core.ɵɵgetCurrentView();
+        core.ɵɵelementStart(0, "div", 39);
+        core.ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_div_2_div_10_ng_container_1_Template, 2, 4, "ng-container", 2);
+        core.ɵɵtemplate(2, DesktopFullScreenComponent_ng_container_3_div_2_div_10_ng_container_2_Template, 2, 4, "ng-container", 2);
+        core.ɵɵelementStart(3, "button", 40);
+        core.ɵɵlistener("click", function DesktopFullScreenComponent_ng_container_3_div_2_div_10_Template_button_click_3_listener() { core.ɵɵrestoreView(_r131); var ctx_r130 = core.ɵɵnextContext(3); return ctx_r130._send(); });
+        core.ɵɵtext(4);
+        core.ɵɵelementEnd();
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var ctx_r93 = core.ɵɵnextContext(3);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", ctx_r93.inputType === "number");
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", ctx_r93.inputType === "text");
+        core.ɵɵadvance(1);
+        core.ɵɵstyleMap(core.ɵɵpureFunction2(6, _c2, ctx_r93.assets == null ? null : ctx_r93.assets.ColorSet == null ? null : ctx_r93.assets.ColorSet.Primary, ctx_r93.assets == null ? null : ctx_r93.assets.ColorSet == null ? null : ctx_r93.assets.ColorSet.Secondary));
+        core.ɵɵproperty("disabled", !ctx_r93.userInput);
+        core.ɵɵadvance(1);
+        core.ɵɵtextInterpolate1("", ctx_r93.sendBtn, " ");
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_2_div_11_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementStart(0, "div", 43);
+        core.ɵɵelementStart(1, "i");
+        core.ɵɵtext(2);
+        core.ɵɵelementEnd();
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var ctx_r94 = core.ɵɵnextContext(3);
+        core.ɵɵadvance(2);
+        core.ɵɵtextInterpolate(ctx_r94.select);
+    } }
+    var _c3 = function () { return { "height": "40%" }; };
+    var _c4 = function () { return { "transform": "translateY(-10vh)" }; };
+    function DesktopFullScreenComponent_ng_container_3_div_2_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementStart(0, "div", 7);
+        core.ɵɵelementStart(1, "div", 8);
+        core.ɵɵelementStart(2, "div", 9);
+        core.ɵɵelementStart(3, "div", 10);
+        core.ɵɵtemplate(4, DesktopFullScreenComponent_ng_container_3_div_2_div_4_Template, 6, 0, "div", 11);
+        core.ɵɵelement(5, "div", 12);
+        core.ɵɵelementEnd();
+        core.ɵɵelementEnd();
+        core.ɵɵelementEnd();
+        core.ɵɵelementStart(6, "div", 13);
+        core.ɵɵtemplate(7, DesktopFullScreenComponent_ng_container_3_div_2_ng_container_7_Template, 2, 1, "ng-container", 2);
+        core.ɵɵtemplate(8, DesktopFullScreenComponent_ng_container_3_div_2_ng_container_8_Template, 5, 2, "ng-container", 2);
+        core.ɵɵelementStart(9, "div", 14);
+        core.ɵɵtemplate(10, DesktopFullScreenComponent_ng_container_3_div_2_div_10_Template, 5, 9, "div", 15);
+        core.ɵɵtemplate(11, DesktopFullScreenComponent_ng_container_3_div_2_div_11_Template, 3, 1, "div", 16);
+        core.ɵɵelementEnd();
+        core.ɵɵelementEnd();
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var ctx_r88 = core.ɵɵnextContext(2);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngStyle", core.ɵɵpureFunction0(7, _c3));
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngStyle", core.ɵɵpureFunction0(8, _c4));
+        core.ɵɵadvance(2);
+        core.ɵɵproperty("ngIf", ctx_r88.botListening);
+        core.ɵɵadvance(3);
+        core.ɵɵproperty("ngIf", ctx_r88.LastUserInput);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", ctx_r88.LastBotAnswer);
+        core.ɵɵadvance(2);
+        core.ɵɵproperty("ngIf", !ctx_r88.disableUserInput && ctx_r88.showInput);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", ctx_r88.disableUserInput);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵelementStart(1, "div", 24);
+        core.ɵɵelementStart(2, "div", 25);
+        core.ɵɵtext(3);
+        core.ɵɵelementEnd();
+        core.ɵɵelementStart(4, "span", 26);
+        core.ɵɵtext(5);
+        core.ɵɵelementEnd();
+        core.ɵɵelementEnd();
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var entry_r136 = core.ɵɵnextContext().$implicit;
+        var ctx_r137 = core.ɵɵnextContext(3);
+        core.ɵɵadvance(2);
+        core.ɵɵstyleMap(core.ɵɵpureFunction2(4, _c2, ctx_r137.assets == null ? null : ctx_r137.assets.ColorSet == null ? null : ctx_r137.assets.ColorSet.Primary, ctx_r137.assets == null ? null : ctx_r137.assets.ColorSet == null ? null : ctx_r137.assets.ColorSet.Secondary));
+        core.ɵɵadvance(1);
+        core.ɵɵtextInterpolate1(" ", entry_r136.message, " ");
+        core.ɵɵadvance(2);
+        core.ɵɵtextInterpolate(entry_r136.date);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_ng_container_2_span_1_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelement(0, "span", 30);
+        core.ɵɵpipe(1, "safeHtml");
+    } if (rf & 2) {
+        var entry_r136 = core.ɵɵnextContext(3).$implicit;
+        core.ɵɵproperty("innerHTML", core.ɵɵpipeBind1(1, 1, entry_r136.text), core.ɵɵsanitizeHtml);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_ng_container_2_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_ng_container_2_span_1_Template, 2, 3, "span", 28);
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var ctx_r140 = core.ɵɵnextContext(5);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", ctx_r140.changed);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_ng_container_3_ng_container_1_ng_container_1_button_1_Template(rf, ctx) { if (rf & 1) {
+        var _r150 = core.ɵɵgetCurrentView();
+        core.ɵɵelementStart(0, "button", 52);
+        core.ɵɵlistener("click", function DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_ng_container_3_ng_container_1_ng_container_1_button_1_Template_button_click_0_listener() { core.ɵɵrestoreView(_r150); var suggest_r145 = core.ɵɵnextContext(2).$implicit; var ctx_r148 = core.ɵɵnextContext(6); return ctx_r148.byPassUserInput(suggest_r145 == null ? null : suggest_r145.value == null ? null : suggest_r145.value.onClick); });
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var suggest_r145 = core.ɵɵnextContext(2).$implicit;
+        var ctx_r147 = core.ɵɵnextContext(6);
+        core.ɵɵstyleMap(core.ɵɵpureFunction2(3, _c1$1, ctx_r147.assets == null ? null : ctx_r147.assets.ColorSet == null ? null : ctx_r147.assets.ColorSet.Primary, ctx_r147.assets == null ? null : ctx_r147.assets.ColorSet == null ? null : ctx_r147.assets.ColorSet.Primary));
+        core.ɵɵproperty("innerHTML", suggest_r145.label || (suggest_r145.value == null ? null : suggest_r145.value.displayedMessage) || (suggest_r145.value == null ? null : suggest_r145.value.title), core.ɵɵsanitizeHtml);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_ng_container_3_ng_container_1_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_ng_container_3_ng_container_1_ng_container_1_button_1_Template, 1, 6, "button", 51);
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var ctx_r146 = core.ɵɵnextContext(7);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", ctx_r146.changed);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_ng_container_3_ng_container_1_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_ng_container_3_ng_container_1_ng_container_1_Template, 2, 1, "ng-container", 2);
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var suggest_r145 = ctx.$implicit;
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", suggest_r145.format === "button");
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_ng_container_3_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_ng_container_3_ng_container_1_Template, 2, 1, "ng-container", 32);
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var entry_r136 = core.ɵɵnextContext(2).$implicit;
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngForOf", entry_r136.medias[0].required_actions);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵelementStart(1, "div", 27);
+        core.ɵɵtemplate(2, DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_ng_container_2_Template, 2, 1, "ng-container", 2);
+        core.ɵɵtemplate(3, DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_ng_container_3_Template, 2, 1, "ng-container", 2);
+        core.ɵɵelementEnd();
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var entry_r136 = core.ɵɵnextContext().$implicit;
+        core.ɵɵadvance(2);
+        core.ɵɵproperty("ngIf", entry_r136.text);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", entry_r136.medias && entry_r136.medias.length && entry_r136.medias[0].required_actions && entry_r136.medias[0].required_actions.length);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵtemplate(1, DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_1_Template, 6, 7, "ng-container", 2);
+        core.ɵɵtemplate(2, DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_ng_container_2_Template, 4, 2, "ng-container", 2);
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var entry_r136 = ctx.$implicit;
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", entry_r136.date);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", !entry_r136.date);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_3_div_7_button_2_Template(rf, ctx) { if (rf & 1) {
+        var _r156 = core.ɵɵgetCurrentView();
+        core.ɵɵelementStart(0, "button", 40);
+        core.ɵɵlistener("click", function DesktopFullScreenComponent_ng_container_3_div_3_div_7_button_2_Template_button_click_0_listener() { core.ɵɵrestoreView(_r156); var ctx_r155 = core.ɵɵnextContext(4); return ctx_r155._send(); });
+        core.ɵɵtext(1);
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var ctx_r154 = core.ɵɵnextContext(4);
+        core.ɵɵstyleMap(core.ɵɵpureFunction2(4, _c2, ctx_r154.assets == null ? null : ctx_r154.assets.ColorSet == null ? null : ctx_r154.assets.ColorSet.Primary, ctx_r154.assets == null ? null : ctx_r154.assets.ColorSet == null ? null : ctx_r154.assets.ColorSet.Secondary));
+        core.ɵɵproperty("disabled", !ctx_r154.userInput);
+        core.ɵɵadvance(1);
+        core.ɵɵtextInterpolate1("", ctx_r154.sendBtn, " ");
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_3_div_7_Template(rf, ctx) { if (rf & 1) {
+        var _r158 = core.ɵɵgetCurrentView();
+        core.ɵɵelementStart(0, "div", 53);
+        core.ɵɵelementStart(1, "input", 54);
+        core.ɵɵlistener("ngModelChange", function DesktopFullScreenComponent_ng_container_3_div_3_div_7_Template_input_ngModelChange_1_listener($event) { core.ɵɵrestoreView(_r158); var ctx_r157 = core.ɵɵnextContext(3); return ctx_r157.userInput = $event; })("keyup.enter", function DesktopFullScreenComponent_ng_container_3_div_3_div_7_Template_input_keyup_enter_1_listener() { core.ɵɵrestoreView(_r158); var ctx_r159 = core.ɵɵnextContext(3); return ctx_r159.userInput && ctx_r159._send(); })("keyup", function DesktopFullScreenComponent_ng_container_3_div_3_div_7_Template_input_keyup_1_listener($event) { core.ɵɵrestoreView(_r158); var ctx_r160 = core.ɵɵnextContext(3); return ctx_r160.userWriting($event); });
+        core.ɵɵelementEnd();
+        core.ɵɵtemplate(2, DesktopFullScreenComponent_ng_container_3_div_3_div_7_button_2_Template, 2, 7, "button", 55);
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var ctx_r134 = core.ɵɵnextContext(3);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngModel", ctx_r134.userInput)("placeholder", ctx_r134.currentPlaceHolder);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", ctx_r134.changed);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_3_div_8_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementStart(0, "div", 43);
+        core.ɵɵelementStart(1, "i");
+        core.ɵɵtext(2);
+        core.ɵɵelementEnd();
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var ctx_r135 = core.ɵɵnextContext(3);
+        core.ɵɵadvance(2);
+        core.ɵɵtextInterpolate(ctx_r135.select);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_div_3_Template(rf, ctx) { if (rf & 1) {
+        core.ɵɵelementStart(0, "div", 44);
+        core.ɵɵtext(1);
+        core.ɵɵelementStart(2, "div", 45, 46);
+        core.ɵɵelementStart(4, "div", 47);
+        core.ɵɵtemplate(5, DesktopFullScreenComponent_ng_container_3_div_3_ng_container_5_Template, 3, 2, "ng-container", 32);
+        core.ɵɵelementEnd();
+        core.ɵɵelementEnd();
+        core.ɵɵelementStart(6, "div", 14);
+        core.ɵɵtemplate(7, DesktopFullScreenComponent_ng_container_3_div_3_div_7_Template, 3, 3, "div", 48);
+        core.ɵɵtemplate(8, DesktopFullScreenComponent_ng_container_3_div_3_div_8_Template, 3, 1, "div", 16);
+        core.ɵɵelementEnd();
+        core.ɵɵelementStart(9, "div", 49);
+        core.ɵɵelement(10, "img", 50);
+        core.ɵɵelementEnd();
+        core.ɵɵelementEnd();
+    } if (rf & 2) {
+        var _r132 = core.ɵɵreference(3);
+        var ctx_r89 = core.ɵɵnextContext(2);
+        core.ɵɵadvance(1);
+        core.ɵɵtextInterpolate1(" ", ctx_r89.AssistantMode, " ");
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("scrollTop", _r132.scrollTo(0, 9999999));
+        core.ɵɵadvance(3);
+        core.ɵɵproperty("ngForOf", ctx_r89.displayData);
+        core.ɵɵadvance(2);
+        core.ɵɵproperty("ngIf", !ctx_r89.disableUserInput && ctx_r89.showInput);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", ctx_r89.disableUserInput);
+        core.ɵɵadvance(2);
+        core.ɵɵproperty("src", ctx_r89.assets.FullSizeLogo, core.ɵɵsanitizeUrl);
+    } }
+    function DesktopFullScreenComponent_ng_container_3_Template(rf, ctx) { if (rf & 1) {
+        var _r162 = core.ɵɵgetCurrentView();
+        core.ɵɵelementContainerStart(0);
+        core.ɵɵelementStart(1, "button", 4);
+        core.ɵɵlistener("click", function DesktopFullScreenComponent_ng_container_3_Template_button_click_1_listener() { core.ɵɵrestoreView(_r162); var ctx_r161 = core.ɵɵnextContext(); return ctx_r161.byPassUserInput("exit", 0); });
+        core.ɵɵelementEnd();
+        core.ɵɵtemplate(2, DesktopFullScreenComponent_ng_container_3_div_2_Template, 12, 9, "div", 5);
+        core.ɵɵtemplate(3, DesktopFullScreenComponent_ng_container_3_div_3_Template, 11, 6, "div", 6);
+        core.ɵɵelementContainerEnd();
+    } if (rf & 2) {
+        var ctx_r85 = core.ɵɵnextContext();
+        core.ɵɵadvance(2);
+        core.ɵɵproperty("ngIf", ctx_r85.AssistantMode);
+        core.ɵɵadvance(1);
+        core.ɵɵproperty("ngIf", !ctx_r85.AssistantMode);
+    } }
+    var _c5 = function () { return { "background-color": "#100652 0% 0% no-repeat padding-box;" }; };
+    var defaultInputType = 'text';
+    var defaultInputLimit = 300;
+    var DesktopFullScreenComponent = /** @class */ (function () {
+        function DesktopFullScreenComponent(translate, service) {
+            var _this = this;
+            this.service = service;
+            this.AssistantMode = false;
+            this.firstVisit = false;
+            this.IsMobile = false;
+            this.readySend = new core.EventEmitter(false);
+            this.send = new core.EventEmitter(null);
+            this.sendBotCommand = new core.EventEmitter(null);
+            this.sendEvent = new core.EventEmitter(null);
+            this.currentPlaceHolder = '';
+            this.sendBtn = '';
+            this.select = '';
+            this.changed = false;
+            this.botListening = false;
+            this.showWrapper = false;
+            this.showText = false;
+            this.inputType = defaultInputType;
+            this.inputLimit = defaultInputLimit;
+            this.newMessage = false;
+            this.messageCurrent = '';
+            this.msgArray = [];
+            this.botListeningTimer = 0;
+            this.anim_done = false;
+            this.reloaded = false;
+            service.lang.subscribe(function (r) {
+                if (service.locale) {
+                    _this.sendBtn = translate.translate(service.locale, 'SEND');
+                    _this.select = translate.translate(service.locale, 'SELECT');
+                }
+            });
+        }
+        DesktopFullScreenComponent.prototype.ngOnChanges = function () {
+            var _this = this;
+            var _a, _b;
+            var t = setInterval(function () {
+                if (document.querySelectorAll('.bot-answer')) {
+                    var elems = document.querySelectorAll('.bot-answer');
+                    if (elems.length > 0) {
+                        var index = 0, length_1 = elems.length;
+                        var rep = true;
+                        for (; index < length_1; index++) {
+                            var temp = elems[index];
+                            if (temp.style.opacity == '0') {
+                                temp.style.opacity = '1';
+                            }
+                        }
+                        _this.anim_done = rep;
+                        if (_this.anim_done) {
+                            clearInterval(t);
+                        }
+                    }
+                }
+            }, 100);
+            this.changed = false;
+            if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes('loading-dots'))) {
+                document.getElementById('text').innerHTML = '';
+            }
+            var displayZone = document.querySelector('.bot-answer');
+            if (displayZone.querySelector('number')) {
+                this.inputType = 'number';
+                this.inputLimit = 999;
+                this.currentPlaceHolder = this.NumberPlaceHolder[Math.floor(Math.random() * this.NumberPlaceHolder.length)];
+            }
+            else {
+                this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
+                this.inputType = defaultInputType;
+                this.inputLimit = defaultInputLimit;
+            }
+            //console.log(this.LastBotAnswer);
+            if (!this.anim_done) {
+                var t2_1 = setInterval(function () {
+                    var _a, _b;
+                    if (_this.LastBotAnswer && !((_a = _this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes('loading-dots')) && _this.anim_done) {
+                        clearInterval(t2_1);
+                        var string = (_b = _this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(" ").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
+                        _this.msgArray = string.split('');
+                        if (_this.messageCurrent !== string) {
+                            _this.newMessage = true;
+                            _this.messageCurrent = string;
+                            _this.launchLoop();
+                        }
+                        //this.looper(array, timer);
+                    }
+                }, 100);
+            }
+            else {
+                var string = (_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(" ").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
+                this.msgArray = string.split('');
+                if (this.messageCurrent !== string && string !== '') {
+                    this.newMessage = true;
+                    this.messageCurrent = string;
+                    this.launchLoop();
+                }
+            }
+            setTimeout(function () {
+                _this.changed = true;
+            }, 100);
+        };
+        DesktopFullScreenComponent.prototype.launchLoop = function () {
+            var _this = this;
+            this.timer = setInterval(function () {
+                if (_this.msgArray.length == 0) {
+                    clearInterval(_this.timer);
+                }
+                if (_this.newMessage) {
+                    if (document.getElementById('text')) {
+                        document.getElementById('text').innerHTML = '';
+                    }
+                    _this.newMessage = false;
+                    //this.msgArray = this.messageCurrent.split("");
+                    clearInterval(_this.timer);
+                    _this.launchLoop();
+                }
+                _this.looper();
+            }, 60);
+        };
+        DesktopFullScreenComponent.prototype.looper = function () {
+            if (this.msgArray.length > 0 && !this.reloaded) {
+                if (document.getElementById('text')) {
+                    document.getElementById('text').innerHTML += this.msgArray.shift();
+                }
+            } /*else {
+            clearTimeout(timer);
+          }*/
+            /*timer = setTimeout(() => {
+              this.looper(array, timer);
+            }, 30);*/
+        };
+        DesktopFullScreenComponent.prototype.ngOnInit = function () {
+            var _this = this;
+            this.inputType = defaultInputType;
+            this.inputLimit = defaultInputLimit;
+            if (this.PlaceHolder) {
+                this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
+                setInterval(function () {
+                    _this.currentPlaceHolder = _this.PlaceHolder[Math.floor(Math.random() * _this.PlaceHolder.length)];
+                }, 3000);
+            }
+            setTimeout(function () {
+                _this.showWrapper = true;
+            }, 2000);
+            setTimeout(function () {
+                _this.showText = true;
+            }, 2500);
+            var t = setInterval(function () {
+                if (document.querySelectorAll('.bot-answer')) {
+                    var elems = document.querySelectorAll('.bot-answer');
+                    if (elems.length > 0) {
+                        var index = 0, length_2 = elems.length;
+                        var rep = true;
+                        for (; index < length_2; index++) {
+                            var temp = elems[index];
+                            if (temp.style.opacity == '0') {
+                                rep = false;
+                            }
+                        }
+                        _this.anim_done = rep;
+                        if (_this.anim_done) {
+                            clearInterval(t);
+                        }
+                    }
+                }
+            }, 100);
+            //run.run();
+            setInterval(function () {
+                if (_this.botListeningTimer > 0) {
+                    _this.botListeningTimer -= 1;
+                    if (_this.botListeningTimer > 0) {
+                        document.getElementById('bot').className = 'a-cue-voice speaking';
+                        document.getElementById('bot-icon').className = 'a-cue-icon speakingicon';
+                    }
+                    else {
+                        document.getElementById('bot').className = 'a-cue-voice';
+                        document.getElementById('bot-icon').className = 'a-cue-icon';
+                    }
+                    _this.botListening = _this.botListeningTimer > 0;
+                }
+            }, 500);
+        };
+        DesktopFullScreenComponent.prototype.userWriting = function (key) {
+            if (key.code === 'Enter') {
+                this.botListening = false;
+                this.botListeningTimer = 0;
+            }
+            else if (key.code === 'Backspace') {
+            }
+            else {
+                this.botListening = true;
+                if (this.botListeningTimer == 0) {
+                    this.botListeningTimer += 2;
+                }
+                else if (this.botListeningTimer < 5) {
+                    this.botListeningTimer += 1;
+                }
+            }
+        };
+        DesktopFullScreenComponent.prototype.emit = function ($event) {
+            this.firstVisit = false;
+            this.readySend.emit(true);
+        };
+        DesktopFullScreenComponent.prototype._send = function () {
+            var _a;
+            if (((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.endOfTopic) && this.LastUserInput) {
+                this.LastUserInput.message = '';
+            }
+            this.botListening = false;
+            var userData = {
+                message: this.userInput,
+                date: new Date().toLocaleTimeString(navigator.language, {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })
+            };
+            this.send.emit(userData);
+            this.userInput = null;
+        };
+        DesktopFullScreenComponent.prototype.scroll = function (scrollHeight) {
+            return __awaiter(this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    return [2 /*return*/, new Promise(function (resolve) {
+                            setTimeout(function () {
+                                resolve(0);
+                            }, 300);
+                        })];
+                });
+            });
+        };
+        DesktopFullScreenComponent.prototype.byPassUserInput = function (botdata, i) {
+            var e_1, _a;
+            /*const buttons: NodeListOf<HTMLElement> = document.querySelectorAll('.show-btn');
+            for (let btn of Array.from(buttons)) {
+              btn.classList.add('hidden-btn');
+            }*/
+            var buttons = document.querySelectorAll('.bot-answer');
+            try {
+                for (var _b = __values(Array.from(buttons)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var btn = _c.value;
+                    btn.classList.add('hidden-btn');
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+            this.sendBotCommand.emit(botdata);
+            setTimeout(function () {
+                var e_2, _a;
+                var buttons = document.querySelectorAll('.bot-answer');
+                try {
+                    for (var _b = __values(Array.from(buttons)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                        var btn = _c.value;
+                        btn.classList.remove('hidden-btn');
+                    }
+                }
+                catch (e_2_1) { e_2 = { error: e_2_1 }; }
+                finally {
+                    try {
+                        if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                    }
+                    finally { if (e_2) throw e_2.error; }
+                }
+            }, 1000);
+        };
+        DesktopFullScreenComponent.ɵfac = function DesktopFullScreenComponent_Factory(t) { return new (t || DesktopFullScreenComponent)(core.ɵɵdirectiveInject(TranslateService), core.ɵɵdirectiveInject(KonversoService)); };
+        DesktopFullScreenComponent.ɵcmp = core.ɵɵdefineComponent({ type: DesktopFullScreenComponent, selectors: [["bot-full-screen"]], inputs: { AssistantMode: "AssistantMode", assets: "assets", firstVisit: "firstVisit", firstUsageStory: "firstUsageStory", displayData: "displayData", disableUserInput: "disableUserInput", LastUserInput: "LastUserInput", LastBotAnswer: "LastBotAnswer", PlaceHolder: "PlaceHolder", IsMobile: "IsMobile", showInput: "showInput", NumberPlaceHolder: "NumberPlaceHolder" }, outputs: { readySend: "readySend", send: "send", sendBotCommand: "sendBotCommand", sendEvent: "sendEvent" }, features: [core.ɵɵNgOnChangesFeature], decls: 4, vars: 7, consts: [["xmlns", "http://www.w3.org/1999/html", 1, "bot-container"], [1, "bot-view"], [4, "ngIf"], [3, "firstUsageStory", "assets", "ready"], ["id", "exit-btn", 2, "display", "none", 3, "click"], ["class", "bot-assistant-wrapper", 4, "ngIf"], ["class", "bot-chat-wrapper", 4, "ngIf"], [1, "bot-assistant-wrapper"], [1, "bot-logo", "bot-listening", 3, "ngStyle"], [1, "m-carl-notification", 3, "ngStyle"], [1, "m-carl-notification-cue", "m-cue"], ["class", "a-cue-voice", "id", "bot", 4, "ngIf"], ["id", "bot-icon", 1, "a-cue-icon"], [1, "bot-discussion-wrapper", 2, "min-height", "60%", "max-height", "60%", "height", "60%", "/*max-height", "120px"], [1, "bot-input-wrapper"], ["class", "bot-input", "id", "bot-input-div", 4, "ngIf"], ["class", "bot-input-disable", 4, "ngIf"], ["id", "bot", 1, "a-cue-voice"], [1, "a-cue-voice-el", "voice1"], [1, "a-cue-voice-el", "voice2"], [1, "a-cue-voice-el", "voice3"], [1, "a-cue-voice-el", "voice4"], [1, "a-cue-voice-el"], ["class", "user-input", 4, "ngIf"], [1, "user-input"], [1, "data"], [1, "time"], [1, "bot-answer"], ["class", "fade", 3, "innerHTML", 4, "ngIf"], ["class", "fade", "id", "loading-creation", 4, "ngIf"], [1, "fade", 3, "innerHTML"], ["id", "loading-creation", 1, "fade"], [4, "ngFor", "ngForOf"], ["class", "bot-button bot-button-left show-btn", 3, "style", "innerHTML", "click", 4, "ngIf"], ["class", "bot-button bot-button-right show-btn", 3, "style", "innerHTML", "click", 4, "ngIf"], ["class", "bot-button bot-button-grey show-btn", 3, "style", "innerHTML", "click", 4, "ngIf"], [1, "bot-button", "bot-button-left", "show-btn", 3, "innerHTML", "click"], [1, "bot-button", "bot-button-right", "show-btn", 3, "innerHTML", "click"], [1, "bot-button", "bot-button-grey", "show-btn", 3, "innerHTML", "click"], ["id", "bot-input-div", 1, "bot-input"], [1, "bot-button", 3, "disabled", "click"], ["min", "2", 3, "type", "ngModel", "max", "placeholder", "ngModelChange", "keyup.enter", "keyup"], [3, "type", "ngModel", "maxlength", "placeholder", "ngModelChange", "keyup.enter", "keyup"], [1, "bot-input-disable"], [1, "bot-chat-wrapper"], [1, "bot-discussion-wrapper", 3, "scrollTop"], ["scrollMe", ""], [1, "bot-chat"], ["class", "bot-input", 4, "ngIf"], [1, "bot-logo"], [3, "src"], ["class", "bot-button fade", 3, "style", "innerHTML", "click", 4, "ngIf"], [1, "bot-button", "fade", 3, "innerHTML", "click"], [1, "bot-input"], ["type", "text", "maxlength", "200", 3, "ngModel", "placeholder", "ngModelChange", "keyup.enter", "keyup"], ["class", "bot-button", 3, "style", "disabled", "click", 4, "ngIf"]], template: function DesktopFullScreenComponent_Template(rf, ctx) { if (rf & 1) {
+                core.ɵɵelementStart(0, "div", 0);
+                core.ɵɵelementStart(1, "div", 1);
+                core.ɵɵtemplate(2, DesktopFullScreenComponent_ng_container_2_Template, 2, 2, "ng-container", 2);
+                core.ɵɵtemplate(3, DesktopFullScreenComponent_ng_container_3_Template, 4, 2, "ng-container", 2);
+                core.ɵɵelementEnd();
+                core.ɵɵelementEnd();
+            } if (rf & 2) {
+                core.ɵɵstyleMap(core.ɵɵpureFunction0(6, _c5));
+                core.ɵɵclassMap(ctx.IsMobile ? "bot-mobile" : "");
+                core.ɵɵadvance(2);
+                core.ɵɵproperty("ngIf", ctx.firstVisit && ctx.firstUsageStory);
+                core.ɵɵadvance(1);
+                core.ɵɵproperty("ngIf", !ctx.firstVisit || !ctx.firstUsageStory);
+            } }, directives: [common.NgIf, FirstVisitComponent, common.NgStyle, common.NgForOf, forms.DefaultValueAccessor, forms.NgControlStatus, forms.NgModel, forms.MaxLengthValidator], pipes: [SafeHtmlPipe], styles: ["@-webkit-keyframes gradient{0%,100%{background-position:50% 0}50%{background-position:50% 100%}}@keyframes gradient{0%,100%{background-position:50% 0}50%{background-position:50% 100%}}@keyframes pulsebot{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}@-webkit-keyframes pulsebot{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}.bot-listening[_ngcontent-%COMP%]{height:100%;background:0 0}.bot-listening[_ngcontent-%COMP%]:before{content:\"\";position:absolute;top:-60vw;left:-80vw;width:150vw;height:150vw;border-radius:50%;background:0 0}.bot-listening[_ngcontent-%COMP%]:after{content:\"\";position:absolute;top:-40vw;left:-50vw;width:90vw;height:90vw;border-radius:50%;background:0 0}@media screen and (min--moz-device-pixel-ratio:0){.m-carl-notification[_ngcontent-%COMP%]{transform:translate(0)!important}}.m-carl-notification[_ngcontent-%COMP%]{position:relative;top:50%}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]{width:168px;height:168px;margin:0 auto 50px;display:flex;justify-content:center;align-items:center}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-icon[_ngcontent-%COMP%]{position:absolute;width:100px;height:100px;transform:translateX(5px) translateY(5px);border-radius:50%;background:radial-gradient(circle at 50% 50%,#9d107d 1px,#9d107d 3%,#580b58 60%);box-shadow:0 0 10px 5px rgb(0 0 0 / 25%);-webkit-animation:3.5s infinite pulsebot;animation:3.5s infinite pulsebot}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice[_ngcontent-%COMP%]{transform-origin:center center;height:130px;width:130px;position:absolute;display:flex;justify-content:center;align-items:center}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice-el[_ngcontent-%COMP%]{position:absolute;width:130px;height:130px;border-radius:50%;background:#fff;opacity:.2;filter:blur(2px)}.voice1[_ngcontent-%COMP%]{background:#9a147f!important}.voice2[_ngcontent-%COMP%]{background:#773691!important}.voice3[_ngcontent-%COMP%]{background:#4e5ca8!important}.voice4[_ngcontent-%COMP%]{background:#abc1f1!important}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice-el[_ngcontent-%COMP%]:nth-child(1){animation:6s infinite reverse both hovering}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice-el[_ngcontent-%COMP%]:nth-child(2){-webkit-animation:7s infinite both hovering;animation:7s infinite both hovering}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice-el[_ngcontent-%COMP%]:nth-child(3){animation:8s infinite reverse both hovering}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice-el[_ngcontent-%COMP%]:nth-child(4){-webkit-animation:9s infinite both hovering;animation:9s infinite both hovering}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .a-cue-voice-el[_ngcontent-%COMP%]:nth-child(5){animation:10s infinite reverse both hovering}.m-carl-notification[_ngcontent-%COMP%]   .m-cue[_ngcontent-%COMP%]   .speaking[_ngcontent-%COMP%]{-webkit-animation:2s infinite pulse;animation:2s infinite pulse}.m-carl-notification[_ngcontent-%COMP%]   .a-caption[_ngcontent-%COMP%]{color:#fff;font-size:1.5em;line-height:1.8em;text-shadow:0 1px 2px rgba(0,0,0,.26);text-align:center}.m-carl-notification[_ngcontent-%COMP%]   .a-caption.speaking[_ngcontent-%COMP%]{text-shadow:0 0 0;opacity:.4}@-webkit-keyframes hovering{from{transform:rotate(0) translateX(18px) rotate(0)}to{transform:rotate(360deg) translateX(18px) rotate(-360deg)}}@keyframes hovering{from{transform:rotate(0) translateX(18px) rotate(0)}to{transform:rotate(360deg) translateX(18px) rotate(-360deg)}}@-webkit-keyframes pulse{0%,40%,60%{transform:scale(1)}10%,80%{transform:scale(1.15)}15%,50%,90%{transform:scale(1.25)}100%,20%{transform:scale(1.05)}30%,65%{transform:scale(1.3)}55%{transform:scale(1.1)}70%{transform:scale(1.2)}}@keyframes pulse{0%,40%,60%{transform:scale(1)}10%,80%{transform:scale(1.15)}15%,50%,90%{transform:scale(1.25)}100%,20%{transform:scale(1.05)}30%,65%{transform:scale(1.3)}55%{transform:scale(1.1)}70%{transform:scale(1.2)}}"] });
+        return DesktopFullScreenComponent;
+    }());
+    /*@__PURE__*/ (function () { core.ɵsetClassMetadata(DesktopFullScreenComponent, [{
+            type: core.Component,
+            args: [{
+                    selector: 'bot-full-screen',
+                    templateUrl: './desktop-full-screen.component.html',
+                    styleUrls: ['./desktop-full-screen.component.css']
+                }]
+        }], function () { return [{ type: TranslateService }, { type: KonversoService }]; }, { AssistantMode: [{
+                type: core.Input
+            }], assets: [{
+                type: core.Input
+            }], firstVisit: [{
+                type: core.Input
+            }], firstUsageStory: [{
+                type: core.Input
+            }], displayData: [{
+                type: core.Input
+            }], disableUserInput: [{
+                type: core.Input
+            }], LastUserInput: [{
+                type: core.Input
+            }], LastBotAnswer: [{
+                type: core.Input
+            }], PlaceHolder: [{
+                type: core.Input
+            }], IsMobile: [{
+                type: core.Input
+            }], showInput: [{
+                type: core.Input
+            }], NumberPlaceHolder: [{
+                type: core.Input
+            }], readySend: [{
+                type: core.Output
+            }], send: [{
+                type: core.Output
+            }], sendBotCommand: [{
+                type: core.Output
+            }], sendEvent: [{
+                type: core.Output
+            }] }); })();
 
     // @ts-ignore
     var KonversoComponent = /** @class */ (function () {
@@ -497,6 +1413,7 @@
             this.firstUsageStory = this.service.firstUsageStory;
             this.AssistantMode = this.service.AssistantMode;
             this.PlaceHolder = this.service.PlaceHolder;
+            this.NumberPlaceHolder = this.service.NumberPlaceHolder;
             this.Welcome = this.service.Welcome;
             this.sendBotCommand('exit', false).catch(function (err) { return console.log('fail reset session'); });
             this.History = [];
@@ -625,441 +1542,31 @@
             };
             return isMobile.any();
         };
-        KonversoComponent.ctorParameters = function () { return [
-            { type: KonversoService }
-        ]; };
-        __decorate([
-            core.Output()
-        ], KonversoComponent.prototype, "ready", void 0);
-        __decorate([
-            core.Output()
-        ], KonversoComponent.prototype, "sended", void 0);
-        __decorate([
-            core.Input()
-        ], KonversoComponent.prototype, "showInput", void 0);
-        KonversoComponent = __decorate([
-            core.Component({
-                selector: 'ngx-konverso',
-                template: "<bot-full-screen [class]=\"isMobile ? 'bot-mobile' : ''\"\n                 [assets]=\"assets\"\n                 [firstVisit]=\"firstVisit\"\n                 [firstUsageStory]=\"firstUsageStory\"\n                 (send)=\"send($event)\"\n                 (sendBotCommand)=\"sendBotCommand($event)\"\n                 [displayData]=\"History\"\n                 [disableUserInput]=\"disableUserInput\"\n                 [LastBotAnswer]=\"LastBotAnswer\"\n                 [LastUserInput]=\"LastUserInput\"\n                 [AssistantMode]=\"AssistantMode\"\n                 [PlaceHolder]=\"PlaceHolder\"\n                 [IsMobile]=\"isMobile\"\n                 (readySend)=\"_ready.emit($event)\"\n                 [showInput]=\"showInput\"\n></bot-full-screen>\n\n\n",
-                styles: ["::ng-deep ngx-konverso{overflow:hidden;display:block;min-height:100%;height:100%}::ng-deep ngx-konverso .hidden-btn{transform:translateY(-100vh)!important;transition:transform .5s ease-in-out!important;animation:.5s fadeout;-moz-animation:.5s fadeout;-webkit-animation:.5s fadeout;-o-animation:.5s fadeout}@keyframes fadeout{from{opacity:1}to{opacity:0}}@-webkit-keyframes fadeout{from{opacity:1}to{opacity:0}}@-webkit-keyframes dot-keyframes{0%,100%{opacity:.4;transform:scale(1,1)}50%{opacity:1;transform:scale(1.2,1.2)}}@keyframes dot-keyframes{0%,100%{opacity:.4;transform:scale(1,1)}50%{opacity:1;transform:scale(1.2,1.2)}}::ng-deep ngx-konverso .loading-dots{text-align:center;width:100%}::ng-deep ngx-konverso .loading-dots--dot{-webkit-animation:1.5s ease-in-out infinite dot-keyframes;animation:1.5s ease-in-out infinite dot-keyframes;border-radius:10px;display:inline-block;height:10px;width:10px}::ng-deep ngx-konverso .loading-dots--dot:nth-child(2){-webkit-animation-delay:.5s;animation-delay:.5s}::ng-deep ngx-konverso .loading-dots--dot:nth-child(3){-webkit-animation-delay:1s;animation-delay:1s}::ng-deep ngx-konverso bot-first-visit,::ng-deep ngx-konverso bot-full-screen{display:table;min-height:100%;height:100%;width:100%}::ng-deep ngx-konverso bot-full-screen button:focus,::ng-deep ngx-konverso bot-full-screen input:focus{outline:0!important}::ng-deep ngx-konverso bot-full-screen .bot-button>*{position:relative}::ng-deep ngx-konverso bot-full-screen .button-lg{padding:10px!important;font-size:16px!important}::ng-deep ngx-konverso bot-full-screen .bot-button{cursor:pointer;opacity:.9;min-width:150px;border-radius:25px;padding:5px;position:relative;overflow:hidden;border-width:0;outline:0;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:opacity .3s}::ng-deep ngx-konverso bot-full-screen .bot-button span{display:block;padding:12px 24px}::ng-deep ngx-konverso bot-full-screen .bot-button:focus,::ng-deep ngx-konverso bot-full-screen .bot-button:hover{opacity:1}::ng-deep ngx-konverso bot-full-screen .bot-button:before{content:\"\";position:absolute;top:50%;left:50%;display:block;width:0;padding-top:0;border-radius:100%;background-color:rgba(236,240,241,.3);transform:translate(-50%,-50%)}::ng-deep ngx-konverso bot-full-screen .bot-button:active:before{width:120%;padding-top:120%;transition:width .2s ease-out,padding-top .2s ease-out}::ng-deep ngx-konverso bot-full-screen .bot-button-left{background:linear-gradient(107deg,#4862ab 0,#9d107d 100%) no-repeat padding-box;border-radius:22px;color:#fff!important;font:12px/19px nexa;height:44px;display:inline-block;letter-spacing:0;margin-right:25px}::ng-deep ngx-konverso bot-full-screen .bot-button-right{background:no-repeat padding-box #e5e8EE54;border:2px solid #c2c8d5!important;color:#404e6b!important;border-radius:22px;font:12px/19px nexa;height:44px;letter-spacing:0;display:inline-block}@-webkit-keyframes movetop2{from{opacity:0;margin-top:5%}to{opacity:1;margin-top:0}}@keyframes movetop2{from{opacity:0;margin-top:5%}to{opacity:1;margin-top:0}}::ng-deep ngx-konverso bot-full-screen .bot-button-grey{background:0 0!important;border:2px solid #171f26!important;border-radius:25px;min-height:44px!important;font:16px/25px \"Nexa Text\";letter-spacing:0;color:#171f26!important;display:inline-block;margin-right:25px;animation:.3s ease-in .3s both movetop2!important;-moz-animation:.3s ease-in .3s both movetop2!important;-webkit-animation:.3s ease-in .3s both movetop2!important;-o-animation:.3s ease-in .3s both movetop2!important}::ng-deep ngx-konverso bot-full-screen .bot-container{font-family:nexa,Roboto;width:100%;height:70vh;display:table;margin:auto;background-size:contain}@media screen and (max-width:500px){::ng-deep ngx-konverso bot-full-screen .bot-container{height:90vh}}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view{background-size:contain;width:auto;margin:auto;height:100%;display:table-cell;vertical-align:middle}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view img{margin:auto}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-logo-init-wrapper{padding-top:5%;width:100%;margin:auto;vertical-align:middle}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-logo-init-wrapper img{margin-left:auto;margin-right:auto;display:block}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-text{margin-top:4%;width:100%;min-height:150px;font-size:20px;text-align:center}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-bullet-step{margin-top:5%;text-align:center}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-bullet-step .bot-init-dot{border:1px solid;display:inline-block;width:12px;height:12px;margin-left:2.5px;margin-right:2.5px;border-radius:50%}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-button-wrapper{display:block;width:100%;text-align:center;margin-top:8%;margin-right:auto;margin-left:auto}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper{display:table;height:100%;width:100%;position:relative}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-logo{width:100%;margin:0 auto auto;vertical-align:middle;animation:.4s ease-in 1.8s both movetop!important;-moz-animation:.4s ease-in 1.8s both movetop!important;-webkit-animation:.4s ease-in 1.8s both movetop!important;-o-animation:.4s ease-in 1.8s both movetop!important}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-logo img{margin-left:auto;margin-right:auto;display:block;width:150px}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper{display:-ms-grid;display:grid;-ms-grid-columns:1fr;grid-template-columns:1fr;-ms-grid-rows:.3fr 0 1fr 0 .7fr;grid-template-rows:.3fr 1fr .7fr;gap:0 0;grid-template-areas:\"user-input\" \"bot-answer\" \"bot-input-wrapper\";overflow:auto!important}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .bot-answer{-ms-grid-row:3;-ms-grid-column:1;width:600px;text-align:center;margin:auto;font-size:18px;grid-area:bot-answer}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .user-input{-ms-grid-row:1;-ms-grid-column:1;font-size:15px;margin:auto;display:block;grid-area:user-input}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .user-input .data{padding:10px 20px;border-radius:23px 23px 0;max-width:550px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;position:relative;word-break:break-all;color:#fff;margin:5% auto auto;background:no-repeat padding-box #171f26}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .user-input .time{font-weight:300;position:absolute;width:200px;display:none;margin-left:95%;bottom:-1%;color:#000;font-size:10px}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .bot-input-wrapper{-ms-grid-row:5;-ms-grid-column:1;text-align:center;width:100%;bottom:2%;animation:.4s ease-in 3.2s both fadeinanswer;-moz-animation:.4s ease-in 3.2s both fadeinanswer;-webkit-animation:.4s ease-in 3.2s both fadeinanswer;-o-animation:.4s ease-in 3.2s both fadeinanswer;grid-area:bot-input-wrapper}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .bot-input-wrapper input{text-align:left;display:inline-block;padding:10px;color:#000;width:40%;background:0 0;border:2px solid #171f26;border-radius:6px;margin-right:10px}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .bot-input-wrapper button{background:no-repeat padding-box #171f26!important;border:2px solid #171f26;border-radius:6px;display:inline-block;width:calc(10% - 15px);padding:11px}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper{width:100%;display:table;height:100%}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-logo{max-width:100px;position:absolute;top:2%;left:2%}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-logo img{max-width:100px}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper{width:100%;position:relative;max-width:600px;height:60%!important;padding:15px 30px;margin:0 auto;overflow-y:scroll;direction:rtl;display:-ms-grid;display:grid;-ms-grid-columns:1fr;grid-template-columns:1fr;-ms-grid-rows:.3fr 0 1fr 0 .7fr;grid-template-rows:.3fr 1fr .7fr;gap:0 0;grid-template-areas:\"user-input\" \"bot-answer\" \"bot-input-wrapper\";overflow:auto}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper::-webkit-scrollbar{width:0!important}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat{position:absolute;overflow-x:hidden;display:flex;flex-direction:column-reverse;justify-content:flex-end;transform:rotate(180deg);min-height:100%;width:94%}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .bot-answer{-ms-grid-row:3;-ms-grid-column:1;font-size:15px;padding:10px 20px;border-radius:25px;color:#000;height:60%;background-color:transparent;max-width:550px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;position:relative;margin:15px 0;word-break:break-all;transform:rotate(180deg);direction:ltr;grid-area:bot-answer}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .bot-answer button{padding:10px;border:1px solid}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .user-input{-ms-grid-row:1;-ms-grid-column:1;font-size:15px;transform:rotate(180deg);direction:ltr;grid-area:user-input}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .user-input .data{padding:10px 20px;border-radius:23px 23px 0;max-width:550px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;position:relative;word-break:break-all;color:#fff;margin:15px 0 15px auto;background:no-repeat padding-box #171f26}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .user-input .time{font-weight:300;position:absolute;width:200px;display:none;margin-left:95%;bottom:-1%;color:#000;font-size:10px}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper{-ms-grid-row:5;-ms-grid-column:1;bottom:2%;display:table;width:100%;margin:auto;grid-area:bot-input-wrapper}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input-disable{width:100%;max-width:600px;margin:auto auto 10px;min-height:100px;max-height:200px;padding:2.5% 2.5% .5% .3%;text-align:center}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input{width:100%;max-width:600px;margin:auto auto 10px;min-height:100px;max-height:200px;padding:2.5% 2.5% .5%}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input input{display:inline-block;padding:10px;border-radius:25px;color:#000;width:60%;margin-right:15px;border:1px solid rgba(0,0,0,.2)}::ng-deep ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input button{display:inline-block;width:calc(36% - 15px);padding:11px}::ng-deep ngx-konverso .bot-mobile{font-family:nexa,Roboto;width:96vw!important;height:100vh;display:table;margin:auto;background-size:contain}::ng-deep ngx-konverso .bot-mobile .bot-view bot-first-visit{position:relative}::ng-deep ngx-konverso .bot-mobile .bot-view bot-first-visit .bot-logo-init-wrapper{margin-top:2.5vh}::ng-deep ngx-konverso .bot-mobile .bot-view bot-first-visit .bot-logo-init-wrapper img{margin-left:auto;margin-right:auto;display:block;max-width:150px}::ng-deep ngx-konverso .bot-mobile .bot-view bot-first-visit .bot-init-text{margin-top:4%;width:100%;min-height:150px;font-size:15px!important;text-align:center}::ng-deep ngx-konverso .bot-mobile .bot-view bot-first-visit .bot-init-button-wrapper{position:absolute;top:70%}::ng-deep ngx-konverso .bot-mobile .bot-view .bot-assistant-wrapper .bot-answer{width:70vw!important;text-align:center;margin:15.5% auto auto!important;font-size:15px!important}::ng-deep ngx-konverso .bot-mobile .bot-view .bot-assistant-wrapper .bot-input-wrapper{background:0 0!important;bottom:10vh!important}::ng-deep ngx-konverso .bot-mobile .bot-view .bot-assistant-wrapper .bot-input-wrapper input{width:90%!important}@keyframes movetop{from{margin-top:5%}to{margin-top:0}}@-webkit-keyframes movetop{from{margin-top:5%}to{margin-top:0}}.fade{animation:.7s ease-in .2s both fadeinanswer!important;-moz-animation:.7s ease-in .2s both fadeinanswer!important;-webkit-animation:.7s ease-in .2s both fadeinanswer!important;-o-animation:.7s ease-in .2s both fadeinanswer!important;display:block}.fade p{animation:.7s ease-in .2s both fadeinanswer!important;-moz-animation:.7s ease-in .2s both fadeinanswer!important;-webkit-animation:.7s ease-in .2s both fadeinanswer!important;-o-animation:.7s ease-in .2s both fadeinanswer!important}@-webkit-keyframes fadeinbutton{from{opacity:0}to{opacity:1}}@keyframes fadeinbutton{from{opacity:0}to{opacity:1}}@keyframes fadeinanswer{from{opacity:0}to{opacity:1}}@-webkit-keyframes fadeinanswer{from{opacity:0}to{opacity:1}}"]
-            })
-        ], KonversoComponent);
+        KonversoComponent.ɵfac = function KonversoComponent_Factory(t) { return new (t || KonversoComponent)(core.ɵɵdirectiveInject(KonversoService)); };
+        KonversoComponent.ɵcmp = core.ɵɵdefineComponent({ type: KonversoComponent, selectors: [["ngx-konverso"]], inputs: { showInput: "showInput" }, outputs: { ready: "ready", sended: "sended" }, decls: 1, vars: 14, consts: [[3, "assets", "firstVisit", "firstUsageStory", "displayData", "disableUserInput", "LastBotAnswer", "LastUserInput", "AssistantMode", "PlaceHolder", "NumberPlaceHolder", "IsMobile", "showInput", "send", "sendBotCommand", "readySend"]], template: function KonversoComponent_Template(rf, ctx) { if (rf & 1) {
+                core.ɵɵelementStart(0, "bot-full-screen", 0);
+                core.ɵɵlistener("send", function KonversoComponent_Template_bot_full_screen_send_0_listener($event) { return ctx.send($event); })("sendBotCommand", function KonversoComponent_Template_bot_full_screen_sendBotCommand_0_listener($event) { return ctx.sendBotCommand($event); })("readySend", function KonversoComponent_Template_bot_full_screen_readySend_0_listener($event) { return ctx._ready.emit($event); });
+                core.ɵɵelementEnd();
+            } if (rf & 2) {
+                core.ɵɵclassMap(ctx.isMobile ? "bot-mobile" : "");
+                core.ɵɵproperty("assets", ctx.assets)("firstVisit", ctx.firstVisit)("firstUsageStory", ctx.firstUsageStory)("displayData", ctx.History)("disableUserInput", ctx.disableUserInput)("LastBotAnswer", ctx.LastBotAnswer)("LastUserInput", ctx.LastUserInput)("AssistantMode", ctx.AssistantMode)("PlaceHolder", ctx.PlaceHolder)("NumberPlaceHolder", ctx.NumberPlaceHolder)("IsMobile", ctx.isMobile)("showInput", ctx.showInput);
+            } }, directives: [DesktopFullScreenComponent], styles: ["ngx-konverso{overflow:hidden;display:block;min-height:100%;height:100%}  ngx-konverso .hidden-btn{transform:translateY(-100vh)!important;transition:transform .5s ease-in-out!important;animation:.5s fadeout;-moz-animation:.5s fadeout;-webkit-animation:.5s fadeout;-o-animation:.5s fadeout}@keyframes fadeout{from{opacity:1}to{opacity:0}}@-webkit-keyframes fadeout{from{opacity:1}to{opacity:0}}@-webkit-keyframes dot-keyframes{0%,100%{opacity:.4;transform:scale(1,1)}50%{opacity:1;transform:scale(1.2,1.2)}}@keyframes dot-keyframes{0%,100%{opacity:.4;transform:scale(1,1)}50%{opacity:1;transform:scale(1.2,1.2)}}  ngx-konverso .loading-dots{text-align:center;width:100%}  ngx-konverso .loading-dots--dot{-webkit-animation:1.5s ease-in-out infinite dot-keyframes;animation:1.5s ease-in-out infinite dot-keyframes;border-radius:10px;display:inline-block;height:10px;width:10px}  ngx-konverso .loading-dots--dot:nth-child(2){-webkit-animation-delay:.5s;animation-delay:.5s}  ngx-konverso .loading-dots--dot:nth-child(3){-webkit-animation-delay:1s;animation-delay:1s}  ngx-konverso bot-first-visit,   ngx-konverso bot-full-screen{display:table;min-height:100%;height:100%;width:100%}  ngx-konverso bot-full-screen button:focus,   ngx-konverso bot-full-screen input:focus{outline:0!important}  ngx-konverso bot-full-screen .bot-button>*{position:relative}  ngx-konverso bot-full-screen .button-lg{padding:10px!important;font-size:16px!important}  ngx-konverso bot-full-screen .bot-button{cursor:pointer;opacity:.9;min-width:150px;border-radius:25px;padding:5px;position:relative;overflow:hidden;border-width:0;outline:0;box-shadow:0 1px 4px rgba(0,0,0,.6);transition:opacity .3s}  ngx-konverso bot-full-screen .bot-button span{display:block;padding:12px 24px}  ngx-konverso bot-full-screen .bot-button:focus,   ngx-konverso bot-full-screen .bot-button:hover{opacity:1}  ngx-konverso bot-full-screen .bot-button:before{content:\"\";position:absolute;top:50%;left:50%;display:block;width:0;padding-top:0;border-radius:100%;background-color:rgba(236,240,241,.3);transform:translate(-50%,-50%)}  ngx-konverso bot-full-screen .bot-button:active:before{width:120%;padding-top:120%;transition:width .2s ease-out,padding-top .2s ease-out}  ngx-konverso bot-full-screen .bot-button-left{background:linear-gradient(107deg,#4862ab 0,#9d107d 100%) no-repeat padding-box;border-radius:22px;color:#fff!important;font:12px/19px nexa;height:44px;display:inline-block;letter-spacing:0;margin-right:25px}  ngx-konverso bot-full-screen .bot-button-right{background:no-repeat padding-box #e5e8EE54;border:2px solid #c2c8d5!important;color:#404e6b!important;border-radius:22px;font:12px/19px nexa;height:44px;letter-spacing:0;display:inline-block}@-webkit-keyframes movetop2{from{opacity:0;margin-top:5%}to{opacity:1;margin-top:0}}@keyframes movetop2{from{opacity:0;margin-top:5%}to{opacity:1;margin-top:0}}  ngx-konverso bot-full-screen .bot-button-grey{background:0 0!important;border:2px solid #171f26!important;border-radius:25px;min-height:44px!important;font:16px/25px \"Nexa Text\";letter-spacing:0;color:#171f26!important;display:inline-block;margin-right:25px;animation:.3s ease-in .3s both movetop2!important;-moz-animation:.3s ease-in .3s both movetop2!important;-webkit-animation:.3s ease-in .3s both movetop2!important;-o-animation:.3s ease-in .3s both movetop2!important}  ngx-konverso bot-full-screen .bot-container{font-family:nexa,Roboto;width:100%;height:70vh;display:table;margin:auto;background-size:contain}@media screen and (max-width:500px){  ngx-konverso bot-full-screen .bot-container{height:90vh}}  ngx-konverso bot-full-screen .bot-container>.bot-view{background-size:contain;width:auto;margin:auto;height:100%;display:table-cell;vertical-align:middle}  ngx-konverso bot-full-screen .bot-container>.bot-view img{margin:auto}  ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-logo-init-wrapper{padding-top:5%;width:100%;margin:auto;vertical-align:middle}  ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-logo-init-wrapper img{margin-left:auto;margin-right:auto;display:block}  ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-text{margin-top:4%;width:100%;min-height:150px;font-size:20px;text-align:center}  ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-bullet-step{margin-top:5%;text-align:center}  ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-bullet-step .bot-init-dot{border:1px solid;display:inline-block;width:12px;height:12px;margin-left:2.5px;margin-right:2.5px;border-radius:50%}  ngx-konverso bot-full-screen .bot-container>.bot-view bot-first-visit .bot-init-button-wrapper{display:block;width:100%;text-align:center;margin-top:8%;margin-right:auto;margin-left:auto}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper{display:table;height:100%;width:100%;position:relative}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-logo{width:100%;margin:0 auto auto;vertical-align:middle;animation:.4s ease-in 1.8s both movetop!important;-moz-animation:.4s ease-in 1.8s both movetop!important;-webkit-animation:.4s ease-in 1.8s both movetop!important;-o-animation:.4s ease-in 1.8s both movetop!important}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-logo img{margin-left:auto;margin-right:auto;display:block;width:150px}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper{display:-ms-grid;display:grid;-ms-grid-columns:1fr;grid-template-columns:1fr;-ms-grid-rows:.3fr 0 1fr 0 .7fr;grid-template-rows:.3fr 1fr .7fr;gap:0 0;grid-template-areas:\"user-input\" \"bot-answer\" \"bot-input-wrapper\";overflow:auto!important}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .bot-answer{-ms-grid-row:3;-ms-grid-column:1;width:600px;text-align:center;margin:auto;font-size:18px;grid-area:bot-answer}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .user-input{-ms-grid-row:1;-ms-grid-column:1;font-size:15px;margin:auto;display:block;grid-area:user-input}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .user-input .data{padding:10px 20px;border-radius:23px 23px 0;max-width:550px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;position:relative;word-break:break-all;color:#fff;margin:5% auto auto;background:no-repeat padding-box #171f26}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .user-input .time{font-weight:300;position:absolute;width:200px;display:none;margin-left:95%;bottom:-1%;color:#000;font-size:10px}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .bot-input-wrapper{-ms-grid-row:5;-ms-grid-column:1;text-align:center;width:100%;bottom:2%;animation:.4s ease-in 3.2s both fadeinanswer;-moz-animation:.4s ease-in 3.2s both fadeinanswer;-webkit-animation:.4s ease-in 3.2s both fadeinanswer;-o-animation:.4s ease-in 3.2s both fadeinanswer;grid-area:bot-input-wrapper}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .bot-input-wrapper input{text-align:left;display:inline-block;padding:10px;color:#000;width:40%;background:0 0;border:2px solid #171f26;border-radius:6px;margin-right:10px}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-assistant-wrapper .bot-discussion-wrapper .bot-input-wrapper button{background:no-repeat padding-box #171f26!important;border:2px solid #171f26;border-radius:6px;display:inline-block;width:calc(10% - 15px);padding:11px}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper{width:100%;display:table;height:100%}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-logo{max-width:100px;position:absolute;top:2%;left:2%}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-logo img{max-width:100px}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper{width:100%;position:relative;max-width:600px;height:60%!important;padding:15px 30px;margin:0 auto;overflow-y:scroll;direction:rtl;display:-ms-grid;display:grid;-ms-grid-columns:1fr;grid-template-columns:1fr;-ms-grid-rows:.3fr 0 1fr 0 .7fr;grid-template-rows:.3fr 1fr .7fr;gap:0 0;grid-template-areas:\"user-input\" \"bot-answer\" \"bot-input-wrapper\";overflow:auto}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper::-webkit-scrollbar{width:0!important}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat{position:absolute;overflow-x:hidden;display:flex;flex-direction:column-reverse;justify-content:flex-end;transform:rotate(180deg);min-height:100%;width:94%}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .bot-answer{-ms-grid-row:3;-ms-grid-column:1;font-size:15px;padding:10px 20px;border-radius:25px;color:#000;height:60%;background-color:transparent;max-width:550px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;position:relative;margin:15px 0;word-break:break-all;transform:rotate(180deg);direction:ltr;grid-area:bot-answer}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .bot-answer button{padding:10px;border:1px solid}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .user-input{-ms-grid-row:1;-ms-grid-column:1;font-size:15px;transform:rotate(180deg);direction:ltr;grid-area:user-input}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .user-input .data{padding:10px 20px;border-radius:23px 23px 0;max-width:550px;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;position:relative;word-break:break-all;color:#fff;margin:15px 0 15px auto;background:no-repeat padding-box #171f26}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-discussion-wrapper .bot-chat .user-input .time{font-weight:300;position:absolute;width:200px;display:none;margin-left:95%;bottom:-1%;color:#000;font-size:10px}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper{-ms-grid-row:5;-ms-grid-column:1;bottom:2%;display:table;width:100%;margin:auto;grid-area:bot-input-wrapper}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input-disable{width:100%;max-width:600px;margin:auto auto 10px;min-height:100px;max-height:200px;padding:2.5% 2.5% .5% .3%;text-align:center}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input{width:100%;max-width:600px;margin:auto auto 10px;min-height:100px;max-height:200px;padding:2.5% 2.5% .5%}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input input{display:inline-block;padding:10px;border-radius:25px;color:#000;width:60%;margin-right:15px;border:1px solid rgba(0,0,0,.2)}  ngx-konverso bot-full-screen .bot-container>.bot-view .bot-chat-wrapper .bot-input-wrapper .bot-input button{display:inline-block;width:calc(36% - 15px);padding:11px}  ngx-konverso .bot-mobile{font-family:nexa,Roboto;width:96vw!important;height:100vh;display:table;margin:auto;background-size:contain}  ngx-konverso .bot-mobile .bot-view bot-first-visit{position:relative}  ngx-konverso .bot-mobile .bot-view bot-first-visit .bot-logo-init-wrapper{margin-top:2.5vh}  ngx-konverso .bot-mobile .bot-view bot-first-visit .bot-logo-init-wrapper img{margin-left:auto;margin-right:auto;display:block;max-width:150px}  ngx-konverso .bot-mobile .bot-view bot-first-visit .bot-init-text{margin-top:4%;width:100%;min-height:150px;font-size:15px!important;text-align:center}  ngx-konverso .bot-mobile .bot-view bot-first-visit .bot-init-button-wrapper{position:absolute;top:70%}  ngx-konverso .bot-mobile .bot-view .bot-assistant-wrapper .bot-answer{width:70vw!important;text-align:center;margin:15.5% auto auto!important;font-size:15px!important}  ngx-konverso .bot-mobile .bot-view .bot-assistant-wrapper .bot-input-wrapper{background:0 0!important;bottom:10vh!important}  ngx-konverso .bot-mobile .bot-view .bot-assistant-wrapper .bot-input-wrapper input{width:90%!important}@keyframes movetop{from{margin-top:5%}to{margin-top:0}}@-webkit-keyframes movetop{from{margin-top:5%}to{margin-top:0}}.fade[_ngcontent-%COMP%]{animation:.7s ease-in .2s both fadeinanswer!important;-moz-animation:.7s ease-in .2s both fadeinanswer!important;-webkit-animation:.7s ease-in .2s both fadeinanswer!important;-o-animation:.7s ease-in .2s both fadeinanswer!important;display:block}.fade[_ngcontent-%COMP%]   p[_ngcontent-%COMP%]{animation:.7s ease-in .2s both fadeinanswer!important;-moz-animation:.7s ease-in .2s both fadeinanswer!important;-webkit-animation:.7s ease-in .2s both fadeinanswer!important;-o-animation:.7s ease-in .2s both fadeinanswer!important}@-webkit-keyframes fadeinbutton{from{opacity:0}to{opacity:1}}@keyframes fadeinbutton{from{opacity:0}to{opacity:1}}@keyframes fadeinanswer{from{opacity:0}to{opacity:1}}@-webkit-keyframes fadeinanswer{from{opacity:0}to{opacity:1}}"] });
         return KonversoComponent;
     }());
-
-    var TranslateService = /** @class */ (function () {
-        function TranslateService() {
-            this.lang = {
-                'fr': {
-                    'GO': "C'est parti",
-                    'SEND': 'Envoyer',
-                    'SELECT': 'Vous devez sélectionner une réponse',
-                },
-                'en': {
-                    'GO': "Let's go",
-                    'SEND': 'Send',
-                    'SELECT': 'You must select an answer',
-                }
-            };
-        }
-        TranslateService.prototype.translate = function (l, word) {
-            return this.lang[l][word];
-        };
-        TranslateService.ɵprov = core.ɵɵdefineInjectable({ factory: function TranslateService_Factory() { return new TranslateService(); }, token: TranslateService, providedIn: "root" });
-        TranslateService = __decorate([
-            core.Injectable({
-                providedIn: 'root'
-            })
-        ], TranslateService);
-        return TranslateService;
-    }());
-
-    var DesktopFullScreenComponent = /** @class */ (function () {
-        function DesktopFullScreenComponent(translate, service) {
-            var _this = this;
-            this.service = service;
-            this.AssistantMode = false;
-            this.firstVisit = false;
-            this.IsMobile = false;
-            this.readySend = new core.EventEmitter(false);
-            this.send = new core.EventEmitter(null);
-            this.sendBotCommand = new core.EventEmitter(null);
-            this.sendEvent = new core.EventEmitter(null);
-            this.currentPlaceHolder = '';
-            this.sendBtn = '';
-            this.select = '';
-            this.changed = false;
-            this.newMessage = false;
-            this.messageCurrent = '';
-            this.msgArray = [];
-            this.botListening = false;
-            this.botListeningTimer = 0;
-            this.anim_done = false;
-            this.reloaded = false;
-            this.showWrapper = false;
-            this.showText = false;
-            service.lang.subscribe(function (r) {
-                if (service.locale) {
-                    _this.sendBtn = translate.translate(service.locale, 'SEND');
-                    _this.select = translate.translate(service.locale, 'SELECT');
-                }
-            });
-        }
-        DesktopFullScreenComponent.prototype.ngOnChanges = function () {
-            var _this = this;
-            var _a, _b;
-            var t = setInterval(function () {
-                if (document.querySelectorAll('.bot-answer')) {
-                    var elems = document.querySelectorAll('.bot-answer');
-                    if (elems.length > 0) {
-                        var index = 0, length_1 = elems.length;
-                        var rep = true;
-                        for (; index < length_1; index++) {
-                            var temp = elems[index];
-                            if (temp.style.opacity == '0') {
-                                temp.style.opacity = '1';
-                            }
-                        }
-                        _this.anim_done = rep;
-                        if (_this.anim_done) {
-                            clearInterval(t);
-                        }
-                    }
-                }
-            }, 100);
-            this.changed = false;
-            if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots"))) {
-                document.getElementById('text').innerHTML = '';
-            }
-            //console.log(this.LastBotAnswer);
-            if (!this.anim_done) {
-                var t2_1 = setInterval(function () {
-                    var _a, _b;
-                    if (_this.LastBotAnswer && !((_a = _this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes("loading-dots")) && _this.anim_done) {
-                        clearInterval(t2_1);
-                        var string = (_b = _this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(" ").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
-                        _this.msgArray = string.split("");
-                        if (_this.messageCurrent != string) {
-                            _this.newMessage = true;
-                            _this.messageCurrent = string;
-                            _this.launchLoop();
-                        }
-                        //this.looper(array, timer);
-                    }
-                }, 100);
-            }
-            else {
-                var string = (_b = this.LastBotAnswer) === null || _b === void 0 ? void 0 : _b.text.split('<br/>').join(" ").split('&eacute;').join('é').split('&egrave;').join('è').replace(/<[^>]*>?/gm, '').split('&nbsp;').join('');
-                this.msgArray = string.split("");
-                if (this.messageCurrent != string && string != '') {
-                    this.newMessage = true;
-                    this.messageCurrent = string;
-                    this.launchLoop();
-                }
-            }
-            setTimeout(function () {
-                _this.changed = true;
-            }, 100);
-        };
-        DesktopFullScreenComponent.prototype.launchLoop = function () {
-            var _this = this;
-            this.timer = setInterval(function () {
-                if (_this.msgArray.length == 0) {
-                    clearInterval(_this.timer);
-                }
-                if (_this.newMessage) {
-                    if (document.getElementById('text')) {
-                        document.getElementById('text').innerHTML = '';
-                    }
-                    _this.newMessage = false;
-                    //this.msgArray = this.messageCurrent.split("");
-                    clearInterval(_this.timer);
-                    _this.launchLoop();
-                }
-                _this.looper();
-            }, 60);
-        };
-        DesktopFullScreenComponent.prototype.looper = function () {
-            if (this.msgArray.length > 0 && !this.reloaded) {
-                if (document.getElementById('text')) {
-                    document.getElementById('text').innerHTML += this.msgArray.shift();
-                }
-            } /*else {
-              clearTimeout(timer);
-            }*/
-            /*timer = setTimeout(() => {
-              this.looper(array, timer);
-            }, 30);*/
-        };
-        DesktopFullScreenComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            if (this.PlaceHolder) {
-                this.currentPlaceHolder = this.PlaceHolder[Math.floor(Math.random() * this.PlaceHolder.length)];
-                setInterval(function () {
-                    _this.currentPlaceHolder = _this.PlaceHolder[Math.floor(Math.random() * _this.PlaceHolder.length)];
-                }, 3000);
-            }
-            setTimeout(function () {
-                _this.showWrapper = true;
-            }, 2000);
-            setTimeout(function () {
-                _this.showText = true;
-            }, 2500);
-            var t = setInterval(function () {
-                if (document.querySelectorAll('.bot-answer')) {
-                    var elems = document.querySelectorAll('.bot-answer');
-                    if (elems.length > 0) {
-                        var index = 0, length_2 = elems.length;
-                        var rep = true;
-                        for (; index < length_2; index++) {
-                            var temp = elems[index];
-                            if (temp.style.opacity == '0') {
-                                rep = false;
-                            }
-                        }
-                        _this.anim_done = rep;
-                        if (_this.anim_done) {
-                            clearInterval(t);
-                        }
-                    }
-                }
-            }, 100);
-            //run.run();
-            setInterval(function () {
-                if (_this.botListeningTimer > 0) {
-                    _this.botListeningTimer -= 1;
-                    if (_this.botListeningTimer > 0) {
-                        document.getElementById('bot').className = 'a-cue-voice speaking';
-                        document.getElementById('bot-icon').className = 'a-cue-icon speakingicon';
-                    }
-                    else {
-                        document.getElementById('bot').className = 'a-cue-voice';
-                        document.getElementById('bot-icon').className = 'a-cue-icon';
-                    }
-                    _this.botListening = _this.botListeningTimer > 0;
-                }
-            }, 500);
-        };
-        DesktopFullScreenComponent.prototype.userWriting = function (key) {
-            if (key.code == 'Enter') {
-                this.botListening = false;
-                this.botListeningTimer = 0;
-            }
-            else if (key.code == 'Backspace') {
-            }
-            else {
-                this.botListening = true;
-                if (this.botListeningTimer == 0) {
-                    this.botListeningTimer += 2;
-                }
-                else if (this.botListeningTimer < 5) {
-                    this.botListeningTimer += 1;
-                }
-            }
-        };
-        DesktopFullScreenComponent.prototype.emit = function ($event) {
-            this.firstVisit = false;
-            this.readySend.emit(true);
-        };
-        DesktopFullScreenComponent.prototype._send = function () {
-            var _a;
-            if (((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.endOfTopic) && this.LastUserInput) {
-                this.LastUserInput.message = '';
-            }
-            this.botListening = false;
-            var userData = {
-                message: this.userInput,
-                date: new Date().toLocaleTimeString(navigator.language, {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                })
-            };
-            this.send.emit(userData);
-            this.userInput = null;
-        };
-        DesktopFullScreenComponent.prototype.scroll = function (scrollHeight) {
-            return __awaiter(this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    return [2 /*return*/, new Promise(function (resolve) {
-                            setTimeout(function () {
-                                resolve(0);
-                            }, 300);
-                        })];
-                });
-            });
-        };
-        DesktopFullScreenComponent.prototype.byPassUserInput = function (botdata, i) {
-            var e_1, _a;
-            /*const buttons: NodeListOf<HTMLElement> = document.querySelectorAll('.show-btn');
-            for (let btn of Array.from(buttons)) {
-              btn.classList.add('hidden-btn');
-            }*/
-            var buttons = document.querySelectorAll('.bot-answer');
-            try {
-                for (var _b = __values(Array.from(buttons)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var btn = _c.value;
-                    btn.classList.add('hidden-btn');
-                }
-            }
-            catch (e_1_1) { e_1 = { error: e_1_1 }; }
-            finally {
-                try {
-                    if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                }
-                finally { if (e_1) throw e_1.error; }
-            }
-            this.sendBotCommand.emit(botdata);
-            setTimeout(function () {
-                var e_2, _a;
-                var buttons = document.querySelectorAll('.bot-answer');
-                try {
-                    for (var _b = __values(Array.from(buttons)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                        var btn = _c.value;
-                        btn.classList.remove('hidden-btn');
-                    }
-                }
-                catch (e_2_1) { e_2 = { error: e_2_1 }; }
-                finally {
-                    try {
-                        if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-                    }
-                    finally { if (e_2) throw e_2.error; }
-                }
-            }, 1000);
-        };
-        DesktopFullScreenComponent.ctorParameters = function () { return [
-            { type: TranslateService },
-            { type: KonversoService }
-        ]; };
-        __decorate([
-            core.Input()
-        ], DesktopFullScreenComponent.prototype, "AssistantMode", void 0);
-        __decorate([
-            core.Input()
-        ], DesktopFullScreenComponent.prototype, "assets", void 0);
-        __decorate([
-            core.Input()
-        ], DesktopFullScreenComponent.prototype, "firstVisit", void 0);
-        __decorate([
-            core.Input()
-        ], DesktopFullScreenComponent.prototype, "firstUsageStory", void 0);
-        __decorate([
-            core.Input()
-        ], DesktopFullScreenComponent.prototype, "displayData", void 0);
-        __decorate([
-            core.Input()
-        ], DesktopFullScreenComponent.prototype, "disableUserInput", void 0);
-        __decorate([
-            core.Input()
-        ], DesktopFullScreenComponent.prototype, "LastUserInput", void 0);
-        __decorate([
-            core.Input()
-        ], DesktopFullScreenComponent.prototype, "LastBotAnswer", void 0);
-        __decorate([
-            core.Input()
-        ], DesktopFullScreenComponent.prototype, "PlaceHolder", void 0);
-        __decorate([
-            core.Input()
-        ], DesktopFullScreenComponent.prototype, "IsMobile", void 0);
-        __decorate([
-            core.Input()
-        ], DesktopFullScreenComponent.prototype, "showInput", void 0);
-        __decorate([
-            core.Output()
-        ], DesktopFullScreenComponent.prototype, "readySend", void 0);
-        __decorate([
-            core.Output()
-        ], DesktopFullScreenComponent.prototype, "send", void 0);
-        __decorate([
-            core.Output()
-        ], DesktopFullScreenComponent.prototype, "sendBotCommand", void 0);
-        __decorate([
-            core.Output()
-        ], DesktopFullScreenComponent.prototype, "sendEvent", void 0);
-        DesktopFullScreenComponent = __decorate([
-            core.Component({
-                selector: 'bot-full-screen',
-                template: "<!--<div class=\"bot-container\"  [class]=\"IsMobile ? 'bot-mobile' : ''\" [style]=\"{'background-color' : '#100652 0% 0% no-repeat padding-box;'}\"-->\n\n  <!--<canvas class=\"orb-canvas\"></canvas>\n  <div class=\"overlay\">\n    <div class=\"overlay__inner\">\n    </div>\n  </div>-->\n  <div class=\"bot-container\"  [class]=\"IsMobile ? 'bot-mobile' : ''\" [style]=\"{'background-color' : '#100652 0% 0% no-repeat padding-box;'}\"\n     xmlns=\"http://www.w3.org/1999/html\">\n  <div class=\"bot-view\">\n    <ng-container *ngIf=\"firstVisit && firstUsageStory\">\n      <bot-first-visit [firstUsageStory]=\"firstUsageStory\" [assets]=\"assets\"\n                       (ready)=\"emit($event)\"></bot-first-visit>\n    </ng-container>\n    <ng-container *ngIf=\"!firstVisit || !firstUsageStory\">\n      <button (click)=\"byPassUserInput('exit', 0)\" id=\"exit-btn\" style=\"display: none;\"></button>\n\n      <div class=\"bot-assistant-wrapper\" *ngIf=\"AssistantMode\">\n        <!--<div *ngIf=\"!botListening\" class=\"bot-logo\" id=\"botlogo\">\n          <img [src]=\"assets.FullSizeLogo\">\n        </div>-->\n        <div [ngStyle]=\"{'height': '40%'}\" class=\"bot-logo bot-listening\">\n          <div [ngStyle]=\"{'transform': 'translateY(-10vh)'}\" class=\"m-carl-notification\">\n            <div class=\"m-carl-notification-cue m-cue\">\n              <div *ngIf=\"botListening\" class=\"a-cue-voice\" id=\"bot\">\n                <div class=\"a-cue-voice-el voice1\"></div>\n                <div class=\"a-cue-voice-el voice2\"></div>\n                <div class=\"a-cue-voice-el voice3\"></div>\n                <div class=\"a-cue-voice-el voice4\"></div>\n                <div class=\"a-cue-voice-el\"></div>\n              </div>\n              <div class=\"a-cue-icon\" id=\"bot-icon\"></div>\n            </div>\n          </div>\n        </div>\n        <div class=\"bot-discussion-wrapper\" style=\"min-height: 60%; max-height: 60%; height: 60%; /*max-height: 120px;*/\">\n          <ng-container *ngIf=\"LastUserInput\">\n            <div class=\"user-input\" *ngIf=\"LastUserInput && LastUserInput?.message != ''\">\n              <div class=\"data\" [style]=\"{\n                     color : assets?.ColorSet?.Secondary\n                    }\">\n                {{LastUserInput.message}}\n              </div>\n              <span class=\"time\">{{LastUserInput.date}}</span>\n            </div>\n          </ng-container>\n          <ng-container *ngIf=\"LastBotAnswer\">\n            <div class=\"bot-answer\">\n              <ng-container>\n\n              </ng-container>\n              <ng-container *ngIf=\"LastBotAnswer.text\">\n                <!--<span *ngIf=\"!LastBotAnswer.text.includes('loading-dots')\" id=\"text\"></span><br>\n                <span *ngIf=\"changed && LastBotAnswer.text.includes('loading-dots')\" class=\"fade\" [innerHTML]=\"LastBotAnswer.text | safeHtml\"></span><br>\n                -->\n                <span *ngIf=\"!LastBotAnswer.text.includes('loading-dots') && changed && showText\" class=\"fade\" [innerHTML]=\"LastBotAnswer.text | safeHtml\"></span>\n                <span *ngIf=\"LastBotAnswer.text.includes('loading-dots')\" class=\"fade\" id=\"loading-creation\"></span>\n                <!--<br>-->\n              </ng-container>\n              <ng-container *ngIf=\"LastBotAnswer.medias && LastBotAnswer.medias.length\n                   && LastBotAnswer.medias[0].required_actions\n                   && LastBotAnswer.medias[0].required_actions.length > 0\n                   && !LastBotAnswer.text.includes('loading-dots')\">\n                <ng-container *ngFor=\"let suggest of LastBotAnswer.medias[0].required_actions; let i = index\">\n                  <ng-container *ngIf=\"suggest.format === 'button'\"  >\n                    <button *ngIf=\"suggest.value?.title == 'Terminer' && changed || suggest.value?.title == 'Quit' && changed\" [style]=\"{\n                      borderColor : assets?.ColorSet?.Primary,\n                      color : assets?.ColorSet?.Primary\n             }\"  class=\"bot-button bot-button-left show-btn\" (click)=\"byPassUserInput(suggest?.value?.onClick, i)\"\n                             [innerHTML]=\"suggest.label|| suggest.value?.displayedMessage || suggest.value?.title \">\n                    </button>\n                    <button *ngIf=\"suggest.value?.title == 'Nouvelle Demande' && changed || suggest.value?.title == 'New Request' && changed\" [style]=\"{\n                      borderColor : assets?.ColorSet?.Primary,\n                      color : assets?.ColorSet?.Primary\n             }\"  class=\"bot-button bot-button-right show-btn\" (click)=\"byPassUserInput(suggest?.value?.onClick, i)\"\n                             [innerHTML]=\"suggest.label|| suggest.value?.displayedMessage || suggest.value?.title \">\n                    </button>\n                    <button *ngIf=\"suggest.value?.title && suggest.value?.title != 'Terminer' && suggest.value?.title != 'Quit' && suggest.value?.title != 'Nouvelle Demande' && suggest.value?.title != 'New Request' && changed\" \n                    [style]=\"{\n                     borderColor : assets?.ColorSet?.Primary,\n                     color : assets?.ColorSet?.Primary\n            }\"  class=\"bot-button bot-button-grey show-btn\" (click)=\"byPassUserInput(suggest?.value?.onClick, i)\"\n                            [innerHTML]=\"suggest.label|| suggest.value?.displayedMessage || suggest.value?.title \">\n                    </button>\n                  </ng-container>\n                </ng-container>\n              </ng-container>\n\n            </div>\n          </ng-container>\n          <div class=\"bot-input-wrapper\">\n            <div class=\"bot-input\" id=\"bot-input-div\" *ngIf=\"!disableUserInput && showInput\">\n              <input type=\"text\" [(ngModel)]=\"userInput\" (keyup.enter)=\"userInput && _send()\" (keyup)=\"userWriting($event)\" maxlength=\"200\"\n                     [placeholder]=\"currentPlaceHolder\">\n              <button class=\"bot-button\" [style]=\"{\n                     backgroundColor : assets?.ColorSet?.Primary,\n                     color : assets?.ColorSet?.Secondary\n            }\" (click)=\"_send()\" [disabled]=\"!userInput\">{{ sendBtn }}\n              </button>\n            </div>\n            <div class=\"bot-input-disable\" *ngIf=\"disableUserInput\">\n              <i>{{ select }}</i>\n            </div>\n          </div>\n        </div>\n      </div>\n      <div class=\"bot-chat-wrapper\" *ngIf=\"!AssistantMode\">\n        {{AssistantMode}}\n        <div class=\"bot-discussion-wrapper\" #scrollMe [scrollTop]=\"scrollMe.scrollTo(0, 9999999)\">\n          <div class=\"bot-chat\">\n\n            <ng-container *ngFor=\"let entry of displayData\">\n              <ng-container *ngIf=\"entry.date\">\n                <div class=\"user-input\">\n                  <div class=\"data\" [style]=\"{\n                     backgroundColor : assets?.ColorSet?.Primary,\n                     color : assets?.ColorSet?.Secondary\n                    }\">\n                    {{entry.message}}\n                  </div>\n                  <span class=\"time\">{{entry.date}}</span>\n                </div>\n              </ng-container>\n              <ng-container *ngIf=\"!entry.date\">\n                <div class=\"bot-answer\">\n                  <ng-container *ngIf=\"entry.text\">\n                    <span *ngIf=\"changed\" class=\"fade\" [innerHTML]=\"entry.text | safeHtml\"></span>\n                    <!--<br>-->\n                  </ng-container>\n                  <ng-container *ngIf=\"entry.medias && entry.medias.length\n                   && entry.medias[0].required_actions\n                   && entry.medias[0].required_actions.length\">\n                    <ng-container *ngFor=\"let suggest of entry.medias[0].required_actions\">\n                      <ng-container *ngIf=\"suggest.format === 'button'\">\n                        <button *ngIf=\"changed\" [style]=\"{\n                     borderColor : assets?.ColorSet?.Primary,\n                     color : assets?.ColorSet?.Primary\n            }\" class=\"bot-button fade\" (click)=\"byPassUserInput(suggest?.value?.onClick)\"\n                                [innerHTML]=\"suggest.label|| suggest.value?.displayedMessage || suggest.value?.title \"></button>\n                      </ng-container>\n                    </ng-container>\n                  </ng-container>\n\n                </div>\n              </ng-container>\n            </ng-container>\n          </div>\n        </div>\n        <div class=\"bot-input-wrapper\">\n          <div class=\"bot-input\" *ngIf=\"!disableUserInput && showInput\">\n            <input type=\"text\" [(ngModel)]=\"userInput\" (keyup.enter)=\"userInput && _send()\" (keyup)=\"userWriting($event)\" maxlength=\"200\"\n                   [placeholder]=\"currentPlaceHolder\">\n            <button *ngIf=\"changed\" class=\"bot-button\" [style]=\"{\n                     backgroundColor : assets?.ColorSet?.Primary,\n                     color : assets?.ColorSet?.Secondary\n            }\" (click)=\"_send()\" [disabled]=\"!userInput\">{{ sendBtn }}\n            </button>\n          </div>\n          <div class=\"bot-input-disable\" *ngIf=\"disableUserInput\">\n            <i>{{ select }}</i>\n          </div>\n        </div>\n        <div class=\"bot-logo\">\n          <img [src]=\"assets.FullSizeLogo\">\n        </div>\n      </div>\n    </ng-container>\n\n  </div>\n</div>\n",
-                styles: ["@-webkit-keyframes gradient{0%,100%{background-position:50% 0}50%{background-position:50% 100%}}@keyframes gradient{0%,100%{background-position:50% 0}50%{background-position:50% 100%}}@keyframes pulsebot{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}@-webkit-keyframes pulsebot{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}.bot-listening{height:100%;background:0 0}.bot-listening:before{content:\"\";position:absolute;top:-60vw;left:-80vw;width:150vw;height:150vw;border-radius:50%;background:0 0}.bot-listening:after{content:\"\";position:absolute;top:-40vw;left:-50vw;width:90vw;height:90vw;border-radius:50%;background:0 0}@media screen and (min--moz-device-pixel-ratio:0){.m-carl-notification{transform:translate(0)!important}}.m-carl-notification{position:relative;top:50%}.m-carl-notification .m-cue{width:168px;height:168px;margin:0 auto 50px;display:flex;justify-content:center;align-items:center}.m-carl-notification .m-cue .a-cue-icon{position:absolute;width:100px;height:100px;transform:translateX(5px) translateY(5px);border-radius:50%;background:radial-gradient(circle at 50% 50%,#9d107d 1px,#9d107d 3%,#580b58 60%);box-shadow:0 0 10px 5px rgb(0 0 0 / 25%);-webkit-animation:3.5s infinite pulsebot;animation:3.5s infinite pulsebot}.m-carl-notification .m-cue .a-cue-voice{transform-origin:center center;height:130px;width:130px;position:absolute;display:flex;justify-content:center;align-items:center}.m-carl-notification .m-cue .a-cue-voice-el{position:absolute;width:130px;height:130px;border-radius:50%;background:#fff;opacity:.2;filter:blur(2px)}.voice1{background:#9a147f!important}.voice2{background:#773691!important}.voice3{background:#4e5ca8!important}.voice4{background:#abc1f1!important}.m-carl-notification .m-cue .a-cue-voice-el:nth-child(1){animation:6s infinite reverse both hovering}.m-carl-notification .m-cue .a-cue-voice-el:nth-child(2){-webkit-animation:7s infinite both hovering;animation:7s infinite both hovering}.m-carl-notification .m-cue .a-cue-voice-el:nth-child(3){animation:8s infinite reverse both hovering}.m-carl-notification .m-cue .a-cue-voice-el:nth-child(4){-webkit-animation:9s infinite both hovering;animation:9s infinite both hovering}.m-carl-notification .m-cue .a-cue-voice-el:nth-child(5){animation:10s infinite reverse both hovering}.m-carl-notification .m-cue .speaking{-webkit-animation:2s infinite pulse;animation:2s infinite pulse}.m-carl-notification .a-caption{color:#fff;font-size:1.5em;line-height:1.8em;text-shadow:0 1px 2px rgba(0,0,0,.26);text-align:center}.m-carl-notification .a-caption.speaking{text-shadow:0 0 0;opacity:.4}@-webkit-keyframes hovering{from{transform:rotate(0) translateX(18px) rotate(0)}to{transform:rotate(360deg) translateX(18px) rotate(-360deg)}}@keyframes hovering{from{transform:rotate(0) translateX(18px) rotate(0)}to{transform:rotate(360deg) translateX(18px) rotate(-360deg)}}@-webkit-keyframes pulse{0%,40%,60%{transform:scale(1)}10%,80%{transform:scale(1.15)}15%,50%,90%{transform:scale(1.25)}100%,20%{transform:scale(1.05)}30%,65%{transform:scale(1.3)}55%{transform:scale(1.1)}70%{transform:scale(1.2)}}@keyframes pulse{0%,40%,60%{transform:scale(1)}10%,80%{transform:scale(1.15)}15%,50%,90%{transform:scale(1.25)}100%,20%{transform:scale(1.05)}30%,65%{transform:scale(1.3)}55%{transform:scale(1.1)}70%{transform:scale(1.2)}}"]
-            })
-        ], DesktopFullScreenComponent);
-        return DesktopFullScreenComponent;
-    }());
-
-    var FirstVisitComponent = /** @class */ (function () {
-        function FirstVisitComponent(translate, service) {
-            var _this = this;
-            this.service = service;
-            this.ready = new core.EventEmitter();
-            this.position = 0;
-            this.current = '';
-            this.go = '';
-            service.lang.subscribe(function (r) {
-                if (service.locale) {
-                    _this.go = translate.translate(service.locale, 'GO');
-                }
-            });
-        }
-        FirstVisitComponent.prototype.ngOnInit = function () {
-            var _this = this;
-            this.current = this.firstUsageStory[this.position];
-            var clear = setInterval(function () {
-                if (_this.position < (_this.firstUsageStory.length - 1)) {
-                    _this.current = _this.firstUsageStory[++_this.position];
-                }
-                else {
-                    clearInterval(clear);
-                }
-            }, 5000);
-        };
-        FirstVisitComponent.prototype.goTo = function (pos) {
-            this.position = pos;
-            this.current = this.firstUsageStory[this.position];
-        };
-        FirstVisitComponent.prototype.start = function () {
-            //console.log('OOOKKKK')
-            this.ready.emit(true);
-        };
-        FirstVisitComponent.ctorParameters = function () { return [
-            { type: TranslateService },
-            { type: KonversoService }
-        ]; };
-        __decorate([
-            core.Input()
-        ], FirstVisitComponent.prototype, "firstUsageStory", void 0);
-        __decorate([
-            core.Input()
-        ], FirstVisitComponent.prototype, "assets", void 0);
-        __decorate([
-            core.Output()
-        ], FirstVisitComponent.prototype, "ready", void 0);
-        FirstVisitComponent = __decorate([
-            core.Component({
-                selector: 'bot-first-visit',
-                template: "<ng-container>\n  <div class=\"bot-logo-init-wrapper\">\n    <!--<img [src]=\"assets.FullSizeLogo\">-->\n    <div class=\"m-carl-notification\">\n      <div class=\"m-carl-notification-cue m-cue\">\n        <div class=\"a-cue-icon\" id=\"bot-icon\"></div>\n      </div>\n    </div>\n  </div>\n  <div class=\"bot-init-text\" [innerHTML]=\"current | safeHtml\"></div>\n  <div class=\"bot-init-bullet-step\">\n      <span *ngFor=\"let elem of firstUsageStory ; let pos = index\" class=\"bot-init-dot\"\n            [style]=\"pos === position ? {\n              backgroundColor : assets?.ColorSet?.Primary,\n              borderColor :assets?.ColorSet?.Primary\n              }:{\n                backgroundColor :assets?.ColorSet?.Secondary,\n                borderColor :assets?.ColorSet?.Primary\n                }\" (click)=\"goTo(pos)\">\n      </span>\n  </div>\n  <div class=\"bot-init-button-wrapper\">\n    <button mat-button class=\"bot-button button-lg\" [style]=\"{\n      backgroundColor : '#171F26',\n      color : assets?.ColorSet?.Secondary\n    }\" (click)=\"start()\">{{ go }}</button>\n  </div>\n\n</ng-container>\n",
-                styles: ["@keyframes pulsebot{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}@-webkit-keyframes pulsebot{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}.bot-listening{height:100%;background:0 0}.bot-listening:before{content:\"\";position:absolute;top:-60vw;left:-80vw;width:150vw;height:150vw;border-radius:50%;background:0 0}.bot-listening:after{content:\"\";position:absolute;top:-40vw;left:-50vw;width:90vw;height:90vw;border-radius:50%;background:0 0}.m-carl-notification{position:relative;top:50%}.m-carl-notification .m-cue{width:168px;height:168px;margin:0 auto 50px;display:flex;justify-content:center;align-items:center}.m-carl-notification .m-cue .a-cue-icon{position:absolute;width:100px;height:100px;transform:translateX(5px) translateY(5px);border-radius:50%;background:radial-gradient(circle at 50% 50%,#9d107d 1px,#9d107d 3%,#580b58 60%);box-shadow:0 0 10px 5px rgba(0,0,0,.25);-webkit-animation:3.5s infinite pulsebot;animation:3.5s infinite pulsebot}.m-carl-notification .m-cue .a-cue-voice{transform-origin:center center;height:190px;width:190px;position:absolute;display:flex;justify-content:center;align-items:center}.m-carl-notification .m-cue .a-cue-voice-el{position:absolute;width:150px;height:150px;border-radius:50%;background:#fff;opacity:.2;filter:blur(2px)}.voice1{background:#9a147f!important}.voice2{background:#773691!important}.voice3{background:#4e5ca8!important}.voice4{background:#abc1f1!important}.m-carl-notification .m-cue .a-cue-voice-el:nth-child(1){animation:6s infinite reverse both hovering}.m-carl-notification .m-cue .a-cue-voice-el:nth-child(2){-webkit-animation:7s infinite both hovering;animation:7s infinite both hovering}.m-carl-notification .m-cue .a-cue-voice-el:nth-child(3){animation:8s infinite reverse both hovering}.m-carl-notification .m-cue .a-cue-voice-el:nth-child(4){-webkit-animation:9s infinite both hovering;animation:9s infinite both hovering}.m-carl-notification .m-cue .a-cue-voice-el:nth-child(5){animation:10s infinite reverse both hovering}.m-carl-notification .m-cue .speaking{-webkit-animation:2s infinite pulse;animation:2s infinite pulse}.m-carl-notification .a-caption{color:#fff;font-size:1.5em;line-height:1.8em;text-shadow:0 1px 2px rgba(0,0,0,.26);text-align:center}.m-carl-notification .a-caption.speaking{text-shadow:0 0 0;opacity:.4}@-webkit-keyframes hovering{from{transform:rotate(0) translateX(18px) rotate(0)}to{transform:rotate(360deg) translateX(18px) rotate(-360deg)}}@keyframes hovering{from{transform:rotate(0) translateX(18px) rotate(0)}to{transform:rotate(360deg) translateX(18px) rotate(-360deg)}}@-webkit-keyframes pulse{0%,40%,60%{transform:scale(1)}10%,80%{transform:scale(1.15)}15%,50%,90%{transform:scale(1.25)}100%,20%{transform:scale(1.05)}30%,65%{transform:scale(1.3)}55%{transform:scale(1.1)}70%{transform:scale(1.2)}}@keyframes pulse{0%,40%,60%{transform:scale(1)}10%,80%{transform:scale(1.15)}15%,50%,90%{transform:scale(1.25)}100%,20%{transform:scale(1.05)}30%,65%{transform:scale(1.3)}55%{transform:scale(1.1)}70%{transform:scale(1.2)}}"]
-            })
-        ], FirstVisitComponent);
-        return FirstVisitComponent;
-    }());
-
-    var SafeHtmlPipe = /** @class */ (function () {
-        function SafeHtmlPipe(sanitizer) {
-            this.sanitizer = sanitizer;
-        }
-        SafeHtmlPipe.prototype.transform = function (value) {
-            return this.sanitizer.bypassSecurityTrustHtml(value);
-        };
-        SafeHtmlPipe.ctorParameters = function () { return [
-            { type: platformBrowser.DomSanitizer }
-        ]; };
-        SafeHtmlPipe = __decorate([
-            core.Pipe({
-                name: 'safeHtml'
-            })
-        ], SafeHtmlPipe);
-        return SafeHtmlPipe;
-    }());
+    /*@__PURE__*/ (function () { core.ɵsetClassMetadata(KonversoComponent, [{
+            type: core.Component,
+            args: [{
+                    selector: 'ngx-konverso',
+                    templateUrl: 'konverso.component.html',
+                    styleUrls: ['../../assets/main.scss']
+                }]
+        }], function () { return [{ type: KonversoService }]; }, { ready: [{
+                type: core.Output
+            }], sended: [{
+                type: core.Output
+            }], showInput: [{
+                type: core.Input
+            }] }); })();
 
     // @ts-ignore
     var KonversoModule = /** @class */ (function () {
@@ -1068,43 +1575,47 @@
                 throw new Error('KonversoModule is already loaded. Import it in the AppModule only');
             }
         }
-        KonversoModule_1 = KonversoModule;
         KonversoModule.forRoot = function (config) {
             return {
-                ngModule: KonversoModule_1,
+                ngModule: KonversoModule,
                 providers: [
                     { provide: '__NgxKonverso__', useValue: config },
                     KonversoService
                 ]
             };
         };
-        var KonversoModule_1;
-        KonversoModule.ctorParameters = function () { return [
-            { type: KonversoModule, decorators: [{ type: core.Optional }, { type: core.SkipSelf }] }
-        ]; };
-        KonversoModule = KonversoModule_1 = __decorate([
-            core.NgModule({
-                declarations: [KonversoComponent, DesktopFullScreenComponent, FirstVisitComponent, SafeHtmlPipe],
-                imports: [
+        KonversoModule.ɵmod = core.ɵɵdefineNgModule({ type: KonversoModule });
+        KonversoModule.ɵinj = core.ɵɵdefineInjector({ factory: function KonversoModule_Factory(t) { return new (t || KonversoModule)(core.ɵɵinject(KonversoModule, 12)); }, providers: [KonversoService], imports: [[
                     forms.FormsModule,
                     http.HttpClientModule,
                     common.CommonModule,
-                ],
-                providers: [KonversoService],
-                exports: [KonversoComponent]
-            }),
-            __param(0, core.Optional()), __param(0, core.SkipSelf())
-        ], KonversoModule);
+                ]] });
         return KonversoModule;
     }());
+    (function () { (typeof ngJitMode === "undefined" || ngJitMode) && core.ɵɵsetNgModuleScope(KonversoModule, { declarations: [KonversoComponent, DesktopFullScreenComponent, FirstVisitComponent, SafeHtmlPipe], imports: [forms.FormsModule,
+            http.HttpClientModule,
+            common.CommonModule], exports: [KonversoComponent] }); })();
+    /*@__PURE__*/ (function () { core.ɵsetClassMetadata(KonversoModule, [{
+            type: core.NgModule,
+            args: [{
+                    declarations: [KonversoComponent, DesktopFullScreenComponent, FirstVisitComponent, SafeHtmlPipe],
+                    imports: [
+                        forms.FormsModule,
+                        http.HttpClientModule,
+                        common.CommonModule,
+                    ],
+                    providers: [KonversoService],
+                    exports: [KonversoComponent]
+                }]
+        }], function () { return [{ type: KonversoModule, decorators: [{
+                    type: core.Optional
+                }, {
+                    type: core.SkipSelf
+                }] }]; }, null); })();
 
     exports.KonversoComponent = KonversoComponent;
     exports.KonversoModule = KonversoModule;
     exports.KonversoService = KonversoService;
-    exports.ɵa = DesktopFullScreenComponent;
-    exports.ɵb = TranslateService;
-    exports.ɵc = FirstVisitComponent;
-    exports.ɵd = SafeHtmlPipe;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

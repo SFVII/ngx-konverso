@@ -1,6 +1,7 @@
 import { EventEmitter, OnInit } from '@angular/core';
 import { KonversoService } from './konverso.service';
 import { ColorSet, DefaultAssets, OpenChatBotResponse, UserInput } from '../interface/KonversoInterface';
+import * as i0 from "@angular/core";
 export declare class KonversoComponent implements OnInit {
     private service;
     _ready: EventEmitter<boolean>;
@@ -19,6 +20,7 @@ export declare class KonversoComponent implements OnInit {
     LastUserInput: UserInput;
     LastBotAnswer: OpenChatBotResponse;
     PlaceHolder: string[];
+    NumberPlaceHolder: string[];
     Welcome: string;
     constructor(service: KonversoService);
     private triggerKbotResponse;
@@ -26,4 +28,6 @@ export declare class KonversoComponent implements OnInit {
     send($event: UserInput): Promise<boolean>;
     sendBotCommand($event: string, push?: boolean): Promise<void>;
     private _isMobile;
+    static ɵfac: i0.ɵɵFactoryDef<KonversoComponent>;
+    static ɵcmp: i0.ɵɵComponentDefWithMeta<KonversoComponent, "ngx-konverso", never, { "showInput": "showInput"; }, { "ready": "ready"; "sended": "sended"; }, never>;
 }
