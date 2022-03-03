@@ -321,13 +321,12 @@ var KonversoComponent = /** @class */ (function () {
                         }
                         this.sended.emit(true);
                         this.LastBotAnswer.text = '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
-                        if (parseInt($event.message) == NaN) {
+                        if (!(typeof $event.message === "number")) {
                             this.History.push($event);
                         }
-                        console.log(parseInt($event.message));
                         if (this.AssistantMode) {
                             if (this.LastUserInput) {
-                                if (parseInt($event.message) == NaN) {
+                                if (!(typeof $event.message === "number")) {
                                     this.LastUserInput.message += ' ' + $event.message;
                                     this.LastUserInput.date = $event.date;
                                 }
