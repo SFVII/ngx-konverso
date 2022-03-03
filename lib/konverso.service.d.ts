@@ -10,6 +10,7 @@ export declare class KonversoService {
     firstUsageStory: string[];
     ColorSet: ColorSet;
     PlaceHolder: string[];
+    NumberPlaceHolder: string[];
     AssistantMode: boolean;
     Welcome: string;
     readyState: boolean;

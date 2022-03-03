@@ -57,6 +57,7 @@ export interface KonversoInterface {
     BotInitMessage?: BotInitMessage;
     AssistantMode?: boolean;
     InputPlaceHolder: WildCardObjectArray;
+    InputNumberPlaceHolder: WildCardObjectArray;
 }
 /**
  *  Inteface setting for authentication

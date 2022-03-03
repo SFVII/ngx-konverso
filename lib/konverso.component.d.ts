@@ -19,6 +19,7 @@ export declare class KonversoComponent implements OnInit {
     LastUserInput: UserInput;
     LastBotAnswer: OpenChatBotResponse;
     PlaceHolder: string[];
+    NumberPlaceHolder: string[];
     Welcome: string;
     constructor(service: KonversoService);
     private triggerKbotResponse;
