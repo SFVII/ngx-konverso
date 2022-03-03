@@ -875,8 +875,8 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         if (document.getElementById('text') && !((_a = this.LastBotAnswer) === null || _a === void 0 ? void 0 : _a.text.includes('loading-dots'))) {
             document.getElementById('text').innerHTML = '';
         }
-        var displayZone = document.querySelector('.bot-answer');
-        if (displayZone && displayZone.querySelector('number')) {
+        console.log('-------> enter', document.querySelector('.bot-answer number'));
+        if (document.querySelector('.bot-answer number')) {
             this.inputType = 'number';
             this.inputLimit = 999;
             this.currentPlaceHolder = this.NumberPlaceHolder[Math.floor(Math.random() * this.NumberPlaceHolder.length)];
@@ -886,6 +886,7 @@ var DesktopFullScreenComponent = /** @class */ (function () {
             this.inputType = defaultInputType;
             this.inputLimit = defaultInputLimit;
         }
+        console.log('TYPE %s MAX %d', this.inputType, this.inputLimit, this.currentPlaceHolder);
         //console.log(this.LastBotAnswer);
         if (!this.anim_done) {
             var t2_1 = setInterval(function () {
