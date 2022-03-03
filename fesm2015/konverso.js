@@ -289,6 +289,7 @@ let KonversoComponent = class KonversoComponent {
             if (parseInt($event.message) == NaN) {
                 this.History.push($event);
             }
+            console.log(parseInt($event.message));
             if (this.AssistantMode) {
                 if (this.LastUserInput) {
                     if (parseInt($event.message) == NaN) {
@@ -297,15 +298,11 @@ let KonversoComponent = class KonversoComponent {
                     }
                 }
                 else {
-                    if (parseInt($event.message) == NaN) {
-                        this.LastUserInput = $event;
-                    }
+                    this.LastUserInput = $event;
                 }
             }
             else {
-                if (parseInt($event.message) == NaN) {
-                    this.LastUserInput = $event;
-                }
+                this.LastUserInput = $event;
             }
             const index = this.History.length - 1;
             const response = yield this.service.send($event.message).catch((err) => {

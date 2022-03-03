@@ -533,6 +533,7 @@
                             if (parseInt($event.message) == NaN) {
                                 this.History.push($event);
                             }
+                            console.log(parseInt($event.message));
                             if (this.AssistantMode) {
                                 if (this.LastUserInput) {
                                     if (parseInt($event.message) == NaN) {
@@ -541,15 +542,11 @@
                                     }
                                 }
                                 else {
-                                    if (parseInt($event.message) == NaN) {
-                                        this.LastUserInput = $event;
-                                    }
+                                    this.LastUserInput = $event;
                                 }
                             }
                             else {
-                                if (parseInt($event.message) == NaN) {
-                                    this.LastUserInput = $event;
-                                }
+                                this.LastUserInput = $event;
                             }
                             index = this.History.length - 1;
                             return [4 /*yield*/, this.service.send($event.message).catch(function (err) {
