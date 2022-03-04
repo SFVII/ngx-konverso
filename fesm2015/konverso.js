@@ -293,12 +293,13 @@ let KonversoComponent = class KonversoComponent {
             }
             this.sended.emit(true);
             this.LastBotAnswer.text = '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
-            if (!(typeof $event.message === "number")) {
+            let verifnb = /^\d+$/.exec($event.message);
+            if (!verifnb) {
                 this.History.push($event);
             }
             if (this.AssistantMode) {
                 if (this.LastUserInput) {
-                    if (!(typeof $event.message === "number")) {
+                    if (!verifnb) {
                         this.LastUserInput.message += ' ' + $event.message;
                         this.LastUserInput.date = $event.date;
                     }

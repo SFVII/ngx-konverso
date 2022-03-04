@@ -526,7 +526,7 @@
         };
         KonversoComponent.prototype.send = function ($event) {
             return __awaiter(this, void 0, void 0, function () {
-                var index, response;
+                var verifnb, index, response;
                 var _this = this;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -537,12 +537,13 @@
                             }
                             this.sended.emit(true);
                             this.LastBotAnswer.text = '<br>' + DotLoaderTemplate(this.service.ColorSet.Primary);
-                            if (!(typeof $event.message === "number")) {
+                            verifnb = /^\d+$/.exec($event.message);
+                            if (!verifnb) {
                                 this.History.push($event);
                             }
                             if (this.AssistantMode) {
                                 if (this.LastUserInput) {
-                                    if (!(typeof $event.message === "number")) {
+                                    if (!verifnb) {
                                         this.LastUserInput.message += ' ' + $event.message;
                                         this.LastUserInput.date = $event.date;
                                     }
