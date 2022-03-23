@@ -349,7 +349,7 @@
               //height: 60%;
               grid-area: bot-answer;
               height: 100%;
-              overflow: scroll;
+              overflow-y: auto;
   
               /*span {
                 color: #FFFFFF !important;
@@ -503,7 +503,7 @@
                 border-radius: 25px;
                 color: #000;
                 height: 60%;
-                overflow: scroll;
+                overflow-y: auto;
                 background-color: transparent;
                 max-width: 550px;
                 width: -webkit-fit-content;
