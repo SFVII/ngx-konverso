@@ -467,6 +467,7 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
         if (this.afterProcess) {
             this.LastUserInput = null;
             this.LastBotAnswer.text = this.config.AfterProcessScenario[this.service.locale];
+            console.log(this.config.AfterProcessScenario[this.service.locale]);
         }
         let t = setInterval(() => {
             if (document.querySelectorAll('.bot-answer')) {
