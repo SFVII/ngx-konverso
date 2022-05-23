@@ -726,9 +726,9 @@
             var _this = this;
             var _a, _b, _c, _d, _e, _f;
             console.log(this.config);
+            console.log(this.service.locale);
             if (this.afterProcess) {
-                this.LastUserInput.message = '';
-                console.log();
+                this.LastUserInput = null;
             }
             var t = setInterval(function () {
                 if (document.querySelectorAll('.bot-answer')) {
