@@ -58,6 +58,8 @@ export interface KonversoInterface {
     AssistantMode?: boolean;
     InputPlaceHolder: WildCardObjectArray;
     InputNumberPlaceHolder: WildCardObjectArray;
+    AfterProcess: boolean;
+    AfterProcessScenario: any;
 }
 /**
  *  Inteface setting for authentication

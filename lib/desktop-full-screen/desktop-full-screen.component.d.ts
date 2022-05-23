@@ -1,5 +1,5 @@
 import { EventEmitter, OnChanges, OnInit } from '@angular/core';
-import { DefaultAssets, OpenChatBotResponse, UserInput } from '../../interface/KonversoInterface';
+import { DefaultAssets, KonversoInterface, OpenChatBotResponse, UserInput } from '../../interface/KonversoInterface';
 import { KonversoService } from '../konverso.service';
 import { TranslateService } from '../translate.service';
 export declare class DesktopFullScreenComponent implements OnChanges, OnInit {
@@ -16,6 +16,7 @@ export declare class DesktopFullScreenComponent implements OnChanges, OnInit {
     IsMobile: boolean;
     showInput: boolean;
     NumberPlaceHolder: string[];
+    afterProcess: boolean;
     readySend: EventEmitter<boolean>;
     send: EventEmitter<UserInput>;
     sendBotCommand: EventEmitter<string>;
@@ -37,7 +38,7 @@ export declare class DesktopFullScreenComponent implements OnChanges, OnInit {
     private anim_done;
     private reloaded;
     private timer;
-    constructor(translate: TranslateService, service: KonversoService);
+    constructor(translate: TranslateService, service: KonversoService, config: KonversoInterface);
     ngOnChanges(): void;
     launchLoop(): void;
     looper(): void;

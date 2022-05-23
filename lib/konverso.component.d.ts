@@ -7,6 +7,7 @@ export declare class KonversoComponent implements OnInit {
     ready: EventEmitter<boolean>;
     sended: EventEmitter<boolean>;
     showInput: boolean;
+    afterProcess: boolean;
     query: string;
     isMobile: boolean;
     assets: DefaultAssets;
