@@ -513,8 +513,8 @@ var DesktopFullScreenComponent = /** @class */ (function () {
         console.log(this.service.locale);
         if (this.afterProcess) {
             this.LastUserInput = null;
-            this.LastBotAnswer.text = this.config.AfterProcessScenario[this.service.locale];
-            console.log(this.config.AfterProcessScenario[this.service.locale]);
+            this.LastBotAnswer.text = this.config.AfterProcessScenario.BotMessage[this.service.locale];
+            console.log(this.config.AfterProcessScenario.BotMessage[this.service.locale]);
         }
         var t = setInterval(function () {
             if (document.querySelectorAll('.bot-answer')) {
