@@ -458,12 +458,13 @@ let DesktopFullScreenComponent = class DesktopFullScreenComponent {
                 this.select = translate.translate(service.locale, 'SELECT');
             }
         });
-        console.log(config);
+        this.config = config;
     }
     ngOnChanges() {
         var _a, _b, _c, _d, _e, _f;
+        console.log(this.config);
         if (this.afterProcess) {
-            this.userInput = '';
+            this.LastUserInput.message = '';
             console.log();
         }
         let t = setInterval(() => {

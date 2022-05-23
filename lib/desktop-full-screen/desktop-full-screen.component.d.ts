@@ -38,6 +38,7 @@ export declare class DesktopFullScreenComponent implements OnChanges, OnInit {
     private anim_done;
     private reloaded;
     private timer;
+    config: KonversoInterface;
     constructor(translate: TranslateService, service: KonversoService, config: KonversoInterface);
     ngOnChanges(): void;
     launchLoop(): void;
