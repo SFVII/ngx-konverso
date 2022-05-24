@@ -3,7 +3,8 @@ import { DefaultAssets, KonversoInterface, OpenChatBotResponse, UserInput } from
 import { KonversoService } from '../konverso.service';
 import { TranslateService } from '../translate.service';
 export declare class DesktopFullScreenComponent implements OnChanges, OnInit {
-    private service;
+    translate: TranslateService;
+    service: KonversoService;
     AssistantMode: boolean;
     assets: DefaultAssets;
     firstVisit: boolean;
