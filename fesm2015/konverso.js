@@ -412,6 +412,7 @@ let TranslateService = class TranslateService {
                 "FRIDAY": 'Vendredi',
                 "SATURDAY": 'Samedi',
                 "SUNDAY": 'Dimanche',
+                "OTHER": "Autre",
                 "FREE_FIELD": 'Champ libre',
             },
             'en': {
@@ -425,6 +426,7 @@ let TranslateService = class TranslateService {
                 "FRIDAY": 'Friday',
                 "SATURDAY": 'Saturday',
                 "SUNDAY": 'Sunday',
+                "OTHER": 'Other',
                 "FREE_FIELD": 'Free field',
             }
         };

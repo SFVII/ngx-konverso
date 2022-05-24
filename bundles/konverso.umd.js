@@ -672,6 +672,7 @@
                     "FRIDAY": 'Vendredi',
                     "SATURDAY": 'Samedi',
                     "SUNDAY": 'Dimanche',
+                    "OTHER": "Autre",
                     "FREE_FIELD": 'Champ libre',
                 },
                 'en': {
@@ -685,6 +686,7 @@
                     "FRIDAY": 'Friday',
                     "SATURDAY": 'Saturday',
                     "SUNDAY": 'Sunday',
+                    "OTHER": 'Other',
                     "FREE_FIELD": 'Free field',
                 }
             };
