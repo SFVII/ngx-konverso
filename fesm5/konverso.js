@@ -547,8 +547,6 @@ var DesktopFullScreenComponent = /** @class */ (function () {
     DesktopFullScreenComponent.prototype.ngOnChanges = function () {
         var _this = this;
         var _a, _b, _c, _d, _e, _f;
-        console.log(this.config.AfterProcessScenario.FormButtons);
-        console.log(this.service.locale);
         if (this.afterProcess) {
             this.LastUserInput = null;
             this.LastBotAnswer.text = this.config.AfterProcessScenario.BotMessage[this.service.locale];
