@@ -677,7 +677,9 @@
                     "VALIDATE": 'Valider',
                     "SKIP": 'Passer',
                     "MORNING": "Matin",
-                    "AFTERNOON": "Après-midi"
+                    "AFTERNOON": "Après-midi",
+                    "MORNING_ALL": 'Matin (tous)',
+                    "AFTERNOON_ALL": 'Après-midi (tous)',
                 },
                 'en': {
                     'GO': "Let's go",
@@ -695,7 +697,9 @@
                     "VALIDATE": 'Validate',
                     "SKIP": 'Skip',
                     "MORNING": "Morning",
-                    "AFTERNOON": "Afternoon"
+                    "AFTERNOON": "Afternoon",
+                    "MORNING_ALL": 'Morning (all)',
+                    "AFTERNOON_ALL": 'Afternoon (all)',
                 }
             };
         }
