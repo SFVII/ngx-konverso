@@ -462,8 +462,8 @@ var TranslateService = /** @class */ (function () {
                 "SKIP": 'Passer',
                 "MORNING": "Matin",
                 "AFTERNOON": "Après-midi",
-                "MORNING_ALL": 'Matin (tous)',
-                "AFTERNOON_ALL": 'Après-midi (tous)',
+                "MORNING_ALL": '(Tous les) matins',
+                "AFTERNOON_ALL": '(Tous les) après-midi',
             },
             'en': {
                 'GO': "Let's go",
@@ -482,8 +482,8 @@ var TranslateService = /** @class */ (function () {
                 "SKIP": 'Skip',
                 "MORNING": "Morning",
                 "AFTERNOON": "Afternoon",
-                "MORNING_ALL": 'Morning (all)',
-                "AFTERNOON_ALL": 'Afternoon (all)',
+                "MORNING_ALL": '(All the) mornings',
+                "AFTERNOON_ALL": '(All the) afternoons',
             }
         };
     }
